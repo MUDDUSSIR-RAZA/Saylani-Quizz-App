@@ -1,0 +1,54 @@
+.card {
+  width: 350px;
+  height: 150px;
+  background: #0000007d;
+  /* backdrop-filter: blur(10px); */
+  border-radius: 10px;
+  border: 1px solid #3F3F40;
+}
+
+.card a {
+  text-decoration: none;
+}
+
+.card header,.card footer, .card main {
+  display: flex;
+  align-items: center;
+}
+
+.card header {
+  justify-content: space-between;
+  margin: 20px;
+  color: #BDBFB7;
+}
+
+.card header a {
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.card main {
+  justify-content: flex-start;
+  margin: 20px;
+}
+
+.card main p {
+  color: white;
+  font-weight: 600;
+}
+
+.card main a {
+  color: #BDBFB7;
+  font-weight: 100;
+}
+
+.card footer {
+  margin: 20px;
+  font-size: 15px;
+  gap: 5px;
+}
+
+.card footer a {
+  color: #2CAD3D;
+  font-weight: 600;
+}
