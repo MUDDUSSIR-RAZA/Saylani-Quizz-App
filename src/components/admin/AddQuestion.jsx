@@ -62,7 +62,7 @@ const AddQuestion = () => {
   };
 
   return (
-    <section className="bg-slate-50 dark:bg-gray-900 w-vwh h-dvh flex overflow-scroll">
+    <section className="bg-slate-50 dark:bg-gray-900 w-vwh h-dvh flex -z-99">
       <div className="flex items-baseline justify-center my-[20px] h-[90%] px-6 py-8 mx-auto md:h-screen lg:py-0 w-10/12 sm:px-0">
         <div className="w-10/12 backdrop-blur-sm bg-[#ccc5c56d] rounded-lg shadow dark:border md:mt-0 sm:w-full xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 sm:p-8">
