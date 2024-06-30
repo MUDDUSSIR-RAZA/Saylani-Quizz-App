@@ -25,7 +25,7 @@ const CreateQuizz = () => {
       initialValues,
       validationSchema: quizTitleSchema,
       onSubmit: async ({ quiz }, action) => {
-        console.log(quiz);
+        setLoading(true);
         // try {
         //   setLoading(true);
         //   const { data } = await axios.post(
@@ -105,7 +105,7 @@ const CreateQuizz = () => {
                       : "bg-primary-600 dark:bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                   }  font-medium rounded-lg text-sm px-5 py-2.5 text-center  `}
                 >
-                  {loading ? <Creating /> : "Login"}
+                  {loading ? <Creating /> : "Create Quiz"}
                 </button>
               </form>
             </div>
