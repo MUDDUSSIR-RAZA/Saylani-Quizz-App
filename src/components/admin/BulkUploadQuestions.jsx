@@ -54,17 +54,17 @@ const BulkUploadQuestions = () => {
 
       try {
         setLoading(true);
-        const response = await axios.post(
-          `/api/courses/${selectedCourse}/bulk-upload-questions`,
-          { questions }
-        );
-        if (response.data.success) {
-          // router.push('/admin'); // Redirect to admin dashboard or another page
-        }
-        setLoading(false);
+        // const response = await axios.post(
+        //   `/api/courses/${selectedCourse}/bulk-upload-questions`,
+        //   { questions }
+        // );
+        // if (response.data.success) {
+        //   // router.push('/admin'); // Redirect to admin dashboard or another page
+        // }
+        // setLoading(false);
       } catch (error) {
-        setLoading(false);
-        console.error("Error uploading questions:", error);
+        // setLoading(false);
+        // console.error("Error uploading questions:", error);
       }
     };
 
