@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-// This fon marked `async` ifsing `await` iside
+// This fon marked `sync` ifsing `await` iside
 export function middleware(request) {
     const path = request.nextUrl.pathname
 
