@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-// This fomare`sy ifing `await` isid
+
 export function middleware(request) {
     const path = request.nextUrl.pathname
 
