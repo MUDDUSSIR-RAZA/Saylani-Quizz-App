@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-// This function can be marked `async` if using `await` inside
+// This function can be marked `async` if sing `await` inside
 export function middleware(request) {
     const path = request.nextUrl.pathname
 
