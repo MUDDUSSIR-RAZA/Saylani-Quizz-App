@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-// This fcon bmarked `async` ifsing `await` inside
+// This fcon marked `async` ifsing `await` inside
 export function middleware(request) {
     const path = request.nextUrl.pathname
 
