@@ -7,9 +7,7 @@ const page = () => {
     <>
       <div className="overflow-hidden w-dvw h-dvh">
         <AdminNavbar />
-        <main className="items-center justify-between p-24 -z-30">
           <CreateQuizz />
-        </main>
       </div>
     </>
   );
