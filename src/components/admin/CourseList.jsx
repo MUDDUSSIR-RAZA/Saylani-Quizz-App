@@ -524,8 +524,8 @@ const CourseList = () => {
     <>
       <div className="flex flex-wrap -z-30 ">
         {courses.map((course) => (
-          <div className="m-6">
-            <section key={course._id} className={`backdrop-blur-sm ${card}`}>
+          <div key={course._id} className="m-6">
+            <section className={`backdrop-blur-sm ${card}`}>
               <header>
                 <p>{course.course_name}</p>
                 <a href="#" className="text-black">
