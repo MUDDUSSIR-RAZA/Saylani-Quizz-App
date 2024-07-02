@@ -94,12 +94,12 @@ const Navbar = () => {
       name: "Add Quiz",
     },
     {
-      id: 1,
+      id: 2,
       link: "/addQuestion",
       name: "Add Question",
     },
     {
-      id: 1,
+      id: 3,
       link: "/addBulkQuestion",
       name: "Add Bulk Questions",
     },
