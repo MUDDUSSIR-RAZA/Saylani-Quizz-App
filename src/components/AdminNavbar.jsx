@@ -1,8 +1,6 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
 import axios from "axios";
-import gsap from "gsap";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
@@ -14,78 +12,9 @@ const AdminNavbar = () => {
   const [nav, setNav] = useState(false);
   const handleToggle = () => {
     setNav(!nav);
-    if (!nav) {
-      tl2.pause();
-      tl2.play();
-    } else {
-      tl2.pause();
-      tl2.reverse();
-    }
+    // }
   };
 
-  const [isSticky, setIsSticky] = useState(false);
-
-  let tl = gsap.timeline();
-  useGSAP(() => {
-    tl.from(".openNavbarLogo", {
-      y: -30,
-      duration: 0.7,
-      delay: 0.5,
-      scale: 0,
-    });
-    tl.from(".openNavbarLinks", {
-      y: -30,
-      duration: 1,
-      scale: 0,
-      stagger: 0.3,
-    });
-  });
-
-  let tl2 = gsap.timeline();
-  useGSAP(() => {
-    tl2.from(".closeNavbar", {
-      right: 0,
-      duration: 0.5,
-      delay: 0.4,
-      opacity: 0,
-    });
-    tl2.from(".closeNavbarLinks", {
-      x: 200,
-      duration: 1,
-      scale: 0,
-      stagger: 0.3,
-    });
-    tl2.from(".closeNavbarCross", {
-      x: 30,
-      y: -30,
-      duration: 0.6,
-      scale: 0,
-    });
-  });
-  tl2.pause();
-
-  useEffect(() => {
-    if (nav) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [nav]);
-
-  //for scrolling Navbar effect
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setIsSticky(true);
-      } else {
-        setIsSticky(false);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   const links = [
     {
@@ -94,12 +23,12 @@ const AdminNavbar = () => {
       name: "Add Quiz",
     },
     {
-      id: 1,
+      id: 2,
       link: "/admin/addQuestion",
       name: "Add Question",
     },
     {
-      id: 1,
+      id: 3,
       link: "/admin/addBulkQuestion",
       name: "Add Bulk Questions",
     },
@@ -116,16 +45,23 @@ const AdminNavbar = () => {
     }
   };
 
+  
+  useEffect(() => {
+    if (nav) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [nav]);
+
   return (
     <nav
-      className={`transition-all duration-500 ease-in-out w-full z-[999]  ${
-        isSticky ? "fixed top-6 w-full" : "absolute"
-      }`}
+      className={`transition-all duration-500 ease-in-out w-full z-[999] fixed`}
     >
       <div
-        className={`mx-auto md:px-2 px-6 lg:px-8 backdrop-blur-sm bg-[#a4a0a098] ${
+        className={`mx-auto md:px-2 px-6 w-[92%] rounded-full lg:px-8 m-5 backdrop-blur-sm bg-[#a4a0a098] ${
           nav ? "hidden" : ""
-        } ${isSticky ? "w-[92%] rounded-full   " : ""}`}
+        } `}
       >
         <div className="relative flex items-center justify-between h-16 w-full">
           <div
@@ -183,17 +119,17 @@ const AdminNavbar = () => {
           )}
         </div>
 
-        <div className="h-5/6 w-full text-3xl font-semibold text-center absolute top-10  mx-auto">
+        <div className="w-full text-2xl font-semibold text-center absolute top-10">
           <div className="flex flex-col justify-around text-center my-auto">
             {links.map(({ link, id ,name }) => (
-              <a
+              <Link
                 key={id}
                 href={link}
-                className="closeNavbarLinks text-[#2c4a4f] hover:text-gray-700  my-14 mx-14 capitalize"
+                className="closeNavbarLinks text-[#2c4a4f] hover:text-gray-700  my-11 mx-14 capitalize bg-[#ffffff72] p-2 rounded-full px-4"
                 onClick={handleToggle}
               >
                 {name}
-              </a>
+              </Link>
             ))}
             <button
               onClick={handleLogout}
