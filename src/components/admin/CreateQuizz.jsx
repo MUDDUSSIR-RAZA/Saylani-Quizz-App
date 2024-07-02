@@ -63,7 +63,7 @@ const CreateQuizz = () => {
                 <p className="text-sm font-light text-gray-500 relative">
                   <a
                     href="/auth/signup"
-                    className="font-medium text-black hover:underline absolute right-5"
+                    className="font-medium text-black hover:underline absolute right-5 md:right-3"
                   >
                     X
                   </a>
@@ -76,7 +76,7 @@ const CreateQuizz = () => {
                     htmlFor="quiz"
                     className="block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Your email
+                    Quiz Name
                   </label>
                   <input
                     type="text"
