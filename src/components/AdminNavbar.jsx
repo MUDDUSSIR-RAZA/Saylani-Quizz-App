@@ -95,7 +95,7 @@ const AdminNavbar = () => {
                 </div>
               </div>
               <button
-                onClick={handleLogout}
+                // onClick={handleLogout}
                 className="openNavbarLinks bg-[#ffffff72] p-2 rounded-full text-lg text-center minLg:mx-5 mr-16 minMd:mr-0 md:hidden px-4"
               >
                 Logout
