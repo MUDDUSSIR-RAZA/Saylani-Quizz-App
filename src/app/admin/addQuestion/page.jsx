@@ -6,7 +6,7 @@ const page = () => {
   return (
     <>
       <AdminNavbar />
-      <main className="items-center justify-between p-24 -z-30">
+      <main className="items-center justify-between py-24 -z-30">
         <AddQuestion />
       </main>
     </>
