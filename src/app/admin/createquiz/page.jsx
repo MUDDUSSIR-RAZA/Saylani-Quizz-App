@@ -13,7 +13,7 @@ const createquiz = () => {
     <>
       {/* <AddQuestion /> */}
       {/* <CourseList courses={course} /> */}
-      <BulkUploadQuestions />
+      {/* <BulkUploadQuestions /> */}
     </>
   );
 };
