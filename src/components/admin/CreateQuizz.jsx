@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import { quizTitleSchema } from "@/yupSchemas/page";
@@ -55,14 +53,14 @@ const CreateQuizz = () => {
       <div>
         <Toaster />
       </div>
-      <section className="bg-slate-50 w-vwh h-dvh flex">
+      <section className="w-vwh h-dvh flex">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-10/12 sm:px-0">
-          <div className="w-10/12 backdrop-blur-sm bg-[#ccc5c56d] rounded-lg shado md:mt-0 sm:w-full xl:p-0">
+          <div className="w-10/12 backdrop-blur-2xl bg-[#ffffff00] shadow-2xl rounded-lg md:mt-0 sm:w-full xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-2xl font-bold leading-tight tracking-tight text-gray-900 md:text-xl">
                 <p className="text-sm font-light text-gray-500 relative">
                   <a
-                    href="/auth/signup"
+                    href="/admin/dashboard"
                     className="font-medium text-black hover:underline absolute right-5 md:right-3"
                   >
                     X
@@ -82,7 +80,7 @@ const CreateQuizz = () => {
                     type="text"
                     name="quiz"
                     id="quiz"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                    className="bg-bgColor border border-green-950 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
                     placeholder="Course Name"
                     required
                     autoComplete="off"
