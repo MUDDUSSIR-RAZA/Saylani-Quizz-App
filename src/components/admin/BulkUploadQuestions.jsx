@@ -4,14 +4,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UploadingBulkFile from "../InPageLoader/UploadingBulkFile";
 
-
 const BulkUploadQuestions = () => {
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([
     { _id: "60d21b4667d0d8992e610c85", course_name: "Mathematics 101" },
     { _id: "60d21b4667d0d8992e610c86", course_name: "Science Basics" },
-    { _id: "60d21b4667d0d8992e610c87", course_name: "History 101" }
-]);
+    { _id: "60d21b4667d0d8992e610c87", course_name: "History 101" },
+  ]);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [file, setFile] = useState(null);
 
@@ -72,20 +71,27 @@ const BulkUploadQuestions = () => {
   };
 
   return (
-    <section className="bg-slate-50 w-vwh h-dvh flex">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-10/12 sm:px-0">
-        <div className="w-10/12 backdrop-blur-sm bg-[#ccc5c56d] rounded-lg shadow md:mt-0 sm:w-full xl:p-0">
+    <section className="w-vwh h-dvh flex">
+      <div className="flex flex-col items-center justify-center mx-auto md:h-screen w-10/12 sm:px-0">
+        <div className="w-10/12 backdrop-blur-xl bg-bgColor rounded-lg shadow-2xl mb-14 md:mt-0 sm:w-full xl:p-0">
           <div className="p-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 relative md:text-xl">
+              <a
+                href="/admin/dashboard"
+                className="font-medium text-black hover:underline absolute right-5 md:right-3"
+              >
+                X
+              </a>
               Bulk Upload Questions
             </h1>
             <form
               className="space-y-4 md:space-y-6"
               onSubmit={handleFormSubmit}
             >
-              <label htmlFor="courseSelect">Select Course:</label>
+              <label htmlFor="courseSelect">Select Course: </label>
               <select
                 id="courseSelect"
+                className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm"
                 value={selectedCourse}
                 onChange={(e) => setSelectedCourse(e.target.value)}
                 required
@@ -107,7 +113,7 @@ const BulkUploadQuestions = () => {
                 id="fileUpload"
                 accept=".json"
                 onChange={handleFileChange}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                className="bg-bgColor font-bold border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
                 required
               />
 
@@ -116,8 +122,8 @@ const BulkUploadQuestions = () => {
                 type="submit"
                 className={`w-full text-white flex justify-center  ${
                   loading
-                    ? "bg-[#22659c]"
-                    : "bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300"
+                    ? "bg-button"
+                    : "bg-button hover:bg-button focus:ring-4 focus:outline-none focus:ring-primary-300"
                 }  font-medium rounded-lg text-sm px-5 py-2.5 text-center  `}
               >
                 {loading ? <UploadingBulkFile /> : "Upload Questions"}
