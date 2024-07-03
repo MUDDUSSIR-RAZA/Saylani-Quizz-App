@@ -66,7 +66,7 @@ const AddQuestion = () => {
       <div className="flex items-baseline justify-center my-[20px] h-[90%] px-6 py-8 mx-auto md:h-screen lg:py-0 w-10/12 sm:px-0">
         <div className="w-9/12 backdrop-blur-xl bg-bgColor rounded-lg shadow-2xl md:mt-0 sm:w-full xl:p-0">
           <div className="p-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 mb-7 relative md:text-xl">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 mb-1 relative md:text-xl">
               <a
                 href="/admin/dashboard"
                 className="font-medium text-black hover:underline absolute right-5 md:right-3"
