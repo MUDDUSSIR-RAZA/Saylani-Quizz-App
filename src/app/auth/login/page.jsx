@@ -23,7 +23,7 @@ const logIn = () => {
       initialValues,
       validationSchema: loginSchema,
       onSubmit: async ({ email, password }, action) => {
-        console.log(email, password )
+        console.log(email, password);
         // try {
         //   setLoading(true);
         //   const { data } = await axios.post(
@@ -53,86 +53,81 @@ const logIn = () => {
       <div>
         <Toaster />
       </div>
-      <section className="bg-slate-50 dark:bg-gray-900 w-vwh h-dvh flex">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-10/12 sm:px-0">
-          <div className="w-10/12 backdrop-blur-sm bg-[#ccc5c56d] rounded-lg shadow dark:border md:mt-0 sm:w-full xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Login to your account
-              </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Your email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="name@company.com"
-                    required
-                    autoComplete="off"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {errors.email && touched.email ? (
-                    <p className="text-red-900">{errors.email}</p>
-                  ) : (
-                    ""
-                  )}
-                </div>
-                <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 mb-3 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required
-                    autoComplete="off"
-                    value={values.password}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                  {errors.password && touched.password ? (
-                    <p className="text-red-900">{errors.password}</p>
-                  ) : (
-                    ""
-                  )}
-                </div>
+      <section className="relative w-full h-screen">
+        <div className="bg-black bg-opacity-50 h-full flex items-center justify-center">
+          <div className="w-full max-w-md bg-[#ffffff8b] backdrop-blur-sm rounded-lg shadow-lg p-8">
+            <h1 className="text-2xl font-bold text-center text-gray-900">
+              Login to your account
+            </h1>
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Your email
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="name@company.com"
+                  required
+                  autoComplete="off"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.email && touched.email ? (
+                  <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+                ) : null}
+              </div>
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  id="password"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  placeholder="••••••••"
+                  required
+                  autoComplete="off"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                {errors.password && touched.password ? (
+                  <p className="text-red-600 text-sm mt-1">{errors.password}</p>
+                ) : null}
+              </div>
+              <div>
                 <button
                   disabled={loading}
                   type="submit"
-                  className={`w-full text-white flex justify-center  ${
+                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
                     loading
-                      ? "bg-[#22659c]"
-                      : "bg-primary-600 dark:bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                  }  font-medium rounded-lg text-sm px-5 py-2.5 text-center  `}
+                      ? "bg-button"
+                      : "bg-button hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  }`}
                 >
                   {loading ? <LogingIn /> : "Login"}
                 </button>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don't have an account?{" "}
-                  <a
-                    href="/auth/signup"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    Signup here
-                  </a>
-                </p>
-              </form>
-            </div>
+              </div>
+              <div className="text-sm text-center">
+                <a
+                  href="/auth/signup"
+                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Don't have an account? Signup here
+                </a>
+              </div>
+            </form>
           </div>
         </div>
       </section>
