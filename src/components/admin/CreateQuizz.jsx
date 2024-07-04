@@ -14,6 +14,13 @@ const initialValues = {
 };
 
 const CreateQuizz = () => {
+  const [courses, setCourses] = useState([
+    { _id: "60d21b4667d0d8992e610c85", course_name: "Mathematics 101" },
+    { _id: "60d21b4667d0d8992e610c86", course_name: "Science Basics" },
+    { _id: "60d21b4667d0d8992e610c87", course_name: "History 101" },
+  ]);
+  const [selectedCourse, setselectedCourse] = useState("");
+
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -70,6 +77,26 @@ const CreateQuizz = () => {
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={handleSubmit}>
                 <div>
+                  <label htmlFor="courseSelect" className="mr-2 mb-3">
+                    Select Course:
+                  </label>
+                  <select
+                    id="courseSelect"
+                    value={selectedCourse}
+                    onChange={(e) => setselectedCourse(e.target.value)}
+                    required
+                    className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm"
+                  >
+                    <option value="">Select a Course</option>
+                    {courses.map((course) => (
+                      <option key={course._id} value={course._id}>
+                        {course.course_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
                   <label
                     htmlFor="quiz"
                     className="block mb-2 text-sm font-medium text-gray-900"
@@ -93,6 +120,27 @@ const CreateQuizz = () => {
                   ) : (
                     ""
                   )}
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="addKey"
+                    className="block mb-2 text-sm font-medium text-gray-900"
+                  >
+                    Add Key
+                  </label>
+                  <input
+                    type="password"
+                    name="addKey"
+                    id="addKey"
+                    className="bg-bgColor border border-green-950 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+                    placeholder="Quiz Key *****"
+                    required
+                    autoComplete="off"
+                    // value={values.ad}
+                    // onChange={handleChange}
+                    // onBlur={handleBlur}
+                  />
                 </div>
                 <button
                   disabled={loading}
