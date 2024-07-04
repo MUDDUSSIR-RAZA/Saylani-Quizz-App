@@ -2,12 +2,13 @@
 
 import React, { useState } from "react";
 import { card } from "@/css/courseList.module.css";
+import Link from "next/link";
 
 const CourseList = () => {
   const [courses, setCourse] = useState([
     {
       _id: "60d21b4667d0d8992e610c85",
-      course_name: "Mathematics ",
+      course_name: "DMAS Rule ",
       questions: [
         {
           _id: "60d21b4667d0d8992e610c90",
@@ -522,7 +523,7 @@ const CourseList = () => {
 
   return (
     <>
-      <div className="flex flex-wrap justify-center -z-30 ">
+      <div className="flex flex-wrap justify-center z-30 ">
         {courses.map((course) => (
           <div key={course._id} className="m-2 backdrop-blur-lg bg-[#ffffff00]">
             <section className={` ${card}`}>
@@ -543,9 +544,9 @@ const CourseList = () => {
                 ) : (
                   <p className="text-[#ff0000]  text-base">Quiz Closed</p>
                 )}
-                <a href="#" className="absolute right-6">
+                <Link href={`/admin/editquiz/${course._id}`} className="absolute right-6">
                   Edit
-                </a>
+                </Link>
               </footer>
             </section>
           </div>
