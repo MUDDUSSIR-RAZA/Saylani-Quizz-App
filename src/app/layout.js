@@ -11,7 +11,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`bg-slate-50  bg-fixed bg-center bg-contain  ${inter.className} bg-[url('https://th.bing.com/th/id/OIP.NkwEpqJktRs1GVY_474xRQHaHa?w=184&h=183&c=7&r=0&o=5&dpr=1.3&pid=1.7')]`} >
+      <body className={`bg-slate-50 bg-fixed bg-center bg-[length:800px_800px] md:bg-[length:400px_400px] bg-no-repeat ${inter.className} bg-[url('/smit.png')]`}>
+
         {children}
       </body>
     </html>
