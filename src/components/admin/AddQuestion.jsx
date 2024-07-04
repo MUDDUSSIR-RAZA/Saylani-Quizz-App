@@ -7,11 +7,11 @@ import Adding from "../InPageLoader/Adding";
 const AddQuestion = () => {
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([
-    { _id: "60d21b4667d0d8992e610c85", course_name: "Mathematics 101" },
-    { _id: "60d21b4667d0d8992e610c86", course_name: "Science Basics" },
-    { _id: "60d21b4667d0d8992e610c87", course_name: "History 101" },
+    { _id: "60d21b4667d0d8992e610c85", quiz_name: "Mathematics 101" },
+    { _id: "60d21b4667d0d8992e610c86", quiz_name: "Science Basics" },
+    { _id: "60d21b4667d0d8992e610c87", quiz_name: "History 101" },
   ]);
-  const [selectedCourse, setSelectedCourse] = useState("");
+  const [selectedQuiz, setselectedQuiz] = useState("");
   const [questionText, setQuestionText] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctOptionIndex, setCorrectOptionIndex] = useState(null);
@@ -42,7 +42,7 @@ const AddQuestion = () => {
     try {
       setLoading(true);
       //   const response = await axios.post(
-      //     `/api/courses/${selectedCourse}/add-question`,
+      //     `/api/courses/${selectedQuiz}/add-question`,
       //     {
       //       question_text: questionText,
       //       options,
@@ -77,19 +77,19 @@ const AddQuestion = () => {
             </h1>
             <form onSubmit={handleFormSubmit}>
               <label htmlFor="courseSelect" className="mr-2 mb-3">
-                Select Course:
+                Select Quiz:
               </label>
               <select
                 id="courseSelect"
-                value={selectedCourse}
-                onChange={(e) => setSelectedCourse(e.target.value)}
+                value={selectedQuiz}
+                onChange={(e) => setselectedQuiz(e.target.value)}
                 required
                 className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm"
               >
-                <option value="">Select a course</option>
+                <option value="">Select a Quiz</option>
                 {courses.map((course) => (
                   <option key={course._id} value={course._id}>
-                    {course.course_name}
+                    {course.quiz_name}
                   </option>
                 ))}
               </select>
