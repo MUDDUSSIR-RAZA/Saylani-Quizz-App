@@ -19,7 +19,7 @@ export function middleware(request) {
     return;
 }
 
-// See
+// Se
 export const config = {
     matcher: [
         '/',
