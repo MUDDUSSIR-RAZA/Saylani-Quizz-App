@@ -19,7 +19,7 @@ export function middleware(request) {
     return;
 }
 
-// See "Mating Paths" below to learn mor
+// See "Matig Paths" below to learn mor
 export const config = {
     matcher: [
         '/',
