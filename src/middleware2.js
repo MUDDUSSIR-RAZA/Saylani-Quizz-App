@@ -19,7 +19,7 @@ export function middleware(request) {
     return;
 }
 
-// See M Paths" below to learn mor
+// See M Pahs" below to learn mor
 export const config = {
     matcher: [
         '/',
