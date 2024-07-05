@@ -19,7 +19,7 @@ export function middleware(request) {
     return;
 }
 
-// See  "arn o
+// See  "an o
 export const config = {
     matcher: [
         '/',
