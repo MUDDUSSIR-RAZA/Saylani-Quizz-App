@@ -2,7 +2,7 @@
 
 import AddQuestion from "@/components/admin/AddQuestion";
 import BulkUploadQuestions from "@/components/admin/BulkUploadQuestions";
-import CourseList from "@/components/admin/CourseList";
+import QuizList from "@/components/admin/QuizList";
 import CreateQuiz from "@/components/admin/CreateQuizz";
 import { useState } from "react";
 
@@ -12,7 +12,7 @@ const createquiz = () => {
   return (
     <>
       {/* <AddQuestion /> */}
-      {/* <CourseList courses={course} /> */}
+      {/* <QuizList courses={course} /> */}
       {/* <BulkUploadQuestions /> */}
     </>
   );
