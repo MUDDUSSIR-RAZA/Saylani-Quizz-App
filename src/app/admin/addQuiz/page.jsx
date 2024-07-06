@@ -1,4 +1,4 @@
-import AdminNavbar from "@/components/AdminNavbar";
+import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import CreateQuizz from "@/components/admin/CreateQuizz";
 import React from "react";
 
