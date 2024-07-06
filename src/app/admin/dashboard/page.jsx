@@ -1,5 +1,5 @@
-import AdminNavbar from "@/components/AdminNavbar";
-import CourseList from "@/components/admin/CourseList";
+import AdminNavbar from "@/components/NavBar/AdminNavbar";
+import QuizList from "@/components/admin/QuizList";
 import React from "react";
 
 const dashboard = () => {
@@ -7,7 +7,7 @@ const dashboard = () => {
     <>
       <AdminNavbar />
       <main className="flex min-h-screen flex-col items-center justify-between py-24 px-5">
-        <CourseList />
+        <QuizList />
       </main>
     </>
   );
