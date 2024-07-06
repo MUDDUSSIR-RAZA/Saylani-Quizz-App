@@ -38,7 +38,12 @@ const AddQuestion = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log(correctOptionIndex, timeLimit);
+    console.log({
+      question_text: questionText,
+      options,
+      correct_option_index: correctOptionIndex,
+      time_limit: timeLimit,
+    });
     try {
       setLoading(true);
       //   const response = await axios.post(
