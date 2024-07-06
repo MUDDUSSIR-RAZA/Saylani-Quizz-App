@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import QuizList from "@/components/admin/QuizList";
 
 export default function Home() {
