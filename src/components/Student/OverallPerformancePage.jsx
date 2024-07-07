@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Loading from "../loading";
 
 const fakeResults = [
   {
@@ -28,13 +29,63 @@ const fakeResults = [
     ],
     date_taken: "2024-06-01T10:00:00Z",
     batch: 1,
+  },{
+    student: "60f7b2f8b1c2c2a1b1a1b1b1",
+    quiz: {
+      _id: "60f7b2f8b1c2c2a1b1a1b1b2",
+      course_name: "Web and App Development",
+      quiz_name: "CSS Basics",
+      questions: ["60f7b2f8b1c2c2a1b1a1b1b3", "60f7b2f8b1c2c2a1b1a1b1b4"],
+      quizOpen: true,
+    },
+    score: 8,
+    totalQuestions: 10,
+    answers: [
+      {
+        question: "60f7b2f8b1c2c2a1b1a1b1b3",
+        selected_option: "A",
+        correct: true,
+      },
+      {
+        question: "60f7b2f8b1c2c2a1b1a1b1b4",
+        selected_option: "B",
+        correct: false,
+      },
+    ],
+    date_taken: "2024-06-01T10:00:00Z",
+    batch: 1,
+  },{
+    student: "60f7b2f8b1c2c2a1b1a1b1b1",
+    quiz: {
+      _id: "60f7b2f8b1c2c2a1b1a1b1b2",
+      course_name: "Web and App Development",
+      quiz_name: "JS Basics",
+      questions: ["60f7b2f8b1c2c2a1b1a1b1b3", "60f7b2f8b1c2c2a1b1a1b1b4"],
+      quizOpen: true,
+    },
+    score: 8,
+    totalQuestions: 10,
+    answers: [
+      {
+        question: "60f7b2f8b1c2c2a1b1a1b1b3",
+        selected_option: "A",
+        correct: true,
+      },
+      {
+        question: "60f7b2f8b1c2c2a1b1a1b1b4",
+        selected_option: "B",
+        correct: false,
+      },
+    ],
+    date_taken: "2024-06-01T10:00:00Z",
+    batch: 1,
   },
   {
     student: "60f7b2f8b1c2c2a1b1a1b1b1",
     quiz: {
       _id: "60f7b2f8b1c2c2a1b1a1b1b5",
       course_name: "Web and App Development",
-      quiz_name: "CSS Basics",
+      quiz_name: "React Js Basics",
       questions: ["60f7b2f8b1c2c2a1b1a1b1b6", "60f7b2f8b1c2c2a1b1a1b1b7"],
       quizOpen: true,
     },
@@ -273,18 +324,18 @@ const OverallPerformancePage = ({ studentId }) => {
   };
 
   if (!groupedResults.length) {
-    return <div>Loading...</div>;
+    return <> <Loading /> </>;
   }
 
   return (
     <div className="flex flex-col items-center h-dvh w-dvw overflow-y-scroll">
-      <h1 className="text-2xl font-bold my-6">Overall Performance</h1>
+      <h1 className="text-2xl font-extrabold my-6 tracking-widest">Overall Performance</h1>
       {groupedResults.map((group, index) => {
         const aggregatedResult = calculateAggregatedResult(group.quizzes);
         return (
           <div
             key={index}
-            className="w-full max-w-2xl backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-md p-6 mb-6"
+            className="w-full max-w-2xl backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6 md:w-11/12"
           >
             <h2 className="text-xl font-bold mb-4">
               {group.course} - Batch {group.batch}
@@ -297,14 +348,14 @@ const OverallPerformancePage = ({ studentId }) => {
               </p>
               <p>Percentage: {aggregatedResult.percentage}%</p>
             </div>
-            <div className="overflow-x-auto">
-              <table className="min-w-full bg-white">
+            <div className="overflow-y-auto max-h-[150px]">
+              <table className="min-w-full backdrop-blur-2xl bg-[#ffffff00] shadow-inner">
                 <thead>
-                  <tr>
-                    <th className="px-4 py-2">Quiz Name</th>
-                    <th className="px-4 py-2">Score</th>
-                    <th className="px-4 py-2">Total Questions</th>
-                    <th className="px-4 py-2">Date Taken</th>
+                  <tr className="shadow-inner">
+                    <th className="px-4 py-2 shadow-inner">Quiz Name</th>
+                    <th className="px-4 py-2 shadow-inner">Score</th>
+                    <th className="px-4 py-2 shadow-inner">Total Questions</th>
+                    <th className="px-4 py-2 shadow-inner">Date Taken</th>
                   </tr>
                 </thead>
                 <tbody>
