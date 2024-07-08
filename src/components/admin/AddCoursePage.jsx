@@ -15,15 +15,40 @@
 // admin-page.js
 // admin-page.js
 
-
 import React, { useState, useEffect } from "react";
 
 const AddCoursePage = () => {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([
+    {
+      _id: 1,
+      course_name: "Web Development",
+      batch: 3,
+      cities: ["Karachi", "Lahore"],
+    },
+    {
+      _id: 2,
+      course_name: "Data Science Fundamentals",
+      batch: 1,
+      cities: ["Islamabad", "Rawalpindi"],
+    },
+    {
+      _id: 3,
+      course_name: "Graphic Design Workshop",
+      batch: 2,
+      cities: ["Faisalabad", "Multan"],
+    },
+    {
+      _id: 4,
+      course_name: "Digital Marketing Course",
+      batch: 4,
+      cities: ["Peshawar", "Quetta"],
+    },
+]
+);
   const [newCourse, setNewCourse] = useState({
     course_name: "",
-    batch: 1, // Adjusted to handle one batch per course as a number
-    cities: ["City A"],
+    batch: "", // Adjusted to handle one batch per course as a number
+    cities: [""],
   });
 
   // Simulated initial courses array for display
@@ -42,13 +67,19 @@ const AddCoursePage = () => {
     },
   ];
 
-  useEffect(() => {
-    // Replace with actual fetch logic to fetch courses from backend
-    // Simulating fetching courses from backend
-    setCourses(fakeCourses);
-  }, []);
+  // useEffect(() => {
+  //   // Replace with actual fetch logic to fetch courses from backend
+  //   // Simulating fetching courses from backend
+  //   setCourses(fakeCourses);
+  // }, []);
 
   const handleCourseSubmit = async (e) => {
+    setCourses([...courses, { ...newCourse, _id: Date.now() }]);
+    setNewCourse({
+      course_name: "",
+      batch: "",
+      cities: [""],
+    });
     e.preventDefault();
     try {
       // Simulating POST request to add new course
@@ -101,15 +132,15 @@ const AddCoursePage = () => {
   return (
     <div className="container mx-auto">
       <div className="my-5">
-        <h1 className="text-2xl font-bold mb-4 text-center my-3">
+        <h1 className="text-2xl font-bold mb-4 text-center my-3 backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4">
           Manage Courses
         </h1>
-        <form onSubmit={handleCourseSubmit} className="mb-8 mx-5">
-          <div className="bg-white rounded-lg shadow-md p-8">
+        <form onSubmit={handleCourseSubmit} className="mb-8 mx-5 ">
+          <div className="backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl p-8">
             <h2 className="text-xl font-bold mb-4">Add New Course</h2>
-            <div className="">
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="flex  md:block">
+              <div className="mr-4 md:mr-0">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Course Name:
                 </label>
                 <input
@@ -119,25 +150,28 @@ const AddCoursePage = () => {
                     setNewCourse({ ...newCourse, course_name: e.target.value })
                   }
                   required
-                  className="form-input mt-1 block w-full"
+                  className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                 />
               </div>
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="mx-4 md:mx-0">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Batch:
                 </label>
                 <input
                   type="number"
                   value={newCourse.batch}
                   onChange={(e) =>
-                    setNewCourse({ ...newCourse, batch: parseInt(e.target.value) })
+                    setNewCourse({
+                      ...newCourse,
+                      batch: parseInt(e.target.value),
+                    })
                   }
                   required
-                  className="form-input mt-1 block w-full"
+                  className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                 />
               </div>
-              <div className="">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+              <div className="mx-4 md:mx-0">
+                <label className="block text-sm font-semibold text-gray-700 mb-2">
                   Cities (comma-separated):
                 </label>
                 <input
@@ -150,23 +184,26 @@ const AddCoursePage = () => {
                     })
                   }
                   required
-                  className="form-input mt-1 block w-full"
+                  className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                 />
               </div>
             </div>
             <button
               type="submit"
-              className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              className="mt-4 bg-button hover:bg-blue-900 text-white font-bold py-2 px-4 rounded"
             >
               Add Course
             </button>
           </div>
         </form>
 
-        <h2 className="text-xl font-bold mb-4 text-center">Current Courses</h2>
+        <h2 className="text-xl font-bold mb-4 text-center backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4">Current Courses</h2>
         <div className="">
           {courses.map((course) => (
-            <div key={course._id} className="bg-white rounded-lg shadow-md p-4 my-4">
+            <div
+              key={course._id}
+              className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4"
+            >
               <h3 className="text-lg font-bold mb-2">{course.course_name}</h3>
               <p>
                 <span className="font-medium">Batch:</span> {course.batch}
@@ -176,7 +213,7 @@ const AddCoursePage = () => {
                 {course.cities.join(", ")}
               </p>
               <button
-                className="mt-2 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className="mt-2 bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
                 onClick={() => handleDeleteCourse(course._id)}
               >
                 Delete
