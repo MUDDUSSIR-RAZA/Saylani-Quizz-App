@@ -17,6 +17,8 @@ module.exports = {
 
       'sm': { 'max': '639px' },
 
+      'smm': { 'max': '550px' },
+
       'minLg': { 'min': '1023px' },
 
       'minMd': { 'min': '800px' },
