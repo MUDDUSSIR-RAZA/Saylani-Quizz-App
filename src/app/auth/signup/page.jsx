@@ -1,4 +1,4 @@
-const EnterKey = () => {
+const signup = () => {
   return (
     <>
     
@@ -6,4 +6,4 @@ const EnterKey = () => {
   )
 }
 
-export default EnterKey
+export default signup
