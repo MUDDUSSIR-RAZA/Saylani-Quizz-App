@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const SignupPage = () => {
   const [studentData, setStudentData] = useState({
@@ -10,37 +10,79 @@ const SignupPage = () => {
     password: "",
     email: "",
     phone: "",
-    courses: [
-      {
-        course_name: "",
-        batch: "",
-        city: "",
-        roll_no: "",
-        status: "pending"
-      }
-    ]
+    city: "",
+    course_name: "",
+    batch: "",
   });
+
+  const [courses, setCourses] = useState([
+    {
+      _id: 1,
+      course_name: "Web Development",
+      batch: 3,
+      cities: ["Karachi", "Lahore"],
+    },
+    {
+      _id: 2,
+      course_name: "Data Science Fundamentals",
+      batch: 1,
+      cities: ["Islamabad", "Rawalpindi"],
+    },
+    {
+      _id: 3,
+      course_name: "Graphic Design Workshop",
+      batch: 2,
+      cities: ["Faisalabad", "Multan"],
+    },
+    {
+      _id: 4,
+      course_name: "Digital Marketing Course",
+      batch: 4,
+      cities: ["Peshawar", "Quetta"],
+    },
+  ]);
+  const [filteredCourses, setFilteredCourses] = useState([]);
+
+  useEffect(() => {
+    // Fetch courses from backend
+    const fetchCourses = async () => {
+      try {
+        const response = await fetch("/api/admin-courses");
+        const data = await response.json();
+        setCourses(data);
+      } catch (error) {
+        console.error("Error fetching courses:", error);
+      }
+    };
+    fetchCourses();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setStudentData({ ...studentData, [name]: value });
-  };
 
-  const handleCourseChange = (index, e) => {
-    const { name, value } = e.target;
-    const newCourses = [...studentData.courses];
-    newCourses[index][name] = value;
-    setStudentData({ ...studentData, courses: newCourses });
-  };
+    if (name === "city") {
+      setFilteredCourses(
+        courses.filter((course) => course.cities.includes(value))
+      );
+      setStudentData({
+        ...studentData,
+        city: value,
+        course_name: "",
+        batch: "",
+      });
+    }
 
-  const addCourse = () => {
-    setStudentData({
-      ...studentData,
-      courses: [
-        ...studentData.courses,
-        { course_name: "", batch: "", city: "", roll_no: "", status: "pending" }
-      ]
-    });
+    if (name === "course_name") {
+      const selectedCourse = filteredCourses.find(
+        (course) => course.course_name === value
+      );
+      setStudentData({
+        ...studentData,
+        course_name: value,
+        batch: selectedCourse.batch,
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -49,9 +91,9 @@ const SignupPage = () => {
       const response = await fetch("/api/signup", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(studentData)
+        body: JSON.stringify(studentData),
       });
 
       if (response.ok) {
@@ -63,9 +105,9 @@ const SignupPage = () => {
           password: "",
           email: "",
           phone: "",
-          courses: [
-            { course_name: "", batch: "", city: "", roll_no: "", status: "pending" }
-          ]
+          city: "",
+          course_name: "",
+          batch: "",
         });
       } else {
         console.error("Failed to sign up student");
@@ -163,88 +205,62 @@ const SignupPage = () => {
               />
             </div>
           </div>
-          <h2 className="text-xl font-bold my-4">Courses Information</h2>
-          {studentData.courses.map((course, index) => (
-            <div key={index} className="mb-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Course Name:
-                  </label>
-                  <input
-                    type="text"
-                    name="course_name"
-                    value={course.course_name}
-                    onChange={(e) => handleCourseChange(index, e)}
-                    required
-                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Batch:
-                  </label>
-                  <input
-                    type="text"
-                    name="batch"
-                    value={course.batch}
-                    onChange={(e) => handleCourseChange(index, e)}
-                    required
-                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    City:
-                  </label>
-                  <input
-                    type="text"
-                    name="city"
-                    value={course.city}
-                    onChange={(e) => handleCourseChange(index, e)}
-                    required
-                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Roll No:
-                  </label>
-                  <input
-                    type="number"
-                    name="roll_no"
-                    value={course.roll_no}
-                    onChange={(e) => handleCourseChange(index, e)}
-                    required
-                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Status:
-                  </label>
-                  <select
-                    name="status"
-                    value={course.status}
-                    onChange={(e) => handleCourseChange(index, e)}
-                    required
-                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-                  >
-                    <option value="pending">Pending</option>
-                    <option value="enrolled">Enrolled</option>
-                    <option value="failed">Failed</option>
-                  </select>
-                </div>
-              </div>
+          <h2 className="text-xl font-bold my-4">Course Information</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                City:
+              </label>
+              <select
+                name="city"
+                value={studentData.city}
+                onChange={handleChange}
+                required
+                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+              >
+                <option value="">Select City</option>
+                {[...new Set(courses.flatMap((course) => course.cities))].map(
+                  (city) => (
+                    <option key={city} value={city}>
+                      {city}
+                    </option>
+                  )
+                )}
+              </select>
             </div>
-          ))}
-          <button
-            type="button"
-            onClick={addCourse}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Add Another Course
-          </button>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Course Name:
+              </label>
+              <select
+                name="course_name"
+                value={studentData.course_name}
+                onChange={handleChange}
+                required
+                disabled={!studentData.city}
+                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+              >
+                <option value="">Select Course</option>
+                {filteredCourses.map((course) => (
+                  <option key={course._id} value={course.course_name}>
+                    {course.course_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Batch:
+              </label>
+              <input
+                type="text"
+                name="batch"
+                value={studentData.batch}
+                readOnly
+                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+              />
+            </div>
+          </div>
           <button
             type="submit"
             className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
