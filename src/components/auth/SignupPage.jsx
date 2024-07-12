@@ -119,12 +119,12 @@ const SignupPage = () => {
 
   return (
     <div className="container mx-auto">
-      <h1 className="text-2xl font-bold mb-4 text-center my-3 backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4">
+      <h1 className="text-2xl font-bold mb-4 text-center my-3 backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4 text-button tracking-[5px] py-2">
         Student Signup
       </h1>
       <form onSubmit={handleSubmit} className="mb-8 mx-5">
         <div className="backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl p-8">
-          <h2 className="text-xl font-bold mb-4">Student Information</h2>
+          <h2 className="text-xl font-bold mb-6 tracking-[2px] text-amber-900">Student Information</h2>
           <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -205,7 +205,7 @@ const SignupPage = () => {
               />
             </div>
           </div>
-          <h2 className="text-xl font-bold my-4">Course Information</h2>
+          <h2 className="text-xl font-bold my-6 tracking-[2px] text-amber-900 font-body">Course Information</h2>
           <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
