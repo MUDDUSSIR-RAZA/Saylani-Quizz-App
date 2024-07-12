@@ -125,7 +125,7 @@ const SignupPage = () => {
       <form onSubmit={handleSubmit} className="mb-8 mx-5">
         <div className="backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl p-8">
           <h2 className="text-xl font-bold mb-4">Student Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 Name:
@@ -206,7 +206,7 @@ const SignupPage = () => {
             </div>
           </div>
           <h2 className="text-xl font-bold my-4">Course Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
                 City:
@@ -257,6 +257,7 @@ const SignupPage = () => {
                 name="batch"
                 value={studentData.batch}
                 readOnly
+                disabled
                 className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
               />
             </div>
