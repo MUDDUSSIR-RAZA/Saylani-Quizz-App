@@ -167,12 +167,12 @@ const SignupPage = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Password:
+                Phone:
               </label>
               <input
-                type="password"
-                name="password"
-                value={studentData.password}
+                type="text"
+                name="phone"
+                value={studentData.phone}
                 onChange={handleChange}
                 required
                 className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
@@ -193,12 +193,12 @@ const SignupPage = () => {
             </div>
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Phone:
+                Password:
               </label>
               <input
-                type="text"
-                name="phone"
-                value={studentData.phone}
+                type="password"
+                name="password"
+                value={studentData.password}
                 onChange={handleChange}
                 required
                 className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
