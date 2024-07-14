@@ -211,42 +211,54 @@ const QuizPage = () => {
 
   const handleNextQuestion = () => {
     const currentQuestion = quizDetails.quiz[currentQuestionIndex];
+    setUserAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      [currentQuestion.id]: userAnswers[currentQuestion.id], // Ensure the last answer is updated
+    }));
+  
     if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
       setScore((prevScore) => prevScore + 1);
     }
-
+  
     if (currentQuestionIndex < quizDetails.quiz.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
-      setIsQuizCompleted(true);
+      setIsQuizCompleted(true); // Set quiz completed before submitting result
+    }
+  };
+  
+
+  useEffect(() => {
+    const submitResult = async () => {
+      console.log(userAnswers);
+      try {
+      //   const response = await fetch("/api/submit-result", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       userAnswers,
+      //       score,
+      //       quizId: quizDetails.id,
+      //     }),
+      //   });
+  
+      //   if (response.ok) {
+      //     console.log("Result submitted successfully");
+      //   } else {
+      //     console.error("Error submitting result");
+      //   }
+      } catch (error) {
+        // console.error("Error submitting result:", error);
+      }
+    };
+  
+    if (isQuizCompleted) {
       submitResult();
     }
-  };
-
-  const submitResult = async () => {
-    // console.log(userAnswers);
-    try {
-      // const response = await fetch("/api/submit-result", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     userAnswers,
-      //     score,
-      //     quizId: quizDetails.id,
-      //   }),
-      // });
-
-      // if (response.ok) {
-      //   console.log("Result submitted successfully");
-      // } else {
-      //   console.error("Error submitting result");
-      // }
-    } catch (error) {
-      // console.error("Error submitting result:", error);
-    }
-  };
+  }, [isQuizCompleted, userAnswers, score, quizDetails.id]);
+  
 
   const submitResultWithZeroScore = async () => {
     // Submit the quiz with a score of 0
