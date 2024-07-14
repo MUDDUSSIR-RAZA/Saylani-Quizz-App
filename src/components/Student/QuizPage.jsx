@@ -222,14 +222,8 @@ const QuizPage = () => {
     // Move to the next question if available, otherwise set quiz as completed
     if (currentQuestionIndex < quizDetails.quiz.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      console.log("🚀 ~ handleNextQuestion ~ setScore:", score);
     } else {
       setIsQuizCompleted(true);
-      console.log("🚀 ~ handleNextQuestion ~ score:", score);
-      console.log(
-        "🚀 ~ handleNextQuestion ~ setIsQuizCompleted:",
-        isQuizCompleted
-      );
     }
   };
 
