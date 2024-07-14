@@ -189,14 +189,15 @@ const QuizPage = () => {
       setTimeLeft(0); // Set time left to 0 when quiz is completed
       return;
     }
-  
+
     // Ensure currentQuestionIndex is within bounds
-    if (currentQuestionIndex >= 0 && currentQuestionIndex < quizDetails.quiz.length) {
+    if (
+      currentQuestionIndex >= 0 &&
+      currentQuestionIndex < quizDetails.quiz.length
+    ) {
       setTimeLeft(quizDetails.quiz[currentQuestionIndex].time_limit);
     }
-
   }, [currentQuestionIndex, isQuizCompleted, quizDetails.quiz]);
-  
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
@@ -211,18 +212,18 @@ const QuizPage = () => {
 
   const handleNextQuestion = () => {
     const currentQuestion = quizDetails.quiz[currentQuestionIndex];
-  
+
     // Update userAnswers with the current answer (convert undefined to empty string)
     setUserAnswers((prevAnswers) => ({
       ...prevAnswers,
       [currentQuestion.id]: userAnswers[currentQuestion.id] || "", // Empty string if undefined
     }));
-  
+
     // Check if the current answer is correct and update score
     if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
       setScore((prevScore) => prevScore + 1);
     }
-  
+
     // Move to the next question if available, otherwise set quiz as completed
     if (currentQuestionIndex < quizDetails.quiz.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
@@ -230,40 +231,36 @@ const QuizPage = () => {
       setIsQuizCompleted(true); // Set quiz completed before submitting result
     }
   };
-  
-  
 
   useEffect(() => {
     const submitResult = async () => {
       console.log(userAnswers);
       try {
-      //   const response = await fetch("/api/submit-result", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify({
-      //       userAnswers,
-      //       score,
-      //       quizId: quizDetails.id,
-      //     }),
-      //   });
-  
-      //   if (response.ok) {
-      //     console.log("Result submitted successfully");
-      //   } else {
-      //     console.error("Error submitting result");
-      //   }
+        //   const response = await fetch("/api/submit-result", {
+        //     method: "POST",
+        //     headers: {
+        //       "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //       userAnswers,
+        //       score,
+        //       quizId: quizDetails.id,
+        //     }),
+        //   });
+        //   if (response.ok) {
+        //     console.log("Result submitted successfully");
+        //   } else {
+        //     console.error("Error submitting result");
+        //   }
       } catch (error) {
         // console.error("Error submitting result:", error);
       }
     };
-  
+
     if (isQuizCompleted) {
       submitResult();
     }
   }, [isQuizCompleted, userAnswers, score, quizDetails.id]);
-  
 
   const submitResultWithZeroScore = async () => {
     // Prepare userAnswers with empty strings for all questions
@@ -271,11 +268,11 @@ const QuizPage = () => {
     quizDetails.quiz.forEach((question) => {
       updatedUserAnswers[question.id] = ""; // Set all answers to empty string
     });
-  
+
     // Submit the quiz with a score of 0 and updated userAnswers
     setScore(0);
     setUserAnswers(updatedUserAnswers); // Update userAnswers state with empty answers
-  
+
     try {
       // const response = await fetch("/api/submit-result", {
       //   method: "POST",
@@ -288,7 +285,6 @@ const QuizPage = () => {
       //     quizId: quizDetails.id,
       //   }),
       // });
-  
       // if (response.ok) {
       //   console.log("Result submitted with 0 score");
       // } else {
@@ -298,7 +294,6 @@ const QuizPage = () => {
       // console.error("Error submitting result with 0 score:", error);
     }
   };
-  
 
   if (!quizStarted) {
     return (
@@ -355,6 +350,20 @@ const QuizPage = () => {
 
   const currentQuestion = quizDetails.quiz[currentQuestionIndex];
 
+  const calculatePathColor = (timeLeft) => {
+    const percentage = (timeLeft / 30) * 100; // Calculate percentage of time left
+  
+    // Determine color based on percentage
+    if (percentage > 65) {
+      return `rgba(76, 175, 80, ${percentage / 100})`; // Green color when > 65%
+    } else if (percentage > 45) {
+      return `rgba(255, 235, 59, ${percentage / 100})`; // Yellow color when > 45%
+    } else {
+      return `rgba(244, 67, 54, ${percentage / 100})`; // Red color below 45%
+    }
+  };
+  
+
   return (
     <>
       {isPaused && (
@@ -404,6 +413,31 @@ const QuizPage = () => {
                 </button>
               ))}
             </div>
+            <div className="timer h-28 w-28">
+      <AnimatedProgressProvider
+        valueStart={timeLeft}
+        valueEnd={0}
+        duration={quizDetails.quiz[currentQuestionIndex].time_limit}
+        easingFunction={easeQuadInOut}
+      >
+        {(value) => (
+          <CircularProgressbar
+            value={(timeLeft / 30) * 100} // Calculate the percentage of time left
+            text={`${timeLeft}`} // Display the current time left
+            styles={buildStyles({
+              pathColor: calculatePathColor(timeLeft), // Dynamically calculate path color
+              textColor: "#f88",
+              trailColor: "#d6d6d6",
+              backgroundColor: "#3e98c7",
+              // CSS transition for smooth color change
+              pathTransition:
+                "stroke-dashoffset 0.5s ease-in-out, stroke 0.5s ease-in-out",
+            })}
+          />
+        )}
+      </AnimatedProgressProvider>
+    </div>
+
             <p className="mt-4">Time Left: {timeLeft} seconds</p>
             <button
               onClick={handleNextQuestion}
