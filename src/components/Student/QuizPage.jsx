@@ -297,13 +297,15 @@ const QuizPage = () => {
 
   if (!quizStarted) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <button
-          onClick={handleStartQuiz}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        >
-          Start Quiz
-        </button>
+      <div className="flex justify-center flex-col items-center h-screen backdrop-blur-xl bg-bgColor rounded-lg shadow-2xl p-7">
+        <div className="flex justify-center items-center h-screen ">
+          <button
+            onClick={handleStartQuiz}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-11 rounded text-6xl"
+          >
+            Start Quiz
+          </button>
+        </div>
       </div>
     );
   }
@@ -406,7 +408,7 @@ const QuizPage = () => {
                 <button
                   key={index}
                   onClick={() => handleOptionClick(currentQuestion.id, option)}
-                  className="bg-button hover:bg-blue-700 active:bg-violet-700 focus:[#fff] focus:outline-none focus:ring focus:ring-[#47ad76] text-white font-bold py-2 px-4 rounded mb-2 min-w-[60%]"
+                  className="bg-button hover:bg-blue-700 active:bg-violet-700 focus:backdrop-blur-3xl focus:bg-[#38ff386c] focus:outline-none focus:ring focus:ring-[#51c542] text-white font-bold py-2 px-4 rounded mb-2 min-w-[60%]"
                 >
                   {option}
                 </button>
