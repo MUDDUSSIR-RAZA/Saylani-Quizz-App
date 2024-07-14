@@ -211,21 +211,26 @@ const QuizPage = () => {
 
   const handleNextQuestion = () => {
     const currentQuestion = quizDetails.quiz[currentQuestionIndex];
+  
+    // Update userAnswers with the current answer (convert undefined to empty string)
     setUserAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [currentQuestion.id]: userAnswers[currentQuestion.id], // Ensure the last answer is updated
+      [currentQuestion.id]: userAnswers[currentQuestion.id] || "", // Empty string if undefined
     }));
   
+    // Check if the current answer is correct and update score
     if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
       setScore((prevScore) => prevScore + 1);
     }
   
+    // Move to the next question if available, otherwise set quiz as completed
     if (currentQuestionIndex < quizDetails.quiz.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
       setIsQuizCompleted(true); // Set quiz completed before submitting result
     }
   };
+  
   
 
   useEffect(() => {
@@ -261,30 +266,39 @@ const QuizPage = () => {
   
 
   const submitResultWithZeroScore = async () => {
-    // Submit the quiz with a score of 0
+    // Prepare userAnswers with empty strings for all questions
+    const updatedUserAnswers = {};
+    quizDetails.quiz.forEach((question) => {
+      updatedUserAnswers[question.id] = ""; // Set all answers to empty string
+    });
+  
+    // Submit the quiz with a score of 0 and updated userAnswers
     setScore(0);
+    setUserAnswers(updatedUserAnswers); // Update userAnswers state with empty answers
+  
     try {
-      const response = await fetch("/api/submit-result", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userAnswers,
-          score: 0,
-          quizId: quizDetails.id,
-        }),
-      });
-
-      if (response.ok) {
-        console.log("Result submitted with 0 score");
-      } else {
-        console.error("Error submitting result with 0 score");
-      }
+      // const response = await fetch("/api/submit-result", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     userAnswers: updatedUserAnswers,
+      //     score: 0,
+      //     quizId: quizDetails.id,
+      //   }),
+      // });
+  
+      // if (response.ok) {
+      //   console.log("Result submitted with 0 score");
+      // } else {
+      //   console.error("Error submitting result with 0 score");
+      // }
     } catch (error) {
-      console.error("Error submitting result with 0 score:", error);
+      // console.error("Error submitting result with 0 score:", error);
     }
   };
+  
 
   if (!quizStarted) {
     return (
