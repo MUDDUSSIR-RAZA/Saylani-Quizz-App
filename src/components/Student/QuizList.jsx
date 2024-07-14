@@ -53,9 +53,6 @@ const QuizList = () => {
     },
   ]);
 
-
-  console.log(courses.questions.length)
-
   const [showKeyEntry, setShowKeyEntry] = useState(false);
   const [selectedQuizId, setSelectedQuizId] = useState(null);
   const [enteredKey, setEnteredKey] = useState("");
@@ -117,7 +114,7 @@ const QuizList = () => {
               </header>
               <main>
                 <p>
-                  {courses.questions.length} <a href="#">Questions</a>
+                  {course.questions.length} <a href="#">Questions</a>
                 </p>
               </main>
             </section>
