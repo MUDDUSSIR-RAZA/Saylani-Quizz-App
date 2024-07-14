@@ -352,7 +352,7 @@ const QuizPage = () => {
 
   const calculatePathColor = (timeLeft) => {
     const percentage = (timeLeft / 30) * 100; // Calculate percentage of time left
-  
+
     // Determine color based on percentage
     if (percentage > 65) {
       return `rgba(76, 175, 80, ${percentage / 100})`; // Green color when > 65%
@@ -362,7 +362,6 @@ const QuizPage = () => {
       return `rgba(244, 67, 54, ${percentage / 100})`; // Red color below 45%
     }
   };
-  
 
   return (
     <>
@@ -407,36 +406,36 @@ const QuizPage = () => {
                 <button
                   key={index}
                   onClick={() => handleOptionClick(currentQuestion.id, option)}
-                  className="bg-button hover:bg-blue-700 active:bg-violet-700 focus:bg-sky-800 focus:outline-none focus:ring focus:ring-sky-950 text-white font-bold py-2 px-4 rounded mb-2 min-w-[60%]"
+                  className="bg-button hover:bg-blue-700 active:bg-violet-700 focus:[#fff] focus:outline-none focus:ring focus:ring-[#47ad76] text-white font-bold py-2 px-4 rounded mb-2 min-w-[60%]"
                 >
                   {option}
                 </button>
               ))}
             </div>
             <div className="timer h-28 w-28">
-      <AnimatedProgressProvider
-        valueStart={timeLeft}
-        valueEnd={0}
-        duration={quizDetails.quiz[currentQuestionIndex].time_limit}
-        easingFunction={easeQuadInOut}
-      >
-        {(value) => (
-          <CircularProgressbar
-            value={(timeLeft / 30) * 100} // Calculate the percentage of time left
-            text={`${timeLeft}`} // Display the current time left
-            styles={buildStyles({
-              pathColor: calculatePathColor(timeLeft), // Dynamically calculate path color
-              textColor: "#f88",
-              trailColor: "#d6d6d6",
-              backgroundColor: "#3e98c7",
-              // CSS transition for smooth color change
-              pathTransition:
-                "stroke-dashoffset 0.5s ease-in-out, stroke 0.5s ease-in-out",
-            })}
-          />
-        )}
-      </AnimatedProgressProvider>
-    </div>
+              <AnimatedProgressProvider
+                valueStart={timeLeft}
+                valueEnd={0}
+                duration={quizDetails.quiz[currentQuestionIndex].time_limit}
+                easingFunction={easeQuadInOut}
+              >
+                {(value) => (
+                  <CircularProgressbar
+                    value={(timeLeft / 30) * 100} // Calculate the percentage of time left
+                    text={`${timeLeft}`} // Display the current time left
+                    styles={buildStyles({
+                      pathColor: calculatePathColor(timeLeft), // Dynamically calculate path color
+                      textColor: "#f88",
+                      trailColor: "#d6d6d6",
+                      backgroundColor: "#3e98c7",
+                      // CSS transition for smooth color change
+                      pathTransition:
+                        "stroke-dashoffset 0.5s ease-in-out, stroke 0.5s ease-in-out",
+                    })}
+                  />
+                )}
+              </AnimatedProgressProvider>
+            </div>
 
             <p className="mt-4">Time Left: {timeLeft} seconds</p>
             <button
