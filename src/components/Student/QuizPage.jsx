@@ -104,7 +104,7 @@ const QuizPage = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [timeLeft]);
+  },[timeLeft, quizStarted]);
 
   useEffect(() => {
     // Function to enter fullscreen
