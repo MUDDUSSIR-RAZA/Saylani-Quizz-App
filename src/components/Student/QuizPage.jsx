@@ -93,48 +93,43 @@ const QuizPage = () => {
   const [timeLeft, setTimeLeft] = useState(quizDetails.quiz[0].time_limit);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const router = useRouter();
-
-  useEffect(() => {
-    const handlePopState = (e) => {
-      e.preventDefault();
-      router.push("/");
-    };
-
-    window.history.pushState(null, "", window.location.href);
-    window.addEventListener("popstate", handlePopState);
-
-    return () => {
-      window.removeEventListener("popstate", handlePopState);
-    };
-  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (timeLeft > 0 && !isPaused) {
+      if (timeLeft > 0) {
         setTimeLeft(timeLeft - 1);
-      } else if (!isPaused) {
+      } else {
         handleNextQuestion();
       }
     }, 1000);
 
     return () => clearTimeout(timer);
-  }, [timeLeft, isPaused]);
+  }, [timeLeft]);
 
   useEffect(() => {
+    // Function to enter fullscreen
     const enterFullscreen = () => {
       const element = document.documentElement;
       if (element.requestFullscreen) {
         element.requestFullscreen();
       } else if (element.mozRequestFullScreen) {
+        /* Firefox */
         element.mozRequestFullScreen();
       } else if (element.webkitRequestFullscreen) {
+        /* Chrome, Safari and Opera */
         element.webkitRequestFullscreen();
       } else if (element.msRequestFullscreen) {
+        /* IE/Edge */
         element.msRequestFullscreen();
       }
     };
 
+    // Enter fullscreen when quiz starts
+    if (quizStarted) {
+      enterFullscreen();
+    }
+
+    // Lock fullscreen during quiz
     const handleFullscreenChange = () => {
       if (
         !document.fullscreenElement &&
@@ -144,6 +139,7 @@ const QuizPage = () => {
       ) {
         setIsFullScreen(false);
         setIsPaused(true);
+        console.log("User exited full screen.");
       } else {
         setIsFullScreen(true);
         setIsPaused(false);
@@ -154,10 +150,6 @@ const QuizPage = () => {
     document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
     document.addEventListener("mozfullscreenchange", handleFullscreenChange);
     document.addEventListener("MSFullscreenChange", handleFullscreenChange);
-
-    if (quizStarted) {
-      enterFullscreen();
-    }
 
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
@@ -178,40 +170,36 @@ const QuizPage = () => {
 
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden) {
-        console.log("User has switched tabs or minimized the browser.");
+      if (document.hidden && quizStarted && !isQuizCompleted) {
+        // Automatically submit the quiz with a score of 0
+        submitResultWithZeroScore();
+        setIsQuizCompleted(true);
       }
     };
-  
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-  
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
+  }, [quizStarted, isQuizCompleted]);
 
   useEffect(() => {
     if (isQuizCompleted) {
       setTimeLeft(0); // Set time left to 0 when quiz is completed
       return;
     }
-
+  
     // Ensure currentQuestionIndex is within bounds
-    if (
-      currentQuestionIndex >= 0 &&
-      currentQuestionIndex < quizDetails.quiz.length
-    ) {
+    if (currentQuestionIndex >= 0 && currentQuestionIndex < quizDetails.quiz.length) {
       setTimeLeft(quizDetails.quiz[currentQuestionIndex].time_limit);
     }
 
-    return () => {
-      // Cleanup function (if needed)
-    };
   }, [currentQuestionIndex, isQuizCompleted, quizDetails.quiz]);
+  
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
-    setIsFullScreen(true);
   };
 
   const handleOptionClick = (questionId, selectedOption) => {
@@ -221,19 +209,6 @@ const QuizPage = () => {
     }));
   };
 
-  const handleSkipQuestion = () => {
-    if (currentQuestionIndex < quizDetails.quiz.length - 1) {
-      console.log(
-        "🚀 ~ handleSkipQuestion ~ currentQuestionIndex:",
-        currentQuestionIndex
-      );
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    } else {
-      setIsQuizCompleted(true);
-      submitResult();
-    }
-  };
-
   const handleNextQuestion = () => {
     const currentQuestion = quizDetails.quiz[currentQuestionIndex];
     if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
@@ -241,10 +216,6 @@ const QuizPage = () => {
     }
 
     if (currentQuestionIndex < quizDetails.quiz.length - 1) {
-      console.log(
-        "🚀 ~ handleNextQuestion ~ currentQuestionIndex:",
-        currentQuestionIndex
-      );
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
       setIsQuizCompleted(true);
@@ -253,6 +224,33 @@ const QuizPage = () => {
   };
 
   const submitResult = async () => {
+    // console.log(userAnswers);
+    try {
+      // const response = await fetch("/api/submit-result", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     userAnswers,
+      //     score,
+      //     quizId: quizDetails.id,
+      //   }),
+      // });
+
+      // if (response.ok) {
+      //   console.log("Result submitted successfully");
+      // } else {
+      //   console.error("Error submitting result");
+      // }
+    } catch (error) {
+      // console.error("Error submitting result:", error);
+    }
+  };
+
+  const submitResultWithZeroScore = async () => {
+    // Submit the quiz with a score of 0
+    setScore(0);
     try {
       const response = await fetch("/api/submit-result", {
         method: "POST",
@@ -261,18 +259,18 @@ const QuizPage = () => {
         },
         body: JSON.stringify({
           userAnswers,
-          score,
+          score: 0,
           quizId: quizDetails.id,
         }),
       });
 
       if (response.ok) {
-        console.log("Result submitted successfully");
+        console.log("Result submitted with 0 score");
       } else {
-        console.error("Error submitting result");
+        console.error("Error submitting result with 0 score");
       }
     } catch (error) {
-      console.error("Error submitting result:", error);
+      console.error("Error submitting result with 0 score:", error);
     }
   };
 
@@ -340,7 +338,7 @@ const QuizPage = () => {
             <p>Please return to full-screen mode to continue the quiz.</p>
             <button
               onClick={() => {
-                handleSkipQuestion();
+                handleNextQuestion();
                 const element = document.documentElement;
                 if (element.requestFullscreen) {
                   element.requestFullscreen();
