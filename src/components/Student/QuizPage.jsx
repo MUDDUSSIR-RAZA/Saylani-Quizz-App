@@ -212,27 +212,36 @@ const QuizPage = () => {
     }));
   };
 
-  const handleNextQuestion = () => {
-    const currentQuestion = quizDetails.quiz[currentQuestionIndex];
+const handleNextQuestion = async () => {
+  const currentQuestion = quizDetails.quiz[currentQuestionIndex];
 
-    // Update userAnswers with the current answer (convert undefined to empty string)
-    setUserAnswers((prevAnswers) => ({
-      ...prevAnswers,
-      [currentQuestion.id]: userAnswers[currentQuestion.id] || "", // Empty string if undefined
-    }));
-
-    // Check if the current answer is correct and update score
-    if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
-      setScore((prevScore) => prevScore + 1);
+  // Check if the current answer is correct and update score
+  if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
+    try {
+      await new Promise((resolve) => {
+        setScore((prevScore) => {
+          console.log("🚀 ~ setScore ~ prevScore:", prevScore);
+          resolve();
+          return prevScore + 1;
+        });
+      });
+    } catch (error) {
+      console.error("Error updating score:", error);
     }
+  }
 
-    // Move to the next question if available, otherwise set quiz as completed
-    if (currentQuestionIndex < quizDetails.quiz.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    } else {
-      setIsQuizCompleted(true); // Set quiz completed before submitting result
-    }
-  };
+  console.log(score); // This will log the previous score due to async nature of state update
+
+  // Move to the next question if available, otherwise set quiz as completed
+  if (currentQuestionIndex < quizDetails.quiz.length - 1) {
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+  } else {
+    setIsQuizCompleted(true); // Set quiz completed before submitting result
+  }
+};
+
+  
+  
 
   useEffect(() => {
     const submitResult = async () => {
