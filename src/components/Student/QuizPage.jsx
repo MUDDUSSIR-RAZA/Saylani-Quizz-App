@@ -204,7 +204,6 @@ const QuizPage = () => {
   const handleStartQuiz = () => {
     setQuizStarted(true);
   };
-
   const handleOptionClick = (questionId, selectedOption) => {
     setUserAnswers((prevAnswers) => ({
       ...prevAnswers,
@@ -212,66 +211,60 @@ const QuizPage = () => {
     }));
   };
 
-const handleNextQuestion = async () => {
-  const currentQuestion = quizDetails.quiz[currentQuestionIndex];
+  const handleNextQuestion = () => {
+    const currentQuestion = quizDetails.quiz[currentQuestionIndex];
 
-  // Check if the current answer is correct and update score
-  if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
-    try {
-      await new Promise((resolve) => {
-        setScore((prevScore) => {
-          console.log("🚀 ~ setScore ~ prevScore:", prevScore);
-          resolve();
-          return prevScore + 1;
-        });
-      });
-    } catch (error) {
-      console.error("Error updating score:", error);
+    // Check if the current answer is correct and update score
+    if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
+      setScore((prevScore) => prevScore + 1);
     }
-  }
 
-  console.log(score); // This will log the previous score due to async nature of state update
+    // Move to the next question if available, otherwise set quiz as completed
+    if (currentQuestionIndex < quizDetails.quiz.length - 1) {
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+      console.log("🚀 ~ handleNextQuestion ~ setScore:", score);
+    } else {
+      setIsQuizCompleted(true);
+      console.log("🚀 ~ handleNextQuestion ~ score:", score);
+      console.log(
+        "🚀 ~ handleNextQuestion ~ setIsQuizCompleted:",
+        isQuizCompleted
+      );
+    }
+  };
 
-  // Move to the next question if available, otherwise set quiz as completed
-  if (currentQuestionIndex < quizDetails.quiz.length - 1) {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-  } else {
-    setIsQuizCompleted(true); // Set quiz completed before submitting result
-  }
-};
-
-  
-  
-
+  // Effect to submit result once quiz is completed
   useEffect(() => {
-    const submitResult = async () => {
-      console.log(userAnswers);
-      try {
-        //   const response = await fetch("/api/submit-result", {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //       userAnswers,
-        //       score,
-        //       quizId: quizDetails.id,
-        //     }),
-        //   });
-        //   if (response.ok) {
-        //     console.log("Result submitted successfully");
-        //   } else {
-        //     console.error("Error submitting result");
-        //   }
-      } catch (error) {
-        // console.error("Error submitting result:", error);
-      }
-    };
-
     if (isQuizCompleted) {
       submitResult();
+      setScore(score); 
+      setUserAnswers({}); 
     }
-  }, [isQuizCompleted, userAnswers, score, quizDetails.id]);
+  }, [isQuizCompleted]);
+
+  const submitResult = async () => {
+    try {
+      //   const response = await fetch("/api/submit-result", {
+      //     method: "POST",
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //     body: JSON.stringify({
+      //       userAnswers,
+      //       score,
+      //       quizId: quizDetails.id,
+      //     }),
+      //   });
+      //   if (response.ok) {
+      //     console.log("Result submitted successfully");
+      //   } else {
+      //     console.error("Error submitting result");
+      //   }
+      console.log("🚀 ~ submitResult ~ score:", score);
+    } catch (error) {
+      // console.error("Error submitting result:", error);
+    }
+  };
 
   const submitResultWithZeroScore = async () => {
     // Prepare userAnswers with empty strings for all questions
@@ -309,10 +302,31 @@ const handleNextQuestion = async () => {
   if (!quizStarted) {
     return (
       <div className="flex justify-center flex-col items-center h-screen backdrop-blur-xl bg-bgColor rounded-lg shadow-2xl p-7">
-        <div className="flex justify-center items-center h-screen ">
+        <div className="flex flex-col justify-center items-center h-screen ">
+          <div className="instructions bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 mb-4">
+            <p className="font-bold ">Instructions for Quiz Takers:</p>
+            <br />
+            <ul className="list-disc pl-5">
+              <li>
+                Do not exit the full-screen mode, or the current question will
+                be skipped and{" "}
+                <span className="text-red-600">
+                  you won't get points for it.
+                </span>
+              </li>
+              <li>
+                Avoid switching tabs or minimizing the window, or the
+                <span className="text-red-600">
+                  {" "}
+                  quiz will be submitted with a score of 0.
+                </span>
+              </li>
+            </ul>
+          </div>
+
           <button
             onClick={handleStartQuiz}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-11 rounded text-6xl"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-11 rounded-2xl text-6xl"
           >
             Start Quiz
           </button>
