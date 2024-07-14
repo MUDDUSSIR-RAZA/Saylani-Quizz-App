@@ -95,6 +95,8 @@ const QuizPage = () => {
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
+    if (!quizStarted) return;
+
     const timer = setTimeout(() => {
       if (timeLeft > 0) {
         setTimeLeft(timeLeft - 1);
@@ -104,7 +106,7 @@ const QuizPage = () => {
     }, 1000);
 
     return () => clearTimeout(timer);
-  },[timeLeft, quizStarted]);
+  }, [timeLeft, quizStarted]);
 
   useEffect(() => {
     // Function to enter fullscreen
