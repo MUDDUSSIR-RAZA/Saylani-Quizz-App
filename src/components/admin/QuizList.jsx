@@ -529,8 +529,8 @@ const QuizList = () => {
             <section className={` ${card}`}>
               <header>
                 <p>{course.course_name}</p>
-                <a href="#" className="text-black">
-                  Details
+                <a href="#" className="text-[#893232]">
+                  Delete
                 </a>
               </header>
               <main>
@@ -540,9 +540,9 @@ const QuizList = () => {
               </main>
               <footer className="relative">
                 {course.quizOpen ? (
-                  <p className="text-[#34ac2c] text-base">Quiz Open</p>
+                  <p className="text-[#287c22] text-base">Quiz Open</p>
                 ) : (
-                  <p className="text-[#ff0000]  text-base">Quiz Closed</p>
+                  <p className="text-[#a72727]  text-base">Quiz Closed</p>
                 )}
                 <Link href={`/admin/editquiz/${course._id}`} className="absolute right-6 cursor-pointer">
                   Edit
