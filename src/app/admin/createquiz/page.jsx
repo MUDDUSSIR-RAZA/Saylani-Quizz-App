@@ -1,19 +1,15 @@
-"use client"
-
-import AddQuestion from "@/components/admin/AddQuestion";
-import BulkUploadQuestions from "@/components/admin/BulkUploadQuestions";
-import QuizList from "@/components/admin/QuizList";
-import CreateQuiz from "@/components/admin/CreateQuizz";
-import { useState } from "react";
+import AdminNavbar from "@/components/NavBar/AdminNavbar";
+import CreateQuizz from "@/components/admin/CreateQuizz";
 
 const createquiz = () => {
   
 
   return (
     <>
-      {/* <AddQuestion /> */}
-      {/* <QuizList courses={course} /> */}
-      {/* <BulkUploadQuestions /> */}
+      <div className="overflow-hidden w-dvw h-dvh" >
+        <AdminNavbar />
+          <CreateQuizz />
+      </div>
     </>
   );
 };
