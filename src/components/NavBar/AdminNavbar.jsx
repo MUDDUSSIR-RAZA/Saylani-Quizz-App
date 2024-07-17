@@ -7,14 +7,13 @@ import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const AdminNavbar = () => {
-  const router = useRouter()
+  const router = useRouter();
 
   const [nav, setNav] = useState(false);
   const handleToggle = () => {
     setNav(!nav);
     // }
   };
-
 
   const links = [
     {
@@ -23,21 +22,26 @@ const AdminNavbar = () => {
       name: "Add Quiz",
     },
     {
-      id: 2,
-      link: "/admin/addQuestion",
-      name: "Add Question",
-    },
-    {
       id: 3,
       link: "/admin/addBulkQuestion",
       name: "Add Bulk Questions",
+    },
+    {
+      id: 1,
+      link: "/admin/createquiz",
+      name: "Create Quiz",
+    },
+    {
+      id: 2,
+      link: "/admin/addQuestion",
+      name: "Add Question",
     },
   ];
 
   const handleLogout = async () => {
     try {
       await axios.post("/api/user/logout");
-      router.push("/auth/signup")
+      router.push("/auth/signup");
       return;
     } catch (error) {
       console.error(error.response.data);
@@ -45,7 +49,6 @@ const AdminNavbar = () => {
     }
   };
 
-  
   useEffect(() => {
     if (nav) {
       document.body.style.overflow = "hidden";
@@ -71,7 +74,6 @@ const AdminNavbar = () => {
             {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
           </div>
 
-
           <div className="flex items-center justify-between w-full">
             <div className="openNavbarLogo flex-shrink-0 flex items-center md:ml-7 ml-3">
               <a href="/" className="text-gray-900 text-lg font-bold ">
@@ -82,7 +84,7 @@ const AdminNavbar = () => {
             <div className="flex items-center justify-around">
               <div className="md:hidden block mr-2 text-xl font-semibold text-center ">
                 <div className="flex justify-around capitalize">
-                  {links.map(({ link, id ,name }) => (
+                  {links.map(({ link, id, name }) => (
                     <Link
                       key={id}
                       href={link}
@@ -119,9 +121,9 @@ const AdminNavbar = () => {
           )}
         </div>
 
-        <div className="w-full text-2xl font-semibold text-center absolute top-10">
-          <div className="flex flex-col justify-around text-center my-auto">
-            {links.map(({ link, id ,name }) => (
+        <div className="w-full text-2xl font-semibold text-center absolute top-14">
+          <div className="flex flex-col justify-around text-center my-auto overflow-auto h-[700px]">
+            {links.map(({ link, id, name }) => (
               <Link
                 key={id}
                 href={link}
