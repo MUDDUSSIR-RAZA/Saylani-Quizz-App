@@ -18,8 +18,8 @@ const AdminNavbar = () => {
   const links = [
     {
       id: 1,
-      link: "/admin/addQuiz",
-      name: "Add Quiz",
+      link: "/admin/addCourse",
+      name: "Add Course",
     },
     {
       id: 3,
@@ -27,12 +27,12 @@ const AdminNavbar = () => {
       name: "Add Bulk Questions",
     },
     {
-      id: 1,
+      id: 5,
       link: "/admin/createquiz",
       name: "Create Quiz",
     },
     {
-      id: 2,
+      id: 8,
       link: "/admin/addQuestion",
       name: "Add Question",
     },
@@ -69,7 +69,7 @@ const AdminNavbar = () => {
         <div className="relative flex items-center justify-between h-16 w-full">
           <div
             onClick={handleToggle}
-            className="cursor-pointer absolute inset-y-0 right-5 md:flex items-center hidden "
+            className="cursor-pointer absolute inset-y-0 right-5 xl:flex items-center hidden "
           >
             {nav ? <FaTimes size={30} /> : <FaBars size={30} />}
           </div>
@@ -82,7 +82,7 @@ const AdminNavbar = () => {
             </div>
 
             <div className="flex items-center justify-around">
-              <div className="md:hidden block mr-2 text-xl font-semibold text-center ">
+              <div className="xl:hidden block mr-2 text-xl font-semibold text-center ">
                 <div className="flex justify-around capitalize">
                   {links.map(({ link, id, name }) => (
                     <Link
@@ -98,7 +98,7 @@ const AdminNavbar = () => {
               </div>
               <button
                 // onClick={handleLogout}
-                className="openNavbarLinks bg-[#ffffff72] p-2 rounded-full text-lg text-center minLg:mx-5 mr-16 minMd:mr-0 md:hidden px-4"
+                className="openNavbarLinks bg-[#ffffff72] p-2 rounded-full text-center capitalize px-4 minLg:mx-5 mr-16 minMd:mr-0 xl:hidden text-xl font-semibold text-[#752e2e] hover:text-[#ff4a4a]"
               >
                 Logout
               </button>
@@ -122,12 +122,12 @@ const AdminNavbar = () => {
         </div>
 
         <div className="w-full text-2xl font-semibold text-center absolute top-14">
-          <div className="flex flex-col justify-around text-center my-auto overflow-auto h-[700px]">
+          <div className="flex flex-col justify-around text-center my-auto">
             {links.map(({ link, id, name }) => (
               <Link
                 key={id}
                 href={link}
-                className="closeNavbarLinks text-[#2c4a4f] hover:text-gray-700  my-11 mx-14 capitalize bg-[#ffffff72] p-2 rounded-full px-4"
+                className="closeNavbarLinks text-[#2c4a4f] hover:text-[#4998a7]  my-11 mx-14 capitalize bg-[#ffffff72] p-2 rounded-full px-4"
                 onClick={handleToggle}
               >
                 {name}
@@ -135,7 +135,7 @@ const AdminNavbar = () => {
             ))}
             <button
               onClick={handleLogout}
-              className="closeNavbarLinks bg-[#ffffff72] p-2 rounded-full text-lg text-center my-7 mx-14  minLg:mx-5 mr-16 minMd:mr-0  border-2 border-red-700"
+              className="closeNavbarLinks bg-[#ffffff72] p-2 rounded-full text-center my-11 mx-14 capitalize px-4 text-2xl font-semibold text-[#752e2e] hover:text-[#ff4a4a]"
             >
               Logout
             </button>
