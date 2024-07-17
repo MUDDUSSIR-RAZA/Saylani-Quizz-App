@@ -61,7 +61,12 @@ const ProfilePage = ({ studentId }) => {
   }, [studentId]);
 
   if (!student) {
-    return <> <Loading /> </>;
+    return (
+      <>
+        {" "}
+        <Loading />{" "}
+      </>
+    );
   }
 
   const getStatusClass = (status) => {
@@ -84,24 +89,32 @@ const ProfilePage = ({ studentId }) => {
           Student Profile
         </h1>
         <div className="w-full max-w-2xl backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6">
-          <h2 className="text-2xl font-extrabold mt-2 mb-5">
-            Profile Details
-          </h2>
+          <h2 className="text-2xl font-extrabold mt-2 mb-5">Profile Details</h2>
           <div className="mb-4">
-            <span className="font-semibold">Name: </span>
-            <span>{student.name}</span>
-            <br />
-            <span className="font-semibold">Father's Name: </span>
-            <span> {student.fathername}</span>
-            <br />
-            <span className="font-semibold"> NIC:</span>
-            <span> {student.nic}</span>
-            <br />
-            <span className="font-semibold">Email: </span>
-            <span>{student.email}</span>
-            <br />
-            <span className="font-semibold">Phone: </span>
-            <span> {student.phone}</span>
+            <div className="mb-1">
+              <span className="font-semibold">Name: </span>
+              <span>{student.name}</span>
+              <br />
+            </div>
+            <div className="mb-1">
+              <span className="font-semibold">Father's Name: </span>
+              <span> {student.fathername}</span>
+              <br />
+            </div>
+            <div className="mb-1">
+              <span className="font-semibold"> NIC:</span>
+              <span> {student.nic}</span>
+              <br />
+            </div>
+            <div className="mb-1">
+              <span className="font-semibold">Email: </span>
+              <span>{student.email}</span>
+              <br />
+            </div>
+            <div className="mb-1">
+              <span className="font-semibold">Phone: </span>
+              <span> {student.phone}</span>
+            </div>
           </div>
           <h2 className="text-xl font-bold mb-4">Enrolled Courses</h2>
           <div className="overflow-y-auto max-h-[150px]">
