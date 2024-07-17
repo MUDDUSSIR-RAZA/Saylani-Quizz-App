@@ -65,26 +65,30 @@ const QuizList = () => {
 
   const handleKeySubmit = async () => {
     try {
-      const response = await fetch("/api/check-key", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ key: enteredKey, quizId: selectedQuizId }),
-      });
 
-      const data = await response.json();
+      router.push(`/student/quiz/${selectedQuizId}`)
 
-      if (data.success) {
-        router.push({
-          pathname: `/quiz/${selectedQuizId}`,
-          query: { key: enteredKey },
-        });
-      } else {
-        setErrorMessage("Invalid key. Please try again.");
-      }
+
+      // const response = await fetch("/api/check-key", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({ key: enteredKey, quizId: selectedQuizId }),
+      // });
+
+      // const data = await response.json();
+
+      // if (data.success) {
+      //   router.push({
+      //     pathname: `/quiz/${selectedQuizId}`,
+      //     query: { key: enteredKey },
+      //   });
+      // } else {
+      //   setErrorMessage("Invalid key. Please try again.");
+      // }
     } catch (error) {
-      setErrorMessage("An error occurred. Please try again.");
+      // setErrorMessage("An error occurred. Please try again.");
     }
   };
 
