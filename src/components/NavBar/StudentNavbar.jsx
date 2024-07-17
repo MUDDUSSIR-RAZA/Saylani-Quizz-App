@@ -3,7 +3,7 @@
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const StudentNavbar = () => {
@@ -12,25 +12,19 @@ const StudentNavbar = () => {
   const [nav, setNav] = useState(false);
   const handleToggle = () => {
     setNav(!nav);
-    // }
   };
 
 
   const links = [
     {
       id: 1,
-      link: "/student/addQuiz",
-      name: "Add Quiz",
+      link: "/student/OverallPerformance",
+      name: "Overall Performance",
     },
     {
       id: 2,
-      link: "/student/addQuestion",
-      name: "Add Question",
-    },
-    {
-      id: 3,
-      link: "/student/addBulkQuestion",
-      name: "Add Bulk Questions",
+      link: "/student/profile",
+      name: "Profile",
     },
   ];
 
