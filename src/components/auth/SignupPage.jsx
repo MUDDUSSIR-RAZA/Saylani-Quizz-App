@@ -29,6 +29,31 @@ const SignupPage = () => {
     batch: "",
   });
 
+  const { values, errors, handleBlur, touched,  handleSubmit } =
+  useFormik({
+    initialValues,
+    validationSchema: sigupSchema,
+    onSubmit: async ({ userName, email, password }, action) => {
+      try {
+        setLoading(true);
+        const { data } = await axios.post("/api/user/signup", {
+          userName,
+          email,
+          password,
+        });
+        setLoading(false);
+        router.push("/auth/login");
+        action.resetForm();
+        return;
+      } catch (error) {
+        setLoading(false);
+        toast.error(error.response.data)
+        action.resetForm();
+        return;
+      }
+    },
+  });
+
   const [courses, setCourses] = useState([
     {
       _id: 1,
@@ -99,37 +124,37 @@ const SignupPage = () => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(studentData),
-      });
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const response = await fetch("/api/signup", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(studentData),
+  //     });
 
-      if (response.ok) {
-        console.log("Student signed up successfully");
-        setStudentData({
-          name: "",
-          fathername: "",
-          nic: "",
-          password: "",
-          email: "",
-          phone: "",
-          city: "",
-          course_name: "",
-          batch: "",
-        });
-      } else {
-        console.error("Failed to sign up student");
-      }
-    } catch (error) {
-      console.error("Error signing up student:", error);
-    }
-  };
+  //     if (response.ok) {
+  //       console.log("Student signed up successfully");
+  //       setStudentData({
+  //         name: "",
+  //         fathername: "",
+  //         nic: "",
+  //         password: "",
+  //         email: "",
+  //         phone: "",
+  //         city: "",
+  //         course_name: "",
+  //         batch: "",
+  //       });
+  //     } else {
+  //       console.error("Failed to sign up student");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error signing up student:", error);
+  //   }
+  // };
 
   return (
     <div className="container mx-auto">
