@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
+import SigningUp from "@/components/InPageLoader/SigningUp";
 
 const initialValues = {
   name: "",
