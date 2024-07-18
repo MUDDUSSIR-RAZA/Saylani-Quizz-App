@@ -30,26 +30,30 @@ const SignupPage = () => {
     batch: "",
   });
 
-  const { values, errors, handleBlur, touched,  handleSubmit } =
-  useFormik({
+  const { values, errors, handleBlur, touched, handleSubmit } = useFormik({
     initialValues,
     validationSchema: sigupSchema,
     onSubmit: async ({ userName, email, password }, action) => {
       try {
-        setLoading(true);
+        // setLoading(true);
         const { data } = await axios.post("/api/user/signup", {
-          userName,
-          email,
+          name: fathername,
+          nic,
           password,
+          email,
+          phone,
+          city,
+          course_name,
+          batch,
         });
-        setLoading(false);
-        router.push("/auth/login");
-        action.resetForm();
+        // setLoading(false);
+        // router.push("/auth/login");
+        // action.resetForm();
         return;
       } catch (error) {
-        setLoading(false);
-        toast.error(error.response.data)
-        action.resetForm();
+        // setLoading(false);
+        // toast.error(error.response.data);
+        // action.resetForm();
         return;
       }
     },
@@ -164,7 +168,9 @@ const SignupPage = () => {
       </h1>
       <form onSubmit={handleSubmit} className="mb-8 mx-5">
         <div className="backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl p-8">
-          <h2 className="text-xl font-bold mb-6 tracking-[2px] text-amber-900">Student Information</h2>
+          <h2 className="text-xl font-bold mb-6 tracking-[2px] text-amber-900">
+            Student Information
+          </h2>
           <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -245,7 +251,9 @@ const SignupPage = () => {
               />
             </div>
           </div>
-          <h2 className="text-xl font-bold my-6 tracking-[2px] text-amber-900 font-body">Course Information</h2>
+          <h2 className="text-xl font-bold my-6 tracking-[2px] text-amber-900 font-body">
+            Course Information
+          </h2>
           <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
