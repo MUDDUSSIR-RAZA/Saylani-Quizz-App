@@ -1,6 +1,20 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { useFormik } from "formik";
+import axios from "axios";
+
+const initialValues = {
+  name: "",
+  fathername: "",
+  nic: "",
+  password: "",
+  email: "",
+  phone: "",
+  city: "",
+  course_name: "",
+  batch: "",
+};
 
 const SignupPage = () => {
   const [studentData, setStudentData] = useState({
