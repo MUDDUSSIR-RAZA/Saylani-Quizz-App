@@ -3,19 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-import { sigupSchema } from "@/yupSchemas/page";
 
-const initialValues = {
-  name: "",
-  fathername: "",
-  nic: "",
-  password: "",
-  email: "",
-  phone: "",
-  city: "",
-  course_name: "",
-  batch: "",
-};
 
 const SignupPage = () => {
   const [studentData, setStudentData] = useState({
@@ -29,36 +17,6 @@ const SignupPage = () => {
     course_name: "",
     batch: "",
   });
-
-  const { values, errors, handleBlur, touched, handleSubmit } = useFormik({
-    initialValues,
-    validationSchema: sigupSchema,
-    onSubmit: async ({ userName, email, password }, action) => {
-      try {
-        // setLoading(true);
-        const { data } = await axios.post("/api/user/signup", {
-          name: fathername,
-          nic,
-          password,
-          email,
-          phone,
-          city,
-          course_name,
-          batch,
-        });
-        // setLoading(false);
-        // router.push("/auth/login");
-        // action.resetForm();
-        return;
-      } catch (error) {
-        // setLoading(false);
-        // toast.error(error.response.data);
-        // action.resetForm();
-        return;
-      }
-    },
-  });
-
   const [courses, setCourses] = useState([
     {
       _id: 1,
@@ -103,63 +61,67 @@ const SignupPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setStudentData({ ...studentData, [name]: value });
 
-    if (name === "city") {
-      setFilteredCourses(
-        courses.filter((course) => course.cities.includes(value))
-      );
-      setStudentData({
-        ...studentData,
-        city: value,
-        course_name: "",
-        batch: "",
-      });
-    }
+    setStudentData((prevStudentData) => {
+      const updatedStudentData = { ...prevStudentData, [name]: value };
 
-    if (name === "course_name") {
-      const selectedCourse = filteredCourses.find(
-        (course) => course.course_name === value
-      );
-      setStudentData({
-        ...studentData,
-        course_name: value,
-        batch: selectedCourse.batch,
-      });
-    }
+      if (name === "city") {
+        const filteredCourses = courses.filter((course) =>
+          course.cities.includes(value)
+        );
+        setFilteredCourses(filteredCourses);
+
+        return {
+          ...updatedStudentData,
+          course_name: "",
+          batch: "",
+        };
+      }
+
+      if (name === "course_name") {
+        const selectedCourse = filteredCourses.find(
+          (course) => course.course_name === value
+        );
+
+        if (selectedCourse) {
+          return {
+            ...updatedStudentData,
+            batch: selectedCourse.batch,
+          };
+        }
+      }
+
+      return updatedStudentData;
+    });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const response = await fetch("/api/signup", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(studentData),
-  //     });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post("/api/user/signup", {
+        studentData
+      });
 
-  //     if (response.ok) {
-  //       console.log("Student signed up successfully");
-  //       setStudentData({
-  //         name: "",
-  //         fathername: "",
-  //         nic: "",
-  //         password: "",
-  //         email: "",
-  //         phone: "",
-  //         city: "",
-  //         course_name: "",
-  //         batch: "",
-  //       });
-  //     } else {
-  //       console.error("Failed to sign up student");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error signing up student:", error);
-  //   }
-  // };
+      if (response.ok) {
+        console.log("Student signed up successfully");
+        setStudentData({
+          name: "",
+          fathername: "",
+          nic: "",
+          password: "",
+          email: "",
+          phone: "",
+          city: "",
+          course_name: "",
+          batch: "",
+        });
+      } else {
+        console.error("Failed to sign up student");
+      }
+    } catch (error) {
+      console.error("Error signing up student:", error);
+    }
+  };
 
   return (
     <div className="container mx-auto">
