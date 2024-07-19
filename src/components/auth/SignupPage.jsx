@@ -61,28 +61,24 @@ const SignupPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-
+  
     setStudentData((prevStudentData) => {
       const updatedStudentData = { ...prevStudentData, [name]: value };
-
+  
       if (name === "city") {
-        const filteredCourses = courses.filter((course) =>
-          course.cities.includes(value)
-        );
+        const filteredCourses = courses.filter((course) => course.cities.includes(value));
         setFilteredCourses(filteredCourses);
-
+  
         return {
           ...updatedStudentData,
           course_name: "",
           batch: "",
         };
       }
-
+  
       if (name === "course_name") {
-        const selectedCourse = filteredCourses.find(
-          (course) => course.course_name === value
-        );
-
+        const selectedCourse = filteredCourses.find((course) => course.course_name === value);
+        
         if (selectedCourse) {
           return {
             ...updatedStudentData,
@@ -90,7 +86,7 @@ const SignupPage = () => {
           };
         }
       }
-
+  
       return updatedStudentData;
     });
   };
