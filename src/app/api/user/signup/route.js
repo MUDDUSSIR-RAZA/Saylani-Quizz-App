@@ -2,7 +2,6 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-    console.log("hit");
     try {
         const {studentData} = await req.json()
 
