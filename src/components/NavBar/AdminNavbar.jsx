@@ -37,7 +37,7 @@ const AdminNavbar = () => {
       name: "Add Question",
     },
     {
-      id: 8,
+      id: 2,
       link: "/admin/request",
       name: "AStudent Requests",
     },
