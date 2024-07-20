@@ -39,7 +39,7 @@ const AdminNavbar = () => {
     {
       id: 2,
       link: "/admin/request",
-      name: "AStudent Requests",
+      name: "Student Requests",
     },
   ];
 
@@ -93,7 +93,7 @@ const AdminNavbar = () => {
                     <Link
                       key={id}
                       href={link}
-                      className="openNavbarLinks text-[#2c4a4f] hover:text-gray-700 ml-3 minLg:ml-11 bg-[#ffffff72] p-2 rounded-full px-4"
+                      className="openNavbarLinks text-[#2c4a4f] hover:text-[#4998a7] ease-in duration-150 ml-3 minLg:ml-11 bg-[#ffffff72] p-2 rounded-full px-4"
                       id="openNavbarLinksRef"
                     >
                       {name}
@@ -113,7 +113,7 @@ const AdminNavbar = () => {
       </div>
 
       <div
-        className={` closeNavbar flex  w-dvh h-dvh relative backdrop-blur-sm bg-[#a4a0a098] z-999 ${
+        className={` closeNavbar flex  w-dvh h-dvh relative backdrop-blur-sm bg-[#a4a0a098] z-999 overflow-auto ${
           nav ? "" : "hidden"
         }`}
       >
