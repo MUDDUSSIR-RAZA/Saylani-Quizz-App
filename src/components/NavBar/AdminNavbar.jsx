@@ -36,6 +36,11 @@ const AdminNavbar = () => {
       link: "/admin/addQuestion",
       name: "Add Question",
     },
+    {
+      id: 8,
+      link: "/admin/request",
+      name: "AStudent Requests",
+    },
   ];
 
   const handleLogout = async () => {
