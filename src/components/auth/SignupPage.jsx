@@ -98,8 +98,8 @@ const SignupPage = () => {
         studentData
       });
 
-      // if (response.ok) {
-      //   console.log("Student signed up successfully");
+      if (response.ok) {
+        console.log("Student signed up successfully");
         setStudentData({
           name: "",
           fathername: "",
@@ -111,9 +111,9 @@ const SignupPage = () => {
           course_name: "",
           batch: "",
         });
-      // } else {
-      //   console.error("Failed to sign up student");
-      // }
+      } else {
+        console.error("Failed to sign up student");
+      }
     } catch (error) {
       console.error("Error signing up student:", error);
     }
