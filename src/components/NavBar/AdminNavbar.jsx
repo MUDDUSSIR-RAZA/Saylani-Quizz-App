@@ -38,7 +38,7 @@ const AdminNavbar = () => {
     },
     {
       id: 2,
-      link: "/admin/request",
+      link: "/admin/requests",
       name: "Student Requests",
     },
   ];
