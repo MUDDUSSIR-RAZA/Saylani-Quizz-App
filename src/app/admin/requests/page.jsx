@@ -8,7 +8,7 @@ import React from "react";
 async function getRequests() {
   try {
     const { data } = await axios.get(
-      `${process.env.BACKEND_URL}/admin/studentRequests`
+      `${process.env.BACKEND_URL}/admin/getStudentRequests`
     );
     return {
       props: {
