@@ -6,7 +6,9 @@ import React from "react";
 
 async function getRequests() {
   try {
-    const { data } = await axios.get("http://localhost:3000/api/admin/studentRequest");
+    const { data } = await axios.get(
+      `${process.env.BACKEND_URL}/admin/studentRequests`
+    );
     return {
       props: {
         data,
@@ -24,7 +26,8 @@ async function getRequests() {
 }
 
 const requests = async () => {
-  const data = await getRequests()
+  const data = await getRequests();
+  console.log(data);
   return <RequestPage />;
 };
 
