@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import React, { useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 
@@ -6,9 +7,10 @@ const RequestPage = ({ data }) => {
   const [selectedStudentId, setSelectedStudentId] = useState(null);
 
   const handleVerify = (id, status) => {
-    // Handle verify or unverify logic here
-    console.log(`User ID: ${id}, Status: ${status}`);
-    // You might want to call an API to update the user's status here
+    const { data } = axios.post("/api/admin/studentRequest", {
+        id,
+        status
+    });
   };
 
   const handleViewDetails = (id) => {
