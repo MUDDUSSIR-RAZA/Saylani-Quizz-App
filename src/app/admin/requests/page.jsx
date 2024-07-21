@@ -1,6 +1,7 @@
 "use server";
 
 import RequestPage from "@/components/admin/RequestPage";
+import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import axios from "axios";
 import React from "react";
 
@@ -26,9 +27,15 @@ async function getRequests() {
 }
 
 const requests = async () => {
-  const data = await getRequests();
-  console.log(data);
-  return <RequestPage />;
+  const { props } = await getRequests();
+  return (
+    <>
+      <AdminNavbar />
+      <main className="items-center justify-between py-24 -z-30">
+        <RequestPage data={props} />;
+      </main>
+    </>
+  );
 };
 
 export default requests;
