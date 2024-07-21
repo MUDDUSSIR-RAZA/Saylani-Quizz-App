@@ -94,7 +94,7 @@ const RequestPage = ({ data }) => {
                 </button>
                 <button
                   className="bg-red-900 text-white rounded-md py-1 px-3 mx-2"
-                  onClick={() => handleVerify(user._id, "unverified")}
+                  onClick={() => handleVerify(user._id, "Unverified")}
                 >
                   UnVerify
                 </button>
