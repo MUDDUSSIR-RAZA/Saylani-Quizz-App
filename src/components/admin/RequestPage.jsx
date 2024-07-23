@@ -35,7 +35,7 @@ const RequestPage = ({ initialData }) => {
           toast.error(data);
         }
       }
-      getUpdateData()
+      getUpdateData();
     } catch (error) {
       console.error("Error signing up student:", error);
     }
@@ -46,15 +46,13 @@ const RequestPage = ({ initialData }) => {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className=" xl:min-w-[30%] p-5">
       <Toaster position="top-right" reverseOrder={true} />
       <header className="mb-3 text-center backdrop-blur-2xl bg-[#ffffff00] shadow-inner p-3 font-black tracking-widest">
         <h1>USER SIGNUP REQUESTS</h1>
       </header>
       <div>
-        <div
-          className="backdrop-blur-2xl bg-[#ffffff00] shadow-inner xl:hidden border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center"
-        >
+        <div className="backdrop-blur-2xl bg-[#ffffff00] shadow-inner xl:hidden border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center">
           <div className="flex text-center">
             <p className="w-[23dvw] px-2 mx-2">
               <strong>NAME</strong>
@@ -69,15 +67,14 @@ const RequestPage = ({ initialData }) => {
         </div>
         {data.map((user) => (
           <div key={user._id}>
-            <div
-              className="backdrop-blur-xl bg-[#ffffff00] shadow-inner border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center xl:flex-col"
-            >
-              <div className="flex text-center xl:flex-col xl:my-1">
-                <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg tracking-widest flex justify-center items-center capitalize">
+            <div className="backdrop-blur-xl bg-[#ffffff00] shadow-inner border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center  xl:max-w-[80%] xl:mx-auto ">
+              <div className="flex text-center xl:flex-col xl:my-1 xl:text-left">
+                <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg tracking-widest flex justify-center items-center capitalize xl:w-full xl:my-2 xl:backdrop-blur-0 xl:shadow-none xl:justify-start">
+                  <strong className="hidden xl:block">NAME : </strong>{" "}
                   {user.name}
                 </p>
-                <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-center flex justify-center items-center">
-                  {user.nic}
+                <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-center flex justify-center items-center xl:w-full xl:my-2  xl:backdrop-blur-0 xl:shadow-none xl:justify-start">
+                  <strong>NIC : </strong> {user.nic}
                 </p>
                 <p
                   className={`w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-white my-auto ${
@@ -86,25 +83,25 @@ const RequestPage = ({ initialData }) => {
                       : user.attest === "Unverified"
                       ? "bg-red-900"
                       : "bg-slate-700"
-                  } `}
+                  }  xl:w-full xl:my-2 xl:backdrop-blur-0 xl:shadow-none xl:justify-start`}
                 >
-                  {user.attest}
+                  <strong>ATTESTED : </strong> {user.attest}
                 </p>
               </div>
-              <div className="flex">
+              <div className="flex xl:flex-col">
                 <AiFillEye
-                  className="cursor-pointer text-center my-auto mx-2"
+                  className="cursor-pointer text-center my-auto mx-2  xl:mx-auto xl:my-1"
                   onClick={() => handleViewDetails(user._id)}
                   style={{ color: "blue", fontSize: "24px" }}
                 />
                 <button
-                  className="bg-green-700 text-white rounded-md py-1 px-3 mx-2"
+                  className="bg-green-700 text-white rounded-md py-2 px-3 mx-2  xl:mx-auto xl:my-1"
                   onClick={() => handleVerify(user._id, "verified")}
                 >
                   Verify
                 </button>
                 <button
-                  className="bg-red-900 text-white rounded-md py-1 px-3 mx-2"
+                  className="bg-red-900 text-white rounded-md py-2 px-3 mx-2  xl:mx-auto xl:my-1"
                   onClick={() => handleVerify(user._id, "Unverified")}
                 >
                   UnVerify
