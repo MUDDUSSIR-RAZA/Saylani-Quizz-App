@@ -48,12 +48,12 @@ const RequestPage = ({ initialData }) => {
   return (
     <div style={{ padding: "20px" }}>
       <Toaster position="top-right" reverseOrder={true} />
-      <header style={{ marginBottom: "20px", textAlign: "center" }}>
-        <h1>User Signup Requests</h1>
+      <header className="mb-3 text-center backdrop-blur-2xl bg-[#ffffff00] shadow-inner p-3 font-black tracking-widest">
+        <h1>USER SIGNUP REQUESTS</h1>
       </header>
       <div>
         <div
-          className="backdrop-blur-2xl bg-[#ffffff00] shadow-inner lg:hidden border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center"
+          className="backdrop-blur-2xl bg-[#ffffff00] shadow-inner xl:hidden border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center"
         >
           <div className="flex text-center">
             <p className="w-[23dvw] px-2 mx-2">
@@ -70,9 +70,9 @@ const RequestPage = ({ initialData }) => {
         {data.map((user) => (
           <div key={user._id}>
             <div
-              className="backdrop-blur-xl bg-[#ffffff00] shadow-inner border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center"
+              className="backdrop-blur-xl bg-[#ffffff00] shadow-inner border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center xl:flex-col"
             >
-              <div className="flex text-center">
+              <div className="flex text-center xl:flex-col xl:my-1">
                 <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg tracking-widest flex justify-center items-center capitalize">
                   {user.name}
                 </p>
