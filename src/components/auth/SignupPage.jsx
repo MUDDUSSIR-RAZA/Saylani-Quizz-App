@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useFormik } from "formik";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 const SignupPage = () => {
+  const [isSend, setIsSend] = useState(false);
   const [studentData, setStudentData] = useState({
     name: "",
     fathername: "",
@@ -114,169 +116,206 @@ const SignupPage = () => {
         batch: "",
       });
       toast.success(data);
-    } catch (error) {
-      console.error("Error signing up student:", error);
+      setIsSend(true);
+    } catch (error)  {
+      toast.error(error.response.data);
     }
   };
 
   return (
-    <div className="container mx-auto">
-      <Toaster position="top-right" reverseOrder={true} />
-      <h1 className="text-2xl font-bold mb-4 text-center my-3 backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4 text-button tracking-[5px] py-2">
-        Student Signup
-      </h1>
-      <form onSubmit={handleSubmit} className="mb-8 mx-5">
-        <div className="backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl p-8">
-          <h2 className="text-xl font-bold mb-6 tracking-[2px] text-amber-900">
-            Student Information
-          </h2>
-          <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Name:
-              </label>
-              <input
-                type="text"
-                name="name"
-                value={studentData.name}
-                onChange={handleChange}
-                required
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Father's Name:
-              </label>
-              <input
-                type="text"
-                name="fathername"
-                value={studentData.fathername}
-                onChange={handleChange}
-                required
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                NIC:
-              </label>
-              <input
-                type="text"
-                name="nic"
-                value={studentData.nic}
-                onChange={handleChange}
-                required
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Phone:
-              </label>
-              <input
-                type="text"
-                name="phone"
-                value={studentData.phone}
-                onChange={handleChange}
-                required
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Email:
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={studentData.email}
-                onChange={handleChange}
-                required
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Password:
-              </label>
-              <input
-                type="password"
-                name="password"
-                value={studentData.password}
-                onChange={handleChange}
-                required
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              />
+    <div className={`container mx-auto ${isSend && "h-dvh flex justify-center items-center"}`}>
+      {isSend && (
+        <div>
+          <div className="backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl p-16 smm:px-2 smm:py-6">
+            <div className="backdrop-blur-3xl bg-white bg-opacity-20 rounded-lg shadow-2xl p-8 max-w-md mx-auto my-auto">
+              <ul className="list-disc list-inside text-[#bd3c3cc9] space-y-2">
+                <li>
+                  Attestation of ID/Admit Card is extremely mandatory from SMIT
+                </li>
+                <li>
+                  No student will be allowed to enter in Entry Test without
+                  attestation of Admit/ID Card
+                </li>
+                <li>
+                  Bring CNIC and Last qualification Marksheet/Certification
+                  (both original) at the time of Attestation.
+                </li>
+                <li>
+                  Address: Saylani Head office 4th floor Bahadurabad char minaar
+                  chowrangi/Gulshan Campus (2nd Floor, Mumtaz Mobile Mall,
+                  Gulshan Chowrangi)
+                </li>
+              </ul>
+              <button
+                className="mt-6 w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 transition-colors"
+                onClick={() => setIsSend(false)}
+              >
+                Signup more..
+              </button>
             </div>
           </div>
-          <h2 className="text-xl font-bold my-6 tracking-[2px] text-amber-900 font-body">
-            Course Information
-          </h2>
-          <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                City:
-              </label>
-              <select
-                name="city"
-                value={studentData.city}
-                onChange={handleChange}
-                required
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              >
-                <option value="">Select City</option>
-                {[...new Set(courses.flatMap((course) => course.cities))].map(
-                  (city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  )
-                )}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Course Name:
-              </label>
-              <select
-                name="course_name"
-                value={studentData.course_name}
-                onChange={handleChange}
-                required
-                disabled={!studentData.city}
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              >
-                <option value="">Select Course</option>
-                {filteredCourses.map((course) => (
-                  <option key={course._id} value={course.course_name}>
-                    {course.course_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Batch:
-              </label>
-              <input
-                type="text"
-                name="batch"
-                value={studentData.batch}
-                readOnly
-                disabled
-                className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-              />
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Sign Up
-          </button>
         </div>
-      </form>
+      )}
+      <Toaster position="top-right" reverseOrder={true} />
+      {!isSend && (
+        <div>
+          <h1 className="text-2xl font-bold mb-4 text-center my-3 backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4 text-button tracking-[5px] py-2">
+            Student Signup
+          </h1>
+          <form onSubmit={handleSubmit} className="mb-8 mx-5">
+            <div className="backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl p-8">
+              <h2 className="text-xl font-bold mb-6 tracking-[2px] text-amber-900">
+                Student Information
+              </h2>
+              <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Name:
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={studentData.name}
+                    onChange={handleChange}
+                    required
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Father's Name:
+                  </label>
+                  <input
+                    type="text"
+                    name="fathername"
+                    value={studentData.fathername}
+                    onChange={handleChange}
+                    required
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    NIC:
+                  </label>
+                  <input
+                    type="number"
+                    name="nic"
+                    value={studentData.nic}
+                    onChange={handleChange}
+                    required
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Phone:
+                  </label>
+                  <input
+                    type="text"
+                    name="phone"
+                    value={studentData.phone}
+                    onChange={handleChange}
+                    required
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Email:
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={studentData.email}
+                    onChange={handleChange}
+                    required
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Password:
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={studentData.password}
+                    onChange={handleChange}
+                    required
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  />
+                </div>
+              </div>
+              <h2 className="text-xl font-bold my-6 tracking-[2px] text-amber-900 font-body">
+                Course Information
+              </h2>
+              <div className="grid grid-cols-2 smm:grid-cols-1 gap-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    City:
+                  </label>
+                  <select
+                    name="city"
+                    value={studentData.city}
+                    onChange={handleChange}
+                    required
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  >
+                    <option value="">Select City</option>
+                    {[
+                      ...new Set(courses.flatMap((course) => course.cities)),
+                    ].map((city) => (
+                      <option key={city} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Course Name:
+                  </label>
+                  <select
+                    name="course_name"
+                    value={studentData.course_name}
+                    onChange={handleChange}
+                    required
+                    disabled={!studentData.city}
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  >
+                    <option value="">Select Course</option>
+                    {filteredCourses.map((course) => (
+                      <option key={course._id} value={course.course_name}>
+                        {course.course_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Batch:
+                  </label>
+                  <input
+                    type="text"
+                    name="batch"
+                    value={studentData.batch}
+                    readOnly
+                    disabled
+                    className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
+                  />
+                </div>
+              </div>
+              <button
+                type="submit"
+                className="mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Sign Up
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
