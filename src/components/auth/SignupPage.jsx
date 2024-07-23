@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useFormik } from "formik";
 import axios from "axios";
-
+import toast, { Toaster } from "react-hot-toast";
 
 const SignupPage = () => {
   const [studentData, setStudentData] = useState({
@@ -61,24 +61,28 @@ const SignupPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     setStudentData((prevStudentData) => {
       const updatedStudentData = { ...prevStudentData, [name]: value };
-  
+
       if (name === "city") {
-        const filteredCourses = courses.filter((course) => course.cities.includes(value));
+        const filteredCourses = courses.filter((course) =>
+          course.cities.includes(value)
+        );
         setFilteredCourses(filteredCourses);
-  
+
         return {
           ...updatedStudentData,
           course_name: "",
           batch: "",
         };
       }
-  
+
       if (name === "course_name") {
-        const selectedCourse = filteredCourses.find((course) => course.course_name === value);
-        
+        const selectedCourse = filteredCourses.find(
+          (course) => course.course_name === value
+        );
+
         if (selectedCourse) {
           return {
             ...updatedStudentData,
@@ -86,7 +90,7 @@ const SignupPage = () => {
           };
         }
       }
-  
+
       return updatedStudentData;
     });
   };
@@ -95,25 +99,21 @@ const SignupPage = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/user/signup", {
-        studentData
+        studentData,
       });
 
-      if (response.ok) {
-        console.log("Student signed up successfully");
-        setStudentData({
-          name: "",
-          fathername: "",
-          nic: "",
-          password: "",
-          email: "",
-          phone: "",
-          city: "",
-          course_name: "",
-          batch: "",
-        });
-      } else {
-        console.error("Failed to sign up student");
-      }
+      setStudentData({
+        name: "",
+        fathername: "",
+        nic: "",
+        password: "",
+        email: "",
+        phone: "",
+        city: "",
+        course_name: "",
+        batch: "",
+      });
+      toast.success(data);
     } catch (error) {
       console.error("Error signing up student:", error);
     }
@@ -121,6 +121,7 @@ const SignupPage = () => {
 
   return (
     <div className="container mx-auto">
+      <Toaster position="top-right" reverseOrder={true} />
       <h1 className="text-2xl font-bold mb-4 text-center my-3 backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4 text-button tracking-[5px] py-2">
         Student Signup
       </h1>
