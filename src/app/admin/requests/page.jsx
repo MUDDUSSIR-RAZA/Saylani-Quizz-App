@@ -11,20 +11,34 @@ async function getRequests() {
       `${process.env.BACKEND_URL}/admin/getStudentRequests`
     );
     return {
-      props: {
-        data,
-        error: null,
-      },
+      props: data,
     };
   } catch (axiosError) {
     return {
-      props: {
-        data: null,
-        error: axiosError.message,
-      },
+      props: axiosError.message,
     };
   }
 }
+// async function getRequests() {
+//   try {
+//     const { data } = await axios.get(
+//       `${process.env.BACKEND_URL}/admin/getStudentRequests`
+//     );
+//     return {
+//       props: {
+//         data,
+//         error: null,
+//       },
+//     };
+//   } catch (axiosError) {
+//     return {
+//       props: {
+//         data: null,
+//         error: axiosError.message,
+//       },
+//     };
+//   }
+// }
 
 const requests = async () => {
   const { props } = await getRequests();
@@ -32,7 +46,7 @@ const requests = async () => {
     <>
       <AdminNavbar />
       <main className="items-center justify-between py-24 -z-30">
-        <RequestPage data={props} />;
+        <RequestPage initialData={props} />;
       </main>
     </>
   );
