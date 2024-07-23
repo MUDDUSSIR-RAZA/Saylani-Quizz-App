@@ -48,7 +48,7 @@ const RequestPage = ({ initialData }) => {
   return (
     <div className=" xl:min-w-[30%] p-5">
       <Toaster position="top-right" reverseOrder={true} />
-      <header className="mb-3 text-center backdrop-blur-2xl bg-[#ffffff00] shadow-inner p-3 font-black tracking-widest">
+      <header className="mb-3 text-center backdrop-blur-2xl bg-[#918d8d52] shadow-inner text-button tracking-[5px] py-2 font-black rounded-xl">
         <h1>USER SIGNUP REQUESTS</h1>
       </header>
       <div>
@@ -67,26 +67,32 @@ const RequestPage = ({ initialData }) => {
         </div>
         {data.map((user) => (
           <div key={user._id}>
-            <div className="backdrop-blur-xl bg-[#ffffff00] shadow-inner border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center  xl:max-w-[80%] xl:mx-auto ">
-              <div className="flex text-center xl:flex-col xl:my-1 xl:text-left">
+            <div className="backdrop-blur-xl bg-[#ffffff00] shadow-inner border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center  xl:max-w-[80%] xl:mx-auto md:max-w-[95%]">
+              <div className="flex text-center xl:flex-col xl:my-1 xl:text-left xl:w-[70%]">
                 <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg tracking-widest flex justify-center items-center capitalize xl:w-full xl:my-2 xl:backdrop-blur-0 xl:shadow-none xl:justify-start">
-                  <strong className="hidden xl:block">NAME : </strong>{" "}
-                  {user.name}
+                  <div className="hidden xl:flex xl:text-wrap font-bold">NAME: </div>
+                  <span>{user.name}</span>
                 </p>
                 <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-center flex justify-center items-center xl:w-full xl:my-2  xl:backdrop-blur-0 xl:shadow-none xl:justify-start">
-                  <strong>NIC : </strong> {user.nic}
+                  <div className="hidden xl:flex xl:text-wrap font-bold">NIC: </div>
+                  <div>{user.nic}</div>
                 </p>
-                <p
-                  className={`w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-white my-auto ${
-                    user.attest === "verified"
-                      ? "bg-green-700"
-                      : user.attest === "Unverified"
-                      ? "bg-red-900"
-                      : "bg-slate-700"
-                  }  xl:w-full xl:my-2 xl:backdrop-blur-0 xl:shadow-none xl:justify-start`}
-                >
-                  <strong>ATTESTED : </strong> {user.attest}
-                </p>
+                <div className="flex backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-center xl:backdrop-blur-0 xl:shadow-none">
+                  <div className="justify-center items-center hidden xl:flex">
+                    <strong>ATTESTED:</strong>
+                  </div>
+                  <p
+                    className={`w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-white my-auto ${
+                      user.attest === "verified"
+                        ? "bg-green-700"
+                        : user.attest === "Unverified"
+                        ? "bg-red-900"
+                        : "bg-slate-700"
+                    } xl:my-2 xl:backdrop-blur-0 xl:shadow-none xl:justify-start xl:text-center`}
+                  >
+                    {user.attest}
+                  </p>
+                </div>
               </div>
               <div className="flex xl:flex-col">
                 <AiFillEye
@@ -110,8 +116,8 @@ const RequestPage = ({ initialData }) => {
             </div>
             {selectedStudentId === user._id && (
               <>
-                <div className="backdrop-blur-xl bg-[#ffffff00] shadow-inner p-5 my-5 border-2 border-[#ccc] rounded-xl">
-                  <h2 className="text-center font-extrabold text-2xl tracking-widest">
+                <div className="backdrop-blur-xl bg-[#ffffff00] shadow-inner p-5 my-5 border-2 border-[#ccc] rounded-xl xl:max-w-[80%] xl:mx-auto md:max-w-[95%]">
+                  <h2 className="text-center font-extrabold text-2xl tracking-widest ">
                     Student Details
                   </h2>
                   <div className="backdrop-blur-xl bg-[#ffffff00] shadow-inner p-5 my-5 border-2 border-[#ccc] rounded-xl grid grid-cols-2 smm:grid-cols-1 gap-4">
