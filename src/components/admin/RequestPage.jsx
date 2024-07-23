@@ -1,16 +1,44 @@
 "use client";
 import axios from "axios";
 import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { AiFillEye } from "react-icons/ai";
 
-const RequestPage = ({ data }) => {
+const RequestPage = ({ initialData }) => {
   const [selectedStudentId, setSelectedStudentId] = useState(null);
+  const [data, setUpdateData] = useState(initialData);
 
-  const handleVerify = (id, status) => {
-    const { data } = axios.post("/api/admin/studentRequest", {
-        id,
-        status
-    });
+  const getUpdateData = async () => {
+    try {
+      const { data } = await axios.get(
+        `/api/admin/studentRequest/getStudentRequests`
+      );
+      setUpdateData(data);
+    } catch (error) {
+      console.error("Error fetching update data:", error);
+    }
+  };
+
+  const handleVerify = async (id, status) => {
+    try {
+      const { data } = await axios.post(
+        "/api/admin/studentRequest/approveStudentReuquests",
+        {
+          id,
+          status,
+        }
+      );
+      if (status == "verified") {
+        toast.success(data);
+      } else {
+        if (status == "Unverified") {
+          toast.error(data);
+        }
+      }
+      getUpdateData()
+    } catch (error) {
+      console.error("Error signing up student:", error);
+    }
   };
 
   const handleViewDetails = (id) => {
@@ -19,21 +47,13 @@ const RequestPage = ({ data }) => {
 
   return (
     <div style={{ padding: "20px" }}>
+      <Toaster position="top-right" reverseOrder={true} />
       <header style={{ marginBottom: "20px", textAlign: "center" }}>
         <h1>User Signup Requests</h1>
       </header>
       <div>
         <div
-          className="backdrop-blur-2xl bg-[#ffffff00] shadow-inner"
-          style={{
-            padding: "10px",
-            margin: "10px 0",
-            border: "1px solid #ccc",
-            borderRadius: "10px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
+          className="backdrop-blur-2xl bg-[#ffffff00] shadow-inner lg:hidden border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center"
         >
           <div className="flex text-center">
             <p className="w-[23dvw] px-2 mx-2">
@@ -47,32 +67,23 @@ const RequestPage = ({ data }) => {
             </p>
           </div>
         </div>
-        {data.data.map((user) => (
+        {data.map((user) => (
           <div key={user._id}>
             <div
-              className="backdrop-blur-xl bg-[#ffffff00] shadow-inner"
-              style={{
-                padding: "10px",
-                margin: "10px 0",
-                border: "1px solid #ccc",
-                borderRadius: "10px",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
+              className="backdrop-blur-xl bg-[#ffffff00] shadow-inner border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center"
             >
               <div className="flex text-center">
-                <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg tracking-widest">
+                <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg tracking-widest flex justify-center items-center capitalize">
                   {user.name}
                 </p>
-                <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg">
+                <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-center flex justify-center items-center">
                   {user.nic}
                 </p>
                 <p
-                  className={`w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-white ${
+                  className={`w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-white my-auto ${
                     user.attest === "verified"
                       ? "bg-green-700"
-                      : user.attest === "unverified"
+                      : user.attest === "Unverified"
                       ? "bg-red-900"
                       : "bg-slate-700"
                   } `}
