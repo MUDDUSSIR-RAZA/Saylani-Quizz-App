@@ -12,6 +12,7 @@ export async function POST(req) {
             return NextResponse.json(axiosError.response.data, { status: 400 })
         }
     } catch (axiosError) {
+        console.log("🚀 ~ POST ~ axiosError:", axiosError)
         return NextResponse.json(error)
     }
 }
