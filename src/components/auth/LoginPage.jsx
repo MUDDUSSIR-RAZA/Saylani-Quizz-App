@@ -18,10 +18,9 @@ const LoginPage = () => {
 
   const router = useRouter();
 
-  const { values, errors, touched, handleChange, handleBlur  } =
-    useFormik({
-      initialValues,
-      validationSchema: loginSchema,
+  const { values, errors, touched, handleChange, handleBlur } = useFormik({
+    initialValues,
+    // validationSchema: loginSchema,
     //   onSubmit: async ({ email, password }, action) => {
     //     console.log("🚀 ~ onSubmit: ~ password:", password)
     //     console.log("🚀 ~ onSubmit: ~ email:", email)
@@ -48,38 +47,40 @@ const LoginPage = () => {
     //     //   return;
     //     // }
     //   },
-    });
+  });
 
-    const handleSubmit = async () => {
-     try {
-          setLoading(true);
-          const { data } = await axios.post(
-            "/api/user/login",
-            {
-              email : values.email,
-              password :values.password,
-            },
-            {
-              withCredentials: true,
-            }
-          );
-          setLoading(false);
-          router.push("/");
-          action.resetForm();
-          return;
-        } catch (error) {
-          setLoading(false);
-          toast.error(error.response.data);
-          action.resetForm();
-          return;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const { data } = await axios.post(
+        "/api/user/login",
+        {
+          email: values.email,
+          password: values.password,
+        },
+        {
+          withCredentials: true,
         }
-      };
+      );
+      console.log(data);
+      setLoading(false);
+      router.push("/student/dashboard");
+    } catch (error) {
+      const err = error.response.data;
+      console.log("🚀 ~ handleSubmit ~ err:", err)
+      setLoading(false);
+      if (err == "pending" || err ==  "Unverified") {
+        toast.error(`${err} Request!`);
+      } else {
+        toast.error(err);
+      }
+    }
+  };
 
   return (
     <>
-      <div>
-        <Toaster />
-      </div>
+      <Toaster position="top-right" reverseOrder={true} />
       <section className="relative w-full h-screen">
         <div className="bg-black bg-opacity-50 h-full flex items-center justify-center">
           <div className="w-full max-w-md bg-[#ffffff8b] backdrop-blur-lg rounded-lg shadow-lg p-8">
@@ -162,4 +163,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage
+export default LoginPage;
