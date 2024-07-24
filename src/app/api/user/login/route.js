@@ -10,7 +10,7 @@ export async function POST(req) {
                 email,
                 password,
             });
-            const response = NextResponse.json({ message: "Login Succesfuly 123", success: true })
+            const response = NextResponse.json({ message: "Login Succesfuly", success: true })
             response.cookies.set("token", data, { httpOnly: true })
             return response
         } catch (axiosError) {
