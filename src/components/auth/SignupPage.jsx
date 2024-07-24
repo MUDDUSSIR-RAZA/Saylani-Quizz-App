@@ -199,7 +199,7 @@ const SignupPage = () => {
                     NIC:
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     name="nic"
                     value={studentData.nic}
                     onChange={handleChange}
