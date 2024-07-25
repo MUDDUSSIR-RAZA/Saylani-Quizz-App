@@ -20,33 +20,7 @@ const LoginPage = () => {
 
   const { values, errors, touched, handleChange, handleBlur } = useFormik({
     initialValues,
-    // validationSchema: loginSchema,
-    //   onSubmit: async ({ email, password }, action) => {
-    //     console.log("🚀 ~ onSubmit: ~ password:", password)
-    //     console.log("🚀 ~ onSubmit: ~ email:", email)
-    //     // try {
-    //     //   setLoading(true);
-    //     //   const { data } = await axios.post(
-    //     //     "/api/user/login",
-    //     //     {
-    //     //       email,
-    //     //       password,
-    //     //     },
-    //     //     {
-    //     //       withCredentials: true,
-    //     //     }
-    //     //   );
-    //     //   setLoading(false);
-    //     //   router.push("/");
-    //     //   action.resetForm();
-    //     //   return;
-    //     // } catch (error) {
-    //     //   setLoading(false);
-    //     //   toast.error(error.response.data);
-    //     //   action.resetForm();
-    //     //   return;
-    //     // }
-    //   },
+    validationSchema: loginSchema
   });
 
   const handleSubmit = async (e) => {
