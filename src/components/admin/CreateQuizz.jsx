@@ -32,15 +32,15 @@ const CreateQuizz = ({ Courses }) => {
           setLoading(true);
           const { data } = await axios.post(
             "/api/admin/quiz/addQuiz",
-            {...values},
+            { ...values },
             {
               withCredentials: true,
             }
           );
           setLoading(false);
           // router.push("/admin/dashboard");
-          action.resetForm();
           toast.success(data);
+          action.resetForm();
           return;
         } catch (error) {
           setLoading(false);
@@ -52,7 +52,7 @@ const CreateQuizz = ({ Courses }) => {
 
   return (
     <>
-          <Toaster position="top-right" reverseOrder={true} />
+      <Toaster  />
       <section className="w-vwh h-dvh flex">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 w-10/12 sm:px-0">
           <div className="w-10/12 backdrop-blur-2xl bg-[#ffffff00] shadow-2xl rounded-lg md:mt-0 sm:w-full xl:p-0">
