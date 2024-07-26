@@ -13,12 +13,12 @@ import {
 const Creating = () => {
   return (
     <>
-      <div class={loader}>
-        <div class={`${loadInner} ${loadOne}`}></div>
-        <div class={`${loadInner} ${loadTwo}`}></div>
-        <div class={`${loadInner} ${loadThree}`}></div>
-        <span class={text}>
-          <div class={spinner}>
+      <div className={loader}>
+        <div className={`${loadInner} ${loadOne}`}></div>
+        <div className={`${loadInner} ${loadTwo}`}></div>
+        <div className={`${loadInner} ${loadThree}`}></div>
+        <span className={text}>
+          <div className={spinner}>
             <span>C</span>
             <span>R</span>
             <span>E</span>
