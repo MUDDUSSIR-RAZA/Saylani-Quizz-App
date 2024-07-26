@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 // const mongoose = require('mongoose');
 // const Schema = mongoose.Schema;
 
@@ -15,97 +16,36 @@
 // admin-page.js
 // admin-page.js
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 
-const AddCoursePage = () => {
-  const [courses, setCourses] = useState([
-    {
-      _id: 1,
-      course_name: "Web Development",
-      batch: 3,
-      cities: ["Karachi", "Lahore"],
-    },
-    {
-      _id: 2,
-      course_name: "Data Science Fundamentals",
-      batch: 1,
-      cities: ["Islamabad", "Rawalpindi"],
-    },
-    {
-      _id: 3,
-      course_name: "Graphic Design Workshop",
-      batch: 2,
-      cities: ["Faisalabad", "Multan"],
-    },
-    {
-      _id: 4,
-      course_name: "Digital Marketing Course",
-      batch: 4,
-      cities: ["Peshawar", "Quetta"],
-    },
-]
-);
+const AddCoursePage = ({ Courses }) => {
+  const [courses, setCourses] = useState(Courses);
   const [newCourse, setNewCourse] = useState({
     course_name: "",
-    batch: "", // Adjusted to handle one batch per course as a number
+    batch: "",
     cities: [""],
   });
 
-  // Simulated initial courses array for display
-  const fakeCourses = [
-    {
-      _id: 1,
-      course_name: "Course A",
-      batch: 1,
-      cities: ["City A", "City B"],
-    },
-    {
-      _id: 2,
-      course_name: "Course B",
-      batch: 2,
-      cities: ["City B", "City C"],
-    },
-  ];
-
-  // useEffect(() => {
-  //   // Replace with actual fetch logic to fetch courses from backend
-  //   // Simulating fetching courses from backend
-  //   setCourses(fakeCourses);
-  // }, []);
+  const getUpdateData = async () => {
+    try {
+      const { data } = await axios.get(`/api/admin/courses/getCourses`);
+      setCourses(data);
+    } catch (error) {
+      toast.error(error.response.data);
+    }
+  };
 
   const handleCourseSubmit = async (e) => {
-    setCourses([...courses, { ...newCourse, _id: Date.now() }]);
-    setNewCourse({
-      course_name: "",
-      batch: "",
-      cities: [""],
-    });
     e.preventDefault();
     try {
-      // Simulating POST request to add new course
-      // Replace with actual fetch logic to POST new course to backend
-      const response = await fetch("/api/admin-courses", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newCourse),
+      const { data } = await axios.post("/api/admin/addCourse", {
+        ...newCourse,
       });
-
-      if (response.ok) {
-        console.log("Course added successfully");
-        // Simulating adding the new course to the courses array
-        setCourses([...courses, { ...newCourse, _id: Date.now() }]);
-        setNewCourse({
-          course_name: "",
-          batch: 1,
-          cities: ["City A"],
-        }); // Reset form fields
-      } else {
-        console.error("Failed to add course");
-      }
+      getUpdateData();
+      toast.success(data);
     } catch (error) {
-      console.error("Error adding course:", error);
+      toast.error(error.response.data);
     }
   };
 
@@ -118,7 +58,6 @@ const AddCoursePage = () => {
       });
 
       if (response.ok) {
-        console.log("Course deleted successfully");
         // Update courses state to reflect deletion
         setCourses(courses.filter((course) => course._id !== courseId));
       } else {
@@ -131,6 +70,7 @@ const AddCoursePage = () => {
 
   return (
     <div className="container mx-auto">
+      <Toaster position="top-right" reverseOrder={true} />
       <div className="my-5">
         <h1 className="text-2xl font-bold mb-4 text-center my-3 backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4">
           Manage Courses
@@ -197,7 +137,9 @@ const AddCoursePage = () => {
           </div>
         </form>
 
-        <h2 className="text-xl font-bold mb-4 text-center backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4">Current Courses</h2>
+        <h2 className="text-xl font-bold mb-4 text-center backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4">
+          Current Courses
+        </h2>
         <div className="">
           {courses.map((course) => (
             <div
