@@ -6,7 +6,7 @@ import Adding from "../InPageLoader/Adding";
 
 const AddQuestion = () => {
   const [loading, setLoading] = useState(false);
-  const [courses, setCourses] = useState([
+  const [quizzes, setQuizzes] = useState([
     { _id: "60d21b4667d0d8992e610c85", quiz_name: "Mathematics 101" },
     { _id: "60d21b4667d0d8992e610c86", quiz_name: "Science Basics" },
     { _id: "60d21b4667d0d8992e610c87", quiz_name: "History 101" },
@@ -21,7 +21,7 @@ const AddQuestion = () => {
     const fetchCourses = async () => {
       try {
         const response = await axios.get("/api/courses");
-        setCourses(response.data.data);
+        setQuizzes(response.data.data);
       } catch (error) {
         console.error("Error fetching courses:", error);
       }
@@ -92,7 +92,7 @@ const AddQuestion = () => {
                 className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm"
               >
                 <option value="">Select a Quiz</option>
-                {courses.map((course) => (
+                {quizzes.map((course) => (
                   <option key={course._id} value={course._id}>
                     {course.quiz_name}
                   </option>
