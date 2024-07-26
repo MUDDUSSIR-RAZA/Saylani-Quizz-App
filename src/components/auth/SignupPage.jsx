@@ -6,7 +6,8 @@ import * as Yup from 'yup';
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const SignupPage = () => {
+const SignupPage = ({Courses}) => {
+  console.log("🚀 ~ SignupPage ~ Courses:", Courses)
   const [isSend, setIsSend] = useState(false);
   const [studentData, setStudentData] = useState({
     name: "",
