@@ -1,9 +1,9 @@
-import * as Yup from "yup"
+import * as Yup from "yup";
 
 export const loginSchema = Yup.object({
-    email:Yup.string().email().required("Please Enter Your Email"),
-    password:Yup.string().required("Please Enter Your Password")
-})
+  email: Yup.string().email().required("Please Enter Your Email"),
+  password: Yup.string().required("Please Enter Your Password"),
+});
 // export const loginSchema = Yup.object({
 //     email:Yup.string().email().required("Please Enter Your Email"),
 //     password:Yup.string().min(13).max(13).required("Please Enter Your Password"),
@@ -16,7 +16,8 @@ export const loginSchema = Yup.object({
 //     batch: "",
 // })
 
-
 export const quizTitleSchema = Yup.object({
-    quiz:Yup.string().required("Please Enter Quiz Title"),
-})
+    quiz_name: Yup.string().required("Please Enter Quiz Title"),
+  key: Yup.string().required("Please Enter Quiz Title"),
+  course_name: Yup.string().required("Course selection is required"),
+});
