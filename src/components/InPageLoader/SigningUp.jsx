@@ -13,12 +13,12 @@ import {
 const SigningUp = () => {
   return (
     <>
-      <div class={loader}>
-        <div class={`${loadInner} ${loadOne}`}></div>
-        <div class={`${loadInner} ${loadTwo}`}></div>
-        <div class={`${loadInner} ${loadThree}`}></div>
-        <span class={text}>
-          <div class={spinner}>
+      <div className={loader}>
+        <div className={`${loadInner} ${loadOne}`}></div>
+        <div className={`${loadInner} ${loadTwo}`}></div>
+        <div className={`${loadInner} ${loadThree}`}></div>
+        <span className={text}>
+          <div className={spinner}>
             <span>S</span>
             <span>I</span>
             <span>G</span>
