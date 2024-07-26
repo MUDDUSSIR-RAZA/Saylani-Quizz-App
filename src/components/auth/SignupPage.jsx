@@ -8,6 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const SignupPage = ({Courses}) => {
   console.log("🚀 ~ SignupPage ~ Courses:", Courses)
+  const [courses, setCourses] = useState(Courses);
   const [isSend, setIsSend] = useState(false);
   const [studentData, setStudentData] = useState({
     name: "",
@@ -20,32 +21,6 @@ const SignupPage = ({Courses}) => {
     course_name: "",
     batch: "",
   });
-  const [courses, setCourses] = useState([
-    {
-      _id: 1,
-      course_name: "Web Development",
-      batch: 3,
-      cities: ["Karachi", "Lahore"],
-    },
-    {
-      _id: 2,
-      course_name: "Data Science Fundamentals",
-      batch: 1,
-      cities: ["Islamabad", "Rawalpindi"],
-    },
-    {
-      _id: 3,
-      course_name: "Graphic Design Workshop",
-      batch: 2,
-      cities: ["Faisalabad", "Multan"],
-    },
-    {
-      _id: 4,
-      course_name: "Digital Marketing Course",
-      batch: 4,
-      cities: ["Peshawar", "Quetta"],
-    },
-  ]);
   const [filteredCourses, setFilteredCourses] = useState([]);
 
   useEffect(() => {
