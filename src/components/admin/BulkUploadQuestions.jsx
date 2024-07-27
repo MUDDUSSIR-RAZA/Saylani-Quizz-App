@@ -4,28 +4,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UploadingBulkFile from "../InPageLoader/UploadingBulkFile";
 
-const BulkUploadQuestions = () => {
+const BulkUploadQuestions = ({ quizzes }) => {
   const [loading, setLoading] = useState(false);
-  const [courses, setCourses] = useState([
-    { _id: "60d21b4667d0d8992e610c85", course_name: "Mathematics 101" },
-    { _id: "60d21b4667d0d8992e610c86", course_name: "Science Basics" },
-    { _id: "60d21b4667d0d8992e610c87", course_name: "History 101" },
-  ]);
+
   const [selectedCourse, setSelectedCourse] = useState("");
   const [file, setFile] = useState(null);
-
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get("/api/courses");
-        setCourses(response.data.data);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      }
-    };
-
-    fetchCourses();
-  }, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -53,6 +36,7 @@ const BulkUploadQuestions = () => {
 
       try {
         setLoading(true);
+        console.log(questions);
         // const response = await axios.post(
         //   `/api/courses/${selectedCourse}/bulk-upload-questions`,
         //   { questions }
@@ -97,9 +81,9 @@ const BulkUploadQuestions = () => {
                 required
               >
                 <option value="">Select a course</option>
-                {courses.map((course) => (
-                  <option key={course._id} value={course._id}>
-                    {course.course_name}
+                {quizzes.map((quiz) => (
+                  <option key={quiz._id} value={quiz._id}>
+                    {quiz.course_name}
                   </option>
                 ))}
               </select>
