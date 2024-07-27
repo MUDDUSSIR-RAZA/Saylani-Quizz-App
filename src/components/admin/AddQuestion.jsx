@@ -3,34 +3,23 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Adding from "../InPageLoader/Adding";
+import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const AddQuestion = ({ quizzes }) => {
   const [loading, setLoading] = useState(false);
-  const [selectedQuiz, setselectedQuiz] = useState("");
+  const [quizId, setQuizId] = useState("");
   const [question_text, setQuestionText] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [time_limit, setTimeLimit] = useState(30);
-
-  // useEffect(() => {
-  //   const fetchCourses = async () => {
-  //     try {
-  //       const response = await axios.get("/api/courses");
-  //       setQuizzes(response.data.data);
-  //     } catch (error) {
-  //       console.error("Error fetching courses:", error);
-  //     }
-  //   };
-
-  //   fetchCourses();
-  // }, []);
+  const router =useRouter()
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
     newOptions[index] = value;
     setOptions(newOptions);
 
-    // Update correct answer if the changed option was the correct one
     if (correctAnswer === options[index]) {
       setCorrectAnswer(value);
     }
@@ -39,24 +28,25 @@ const AddQuestion = ({ quizzes }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log({
-      selectedQuiz,
+      quizId,
       question_text,
       options,
       correctAnswer,
       time_limit,
     });
     try {
-      // setLoading(true);
+      setLoading(true);
       const { data } = await axios.post(`/api/admin/question/addQuestion`, {
-        selectedQuiz,
+        quizId,
         question_text,
         options,
         correctAnswer,
         time_limit,
       });
-      setLoading(false);
-
       toast.success(data);
+      setLoading(false);
+      router.push('/admin/dashboard')
+      rout
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data);
@@ -65,6 +55,7 @@ const AddQuestion = ({ quizzes }) => {
 
   return (
     <section className="w-vwh h-dvh flex -z-99">
+      <Toaster position="top-right" reverseOrder={true} />
       <div className="flex items-baseline justify-center my-[20px] h-[90%] px-6 py-8 mx-auto md:h-screen lg:py-0 w-10/12 sm:px-0">
         <div className="w-9/12 backdrop-blur-xl bg-bgColor rounded-lg shadow-2xl md:mt-0 sm:w-full xl:p-0">
           <div className="p-6 sm:p-8">
@@ -83,10 +74,10 @@ const AddQuestion = ({ quizzes }) => {
               </label>
               <select
                 id="courseSelect"
-                value={selectedQuiz}
+                value={quizId}
                 type="radio"
                 onChange={(e) => {
-                  setselectedQuiz(e.target.value);
+                  setQuizId(e.target.value);
                 }}
                 required
                 className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm"
