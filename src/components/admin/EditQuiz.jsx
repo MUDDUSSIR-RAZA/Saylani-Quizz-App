@@ -28,7 +28,6 @@ const EditQuiz = ({ id }) => {
   }, []);
 
   const handleInputChange = (field, value) => {
-    console.log("first field, value", field, value);
     const newEditedData = {
       ...editedData,
       [field]: value,
