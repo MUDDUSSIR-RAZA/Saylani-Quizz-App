@@ -6,7 +6,6 @@ import Link from "next/link";
 
 
 const DashBoard = ({quizzes}) => {
-  console.log("first quizzes" , quizzes)
 
   // Check if courses is defined and is an array
   if (!Array.isArray(quizzes) || quizzes.length === 0) {
@@ -53,7 +52,6 @@ export default DashBoard;
 // import { card } from "@/css/quizList.module.css";
 
 // const quizList = ({ course }) => {
-//   console.log(course);
 //   return (
 //     <>
 //       {course.map((course) => {
