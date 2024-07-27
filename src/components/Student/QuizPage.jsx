@@ -141,7 +141,6 @@ const QuizPage = () => {
       ) {
         setIsFullScreen(false);
         setIsPaused(true);
-        console.log("User exited full screen.");
       } else {
         setIsFullScreen(true);
         setIsPaused(false);
@@ -250,11 +249,9 @@ const QuizPage = () => {
       //     }),
       //   });
       //   if (response.ok) {
-      //     console.log("Result submitted successfully");
       //   } else {
       //     console.error("Error submitting result");
       //   }
-      console.log("🚀 ~ submitResult ~ score:", score);
     } catch (error) {
       // console.error("Error submitting result:", error);
     }
@@ -284,7 +281,6 @@ const QuizPage = () => {
       //   }),
       // });
       // if (response.ok) {
-      //   console.log("Result submitted with 0 score");
       // } else {
       //   console.error("Error submitting result with 0 score");
       // }
