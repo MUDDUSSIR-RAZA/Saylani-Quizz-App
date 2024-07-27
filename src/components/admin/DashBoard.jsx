@@ -19,7 +19,7 @@ const DashBoard = ({quizzes}) => {
           <div key={quiz._id} className="m-2 backdrop-blur-lg bg-[#ffffff00]">
             <section className={` ${card}`}>
               <header>
-                <p>{quiz.course_name}</p>
+                <p>{quiz.quiz_name}</p>
                 <a href="#" className="text-[#893232]">
                   Delete
                 </a>
