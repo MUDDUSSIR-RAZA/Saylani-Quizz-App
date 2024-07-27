@@ -10,45 +10,43 @@ import LogingIn from "@/components/InPageLoader/LogingIn";
 import Creating from "../InPageLoader/Creating";
 
 const initialValues = {
-  quiz_name: "",
+  quiz_name: " ",
   key: "",
   course_name: "",
 };
 
 const CreateQuizz = ({ Courses }) => {
   const [courses, setCourses] = useState(Courses);
-
   const [loading, setLoading] = useState(false);
-
   const router = useRouter();
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-    useFormik({
-      initialValues,
-      validationSchema: quizTitleSchema,
-      onSubmit: async (action) => {
+  useFormik({
+    initialValues,
+    validationSchema: quizTitleSchema,
+    onSubmit: async (values,action) => {
+      setLoading(true);
+      try {
         setLoading(true);
-        try {
-          setLoading(true);
-          const { data } = await axios.post(
-            "/api/admin/quiz/addQuiz",
-            { ...values },
-            {
-              withCredentials: true,
-            }
-          );
-          setLoading(false);
-          // router.push("/admin/dashboard");
-          toast.success(data);
-          action.resetForm();
-          return;
-        } catch (error) {
-          setLoading(false);
-          toast.error(error.response.data);
-          return;
-        }
-      },
-    });
+        const { data } = await axios.post(
+          "/api/admin/quiz/addQuiz",
+          { ...values },
+          {
+            withCredentials: true,
+          }
+        );
+        setLoading(false);
+        // router.push("/admin/dashboard");
+        toast.success(data);
+        action.resetForm();
+        return;
+      } catch (error) {
+        setLoading(false);
+        toast.error(error.response.data);
+        return;
+      }
+    },
+  });
 
   return (
     <>
