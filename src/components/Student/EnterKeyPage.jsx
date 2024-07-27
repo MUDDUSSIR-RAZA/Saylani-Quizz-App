@@ -12,7 +12,6 @@ export default function EnterKeyPage() {
     e.preventDefault();
     if (key === "123") {
       router.push("/student/quiz"); 
-      console.log(key);
     } else {
       <div><Toaster/></div>
       toast.error("Incorrect Key");
