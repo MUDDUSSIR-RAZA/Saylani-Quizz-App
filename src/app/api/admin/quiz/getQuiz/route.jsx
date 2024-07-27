@@ -2,17 +2,17 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  console.log("🚀 ~ GET ~ GET:", GET)
   try {
     try {
       const { data } = await axios.get(
-        `${process.env.BACKEND_URL}/admin/getStudentRequests`
+        `${process.env.BACKEND_URL}/admin/getQuizzes`
       );
-      return NextResponse.json(data);
-    } catch (axiosError) {
-      return NextResponse.json(axiosError.response.data, { status: 400 });
+      return NextResponse.json(data)
+    } catch (error) {
+      return NextResponse.json(error.response.data, { status: 400 });
     }
-  } catch (axiosError) {
+  } catch (error) {
     return NextResponse.json(axiosError.response.data, { status: 400 });
   }
 }
-a
