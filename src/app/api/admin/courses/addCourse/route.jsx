@@ -9,10 +9,8 @@ export async function POST(req) {
         `${process.env.BACKEND_URL}/admin/addCourse`,
         { course_name, batch, cities }
       );
-      console.log("🚀 ~ POST ~ data:", data)
       return NextResponse.json(data);
     } catch (axiosError) {
-      console.log("🚀 ~ POST ~ axiosError:", axiosError)
       return NextResponse.json(axiosError.response.data, { status: 400 });
     }
   } catch (axiosError) {
