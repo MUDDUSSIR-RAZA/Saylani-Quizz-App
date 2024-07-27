@@ -37,7 +37,6 @@ const BulkUploadQuestions = ({ quizzes }) => {
 
       try {
         setLoading(true);
-        console.log(questions);
         const { data } = await axios.post(
           `/api/admin/question/addBulkQuestions`,
           { selectedCourse, questions }
