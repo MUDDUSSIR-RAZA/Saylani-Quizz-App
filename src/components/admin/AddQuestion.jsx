@@ -27,13 +27,6 @@ const AddQuestion = ({ quizzes }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      quizId,
-      question_text,
-      options,
-      correctAnswer,
-      time_limit,
-    });
     try {
       setLoading(true);
       const { data } = await axios.post(`/api/admin/question/addQuestion`, {
