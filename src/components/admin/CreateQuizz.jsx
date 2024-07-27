@@ -34,7 +34,6 @@ const CreateQuizz = ({ Courses }) => {
     onSubmit: async (values, action) => {
       setLoading(true);
       try {
-        console.log("🚀 ~ onSubmit: ~ values:", values);
         setLoading(true);
         const { data } = await axios.post(
           "/api/admin/quiz/addQuiz",
