@@ -7,7 +7,6 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 const SignupPage = ({Courses}) => {
-  console.log("🚀 ~ SignupPage ~ Courses:", Courses)
   const [courses, setCourses] = useState(Courses);
   const [isSend, setIsSend] = useState(false);
   const [studentData, setStudentData] = useState({
