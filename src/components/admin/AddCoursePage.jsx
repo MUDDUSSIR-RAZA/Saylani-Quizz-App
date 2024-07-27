@@ -137,10 +137,18 @@ const AddCoursePage = ({ Courses }) => {
           </div>
         </form>
 
-        <h2 className="text-xl font-bold mb-4 text-center backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4">
+        <h2 className="text-3xl tracking-widest font-extrabold mb-4 text-center backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4 p-3 text-gray-900">
           Current Courses
         </h2>
-        <div className="">
+        <div>
+          {courses.length == 0 && (
+            <div className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4">
+              <h1 className="p-5 font-black text-7xl text-center md:text-5xl">
+                Courses Not Available
+              </h1>
+            </div>
+          )}
+
           {courses.map((course) => (
             <div
               key={course._id}
