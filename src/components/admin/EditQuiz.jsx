@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 // import Adding from "../InPageLoader/Adding";
 
-const EditQuiz = () => {
+const EditQuiz = ({id}) => {
+  console.log(id)
   const [loading, setLoading] = useState(false);
   const [initialData, setInitialData] = useState({});
   const [editedData, setEditedData] = useState({});
