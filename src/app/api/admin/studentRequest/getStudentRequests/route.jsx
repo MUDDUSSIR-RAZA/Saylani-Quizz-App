@@ -15,4 +15,3 @@ export async function GET() {
     return NextResponse.json(axiosError.response.data, { status: 400 });
   }
 }
-a
