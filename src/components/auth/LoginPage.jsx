@@ -37,12 +37,10 @@ const LoginPage = () => {
           withCredentials: true,
         }
       );
-      console.log(data);
       setLoading(false);
       router.push("/student/dashboard");
     } catch (error) {
       const err = error.response.data;
-      console.log("🚀 ~ handleSubmit ~ err:", err)
       setLoading(false);
       if (err == "pending" || err ==  "Unverified") {
         toast.error(`${err} Request!`);
