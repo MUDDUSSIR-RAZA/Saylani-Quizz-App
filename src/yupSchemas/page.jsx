@@ -17,7 +17,7 @@ export const loginSchema = Yup.object({
 // })
 
 export const quizTitleSchema = Yup.object({
-    quiz_name: Yup.string().required("Please Enter Quiz Title"),
+  quiz_name: Yup.string().required("Please Enter Quiz Title"),
   key: Yup.string().required("Please Enter Quiz Title"),
   course_name: Yup.string().required("Course selection is required"),
 });
