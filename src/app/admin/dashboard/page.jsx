@@ -3,10 +3,10 @@ import DashBoard from "@/components/admin/DashBoard";
 import axios from "axios";
 import React from "react";
 
-async function getQuizzes() {
+async function getAllQuizzes() {
   try {
     const { data } = await axios.get(
-      `${process.env.BACKEND_URL}/admin/getQuizzes`
+      `${process.env.BACKEND_URL}/admin/getAllQuizzes`
     );
    
     return {
@@ -21,7 +21,7 @@ async function getQuizzes() {
 
 
 const dashboard = async () => {
-  const { props } = await getQuizzes();
+  const { props } = await getAllQuizzes();
   return (
     <>
       <AdminNavbar />
