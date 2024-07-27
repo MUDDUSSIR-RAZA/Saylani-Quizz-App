@@ -1,9 +1,12 @@
+"use server"
+
 import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import DashBoard from "@/components/admin/DashBoard";
 import axios from "axios";
 import React from "react";
 
 async function getAllQuizzes() {
+
   try {
     const { data } = await axios.get(
       `${process.env.BACKEND_URL}/admin/getAllQuizzes`
