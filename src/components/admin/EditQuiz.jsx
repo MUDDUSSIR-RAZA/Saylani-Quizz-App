@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 // import Adding from "../InPageLoader/Adding";
 
-const EditQuiz = ({id}) => {
-  console.log(id)
+const EditQuiz = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [initialData, setInitialData] = useState({});
   const [editedData, setEditedData] = useState({});
@@ -14,9 +14,11 @@ const EditQuiz = ({id}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("/api/detail");
+        const response = await axios.get("/api/admin/quiz/getQuizById", {
+          params: { id },
+        });
         setInitialData(response.data);
-        setEditedData(response.data); // Initialize edited data with initial data
+        setEditedData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -26,6 +28,7 @@ const EditQuiz = ({id}) => {
   }, []);
 
   const handleInputChange = (field, value) => {
+    console.log("first field, value", field, value);
     const newEditedData = {
       ...editedData,
       [field]: value,
@@ -33,7 +36,6 @@ const EditQuiz = ({id}) => {
 
     setEditedData(newEditedData);
 
-    // Check if there are any changes compared to the initial data
     const hasChanges = Object.keys(newEditedData).some(
       (key) => newEditedData[key] !== initialData[key]
     );
@@ -43,24 +45,39 @@ const EditQuiz = ({id}) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    try {
-      setLoading(true);
-      const response = await axios.post("/api/update-detail", editedData);
-      setLoading(false);
 
-      if (response.data.success) {
+    // if (editedData.displayQuestions < 10) {
+    //   toast.error("Question count must be at least 10!");
+    // } else
+    if (editedData.displayQuestions > initialData.displayQuestions) {
+      toast.error(
+        `First add ${
+          editedData.displayQuestions - initialData.displayQuestions
+        } more questions!`
+      );
+    } else {
+      try {
+        setLoading(true);
+        const { data } = await axios.patch("/api/admin/quiz/editQuiz", {
+          _id: editedData._id,
+          quiz_name: editedData.quiz_name,
+          key: editedData.key,
+          displayQuestions: editedData.displayQuestions,
+        });
+        setLoading(false);
+        toast.success(data);
         setInitialData(editedData);
         setIsEdited(false);
-        // Optional: Add success notification or redirect
+      } catch (error) {
+        toast.error(error.response.data || "Error updating data.");
+        setLoading(false);
       }
-    } catch (error) {
-      setLoading(false);
-      console.error("Error updating data:", error);
     }
   };
 
   return (
     <section className="w-vwh h-dvh flex -z-99">
+      <Toaster position="top-right" reverseOrder={true} />
       <div className="flex items-baseline justify-center my-[20px] h-[90%] px-6 py-8 mx-auto md:h-screen lg:py-0 w-10/12 sm:px-0">
         <div className="w-9/12 backdrop-blur-xl bg-bgColor rounded-lg shadow-2xl md:mt-0 sm:w-full xl:p-0">
           <div className="p-6 sm:p-8">
@@ -77,33 +94,31 @@ const EditQuiz = ({id}) => {
             <br />
             <br />
             <form onSubmit={handleFormSubmit}>
-              <label htmlFor="quizName">
+              <label htmlFor="quiz_name">
                 <b>Quiz Name:</b>
               </label>
               <input
                 type="text"
-                id="quizName"
-                value={editedData.quizName || "DMAS Rule"}
+                id="quiz_name"
+                value={editedData.quiz_name}
                 autoComplete="off"
-                onChange={(e) =>
-                  handleInputChange("quizName", e.target.value)
-                }
+                onChange={(e) => handleInputChange("quiz_name", e.target.value)}
                 className="bg-bgColor  text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 required
               />
-              
+
               <br />
 
-              <label htmlFor="courseName">
+              <label htmlFor="course_name">
                 <b>Course Name:</b>
               </label>
               <input
                 type="text"
-                id="courseName"
-                value={editedData.courseName || "Mathematics"}
+                id="course_name"
+                value={editedData.course_name}
                 autoComplete="off"
                 onChange={(e) =>
-                  handleInputChange("courseName", e.target.value)
+                  handleInputChange("course_name", e.target.value)
                 }
                 className="bg-bgColor  text-gray-900 text-sm rounded-lg block w-full p-2.5 "
                 disabled
@@ -112,16 +127,16 @@ const EditQuiz = ({id}) => {
 
               <br />
 
-              <label htmlFor="editKey">
+              <label htmlFor="key">
                 <b>Key:</b>
               </label>
               <input
                 type="text"
-                id="editKey"
-                value={editedData.editKey || ""}
+                id="key"
+                value={editedData.key}
                 placeholder="**********"
                 autoComplete="off"
-                onChange={(e) => handleInputChange("editKey", e.target.value)}
+                onChange={(e) => handleInputChange("key", e.target.value)}
                 className="bg-bgColor text-gray-900 text-sm rounded-lg block w-full p-2.5"
                 required
               />
@@ -134,7 +149,7 @@ const EditQuiz = ({id}) => {
               <input
                 type="number"
                 id="displayQuestions"
-                value={editedData.displayQuestions || ""}
+                value={editedData.displayQuestions}
                 placeholder="Minimum 10"
                 autoComplete="off"
                 onChange={(e) =>
@@ -158,7 +173,7 @@ const EditQuiz = ({id}) => {
                     : "bg-gray-400 cursor-not-allowed"
                 } font-medium rounded-lg text-sm py-2.5 text-center`}
               >
-                {loading ? <Adding /> : "Update"}
+                {loading ? "Updating" : "Update"}
               </button>
             </form>
           </div>
