@@ -13,19 +13,28 @@ const initialValues = {
   quiz_name: " ",
   key: "",
   course_name: "",
+  course_id: "",
 };
 
 const CreateQuizz = ({ Courses }) => {
   const [courses, setCourses] = useState(Courses);
   const [loading, setLoading] = useState(false);
 
-  const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
-  useFormik({
+  const {
+    values,
+    errors,
+    touched,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    setFieldValue,
+  } = useFormik({
     initialValues,
     validationSchema: quizTitleSchema,
-    onSubmit: async (values,action) => {
+    onSubmit: async (values, action) => {
       setLoading(true);
       try {
+        console.log("🚀 ~ onSubmit: ~ values:", values);
         setLoading(true);
         const { data } = await axios.post(
           "/api/admin/quiz/addQuiz",
@@ -46,6 +55,15 @@ const CreateQuizz = ({ Courses }) => {
       }
     },
   });
+
+  const handleCourseChange = (event) => {
+    const selectedOption = event.target.options[event.target.selectedIndex];
+    const courseName = selectedOption.getAttribute("data-name");
+    const courseId = selectedOption.value;
+
+    setFieldValue("course_name", courseName);
+    setFieldValue("course_id", courseId);
+  };
 
   return (
     <>
@@ -73,15 +91,19 @@ const CreateQuizz = ({ Courses }) => {
                   <select
                     id="course_name"
                     name="course_name"
-                    value={values.course_name}
-                    onChange={handleChange}
+                    value={values.course_id} // Use course_id as the value
+                    onChange={handleCourseChange} // Custom change handler
                     onBlur={handleBlur}
                     required
                     className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm"
                   >
                     <option value="">Select a Course</option>
                     {courses.map((course) => (
-                      <option key={course._id} value={course.course_name}>
+                      <option
+                        key={course._id}
+                        value={course._id}
+                        data-name={course.course_name}
+                      >
                         {course.course_name}
                       </option>
                     ))}
