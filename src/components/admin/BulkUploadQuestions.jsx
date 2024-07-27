@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UploadingBulkFile from "../InPageLoader/UploadingBulkFile";
+import toast, { Toaster } from "react-hot-toast";
 
 const BulkUploadQuestions = ({ quizzes }) => {
   const [loading, setLoading] = useState(false);
@@ -37,17 +38,15 @@ const BulkUploadQuestions = ({ quizzes }) => {
       try {
         setLoading(true);
         console.log(questions);
-        // const response = await axios.post(
-        //   `/api/courses/${selectedCourse}/bulk-upload-questions`,
-        //   { questions }
-        // );
-        // if (response.data.success) {
-        //   // router.push('/admin'); // Redirect to admin dashboard or another page
-        // }
-        // setLoading(false);
+        const { data } = await axios.post(
+          `/api/admin/question/addBulkQuestions`,
+          { selectedCourse, questions }
+        );
+        toast.success(data);
+        setLoading(false);
       } catch (error) {
-        // setLoading(false);
-        // console.error("Error uploading questions:", error);
+        setLoading(false);
+        toast.error(error.response.data)
       }
     };
 
@@ -56,6 +55,7 @@ const BulkUploadQuestions = ({ quizzes }) => {
 
   return (
     <section className="w-vwh h-dvh flex">
+      <Toaster position="top-right" reverseOrder={true} />
       <div className="flex flex-col items-center justify-center mx-auto md:h-screen w-10/12 sm:px-0">
         <div className="w-10/12 backdrop-blur-xl bg-bgColor rounded-lg shadow-2xl mb-14 md:mt-0 sm:w-full xl:p-0">
           <div className="p-6 sm:p-8">
