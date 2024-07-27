@@ -46,10 +46,9 @@ const EditQuiz = ({ id }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // if (editedData.displayQuestions < 10) {
-    //   toast.error("Question count must be at least 10!");
-    // } else
-    if (editedData.displayQuestions > initialData.displayQuestions) {
+    if (editedData.displayQuestions < 10) {
+      toast.error("Question count must be at least 10!");
+    } else if (editedData.displayQuestions > initialData.displayQuestions) {
       toast.error(
         `First add ${
           editedData.displayQuestions - initialData.displayQuestions
