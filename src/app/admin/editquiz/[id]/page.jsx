@@ -1,10 +1,12 @@
+"use client"
+
 import EditQuiz from '@/components/admin/EditQuiz'
 import React from 'react'
 
-const editQuiz = () => {
+const editQuiz = ({params}) => {
   return (
     <>
-    <EditQuiz />
+    <EditQuiz id={params.id} />
     </>
   )
 }
