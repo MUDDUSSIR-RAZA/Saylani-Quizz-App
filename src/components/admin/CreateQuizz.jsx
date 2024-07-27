@@ -18,7 +18,6 @@ const initialValues = {
 const CreateQuizz = ({ Courses }) => {
   const [courses, setCourses] = useState(Courses);
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const { values, errors, touched, handleChange, handleBlur, handleSubmit } =
   useFormik({
