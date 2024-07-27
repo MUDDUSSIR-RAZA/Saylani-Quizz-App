@@ -3,10 +3,10 @@ import AddQuestion from "@/components/admin/AddQuestion";
 import axios from "axios";
 import React from "react";
 
-async function getQuizzes() {
+async function getAllQuizzes() {
   try {
     const { data } = await axios.get(
-      `${process.env.BACKEND_URL}/admin/getQuizzes`
+      `${process.env.BACKEND_URL}/admin/getAllQuizzes`
     );
    
     return {
@@ -21,7 +21,7 @@ async function getQuizzes() {
 
 
 const page = async () => {
-  const { props } = await getQuizzes();
+  const { props } = await getAllQuizzes();
   return (
     <>
       <AdminNavbar />
