@@ -4,65 +4,62 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Adding from "../InPageLoader/Adding";
 
-const AddQuestion = () => {
+const AddQuestion = ({ quizzes }) => {
   const [loading, setLoading] = useState(false);
-  const [quizzes, setQuizzes] = useState([
-    { _id: "60d21b4667d0d8992e610c85", quiz_name: "Mathematics 101" },
-    { _id: "60d21b4667d0d8992e610c86", quiz_name: "Science Basics" },
-    { _id: "60d21b4667d0d8992e610c87", quiz_name: "History 101" },
-  ]);
   const [selectedQuiz, setselectedQuiz] = useState("");
-  const [questionText, setQuestionText] = useState("");
+  const [question_text, setQuestionText] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
-  const [correctOptionIndex, setCorrectOptionIndex] = useState(null);
-  const [timeLimit, setTimeLimit] = useState(30);
+  const [correctAnswer, setCorrectAnswer] = useState("");
+  const [time_limit, setTimeLimit] = useState(30);
 
-  useEffect(() => {
-    const fetchCourses = async () => {
-      try {
-        const response = await axios.get("/api/courses");
-        setQuizzes(response.data.data);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchCourses = async () => {
+  //     try {
+  //       const response = await axios.get("/api/courses");
+  //       setQuizzes(response.data.data);
+  //     } catch (error) {
+  //       console.error("Error fetching courses:", error);
+  //     }
+  //   };
 
-    fetchCourses();
-  }, []);
+  //   fetchCourses();
+  // }, []);
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
     newOptions[index] = value;
     setOptions(newOptions);
+
+    // Update correct answer if the changed option was the correct one
+    if (correctAnswer === options[index]) {
+      setCorrectAnswer(value);
+    }
   };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     console.log({
-      question_text: questionText,
+      selectedQuiz,
+      question_text,
       options,
-      correct_option_index: correctOptionIndex,
-      time_limit: timeLimit,
+      correctAnswer,
+      time_limit,
     });
     try {
-      setLoading(true);
-      //   const response = await axios.post(
-      //     `/api/courses/${selectedQuiz}/add-question`,
-      //     {
-      //       question_text: questionText,
-      //       options,
-      //       correct_option_index: correctOptionIndex,
-      //       time_limit: timeLimit,
-      //     }
-      //   );
-      // setLoading(false);
+      // setLoading(true);
+      const { data } = await axios.post(`/api/admin/question/addQuestion`, {
+        selectedQuiz,
+        question_text,
+        options,
+        correctAnswer,
+        time_limit,
+      });
+      setLoading(false);
 
-      //   if (response.data.success) {
-      //     // router.push('/admin'); // Redirect to admin dashboard or another page
-      //   }
+      toast.success(data);
     } catch (error) {
       setLoading(false);
-      console.error("Error adding question:", error);
+      toast.error(error.response.data);
     }
   };
 
@@ -87,7 +84,10 @@ const AddQuestion = () => {
               <select
                 id="courseSelect"
                 value={selectedQuiz}
-                onChange={(e) => setselectedQuiz(e.target.value)}
+                type="radio"
+                onChange={(e) => {
+                  setselectedQuiz(e.target.value);
+                }}
                 required
                 className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm"
               >
@@ -102,13 +102,13 @@ const AddQuestion = () => {
               <br />
               <br />
 
-              <label htmlFor="questionText">
+              <label htmlFor="question_text">
                 <b>Question Text:</b>
               </label>
               <input
                 type="text"
-                id="questionText"
-                value={questionText}
+                id="question_text"
+                value={question_text}
                 autoComplete="off"
                 onChange={(e) => setQuestionText(e.target.value)}
                 className="bg-bgColor border border-green-950 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
@@ -140,20 +140,20 @@ const AddQuestion = () => {
                       name="correctOption"
                       className="text-sm ml-5 p-2.5"
                       required
-                      value={index}
-                      checked={correctOptionIndex === index}
-                      onChange={() => setCorrectOptionIndex(index)}
+                      value={option}
+                      checked={correctAnswer === option}
+                      onChange={() => setCorrectAnswer(option)}
                     />
                   </div>
                 </div>
               ))}
 
-              <label htmlFor="timeLimit">Time Limit (seconds):</label>
+              <label htmlFor="time_limit">Time Limit (seconds):</label>
               <input
                 className="bg-bgColor border border-green-950 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
                 type="number"
-                id="timeLimit"
-                value={timeLimit}
+                id="time_limit"
+                value={time_limit}
                 onChange={(e) => setTimeLimit(Number(e.target.value))}
                 required
               />
