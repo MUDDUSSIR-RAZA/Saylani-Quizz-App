@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
 
+
 const DashBoard = ({quizzes}) => {
   console.log("first quizzes" , quizzes)
 
