@@ -1,12 +1,24 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const DashBoard = () => {
   const router = useRouter();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const {data} = await axios.get("/api/student/quiz/getStudentQuiz");
+       console.log(data)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
+    fetchData();
+  }, []);
   const [courses, setCourses] = useState([
     {
       _id: "60d21b4667d0d8992e610c85",
@@ -65,30 +77,15 @@ const DashBoard = () => {
 
   const handleKeySubmit = async () => {
     try {
+      const { data } = await axios.post("student/quiz/checkKey", {
+        key: enteredKey,
+        quizId: selectedQuizId,
+      });
 
-      router.push(`/student/quiz/${selectedQuizId}`)
+      router.push(`/student/quiz/${selectedQuizId}?key=${enteredKey}`);
 
-
-      // const response = await fetch("/api/check-key", {
-      //   method: "POST",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({ key: enteredKey, quizId: selectedQuizId }),
-      // });
-
-      // const data = await response.json();
-
-      // if (data.success) {
-      //   router.push({
-      //     pathname: `/quiz/${selectedQuizId}`,
-      //     query: { key: enteredKey },
-      //   });
-      // } else {
-      //   setErrorMessage("Invalid key. Please try again.");
-      // }
     } catch (error) {
-      // setErrorMessage("An error occurred. Please try again.");
+      setErrorMessage(error.response.data);
     }
   };
 
@@ -142,7 +139,9 @@ const DashBoard = () => {
             >
               Submit
             </button>
-            {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
+            {errorMessage && (
+              <p className="text-red-500 mt-2">{errorMessage}</p>
+            )}
           </div>
         </div>
       )}
