@@ -4,12 +4,16 @@ import React, { useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
 
-
-const DashBoard = ({quizzes}) => {
-
+const DashBoard = ({ quizzes }) => {
   // Check if courses is defined and is an array
   if (!Array.isArray(quizzes) || quizzes.length === 0) {
-    return <p>No courses available</p>;
+    return (
+      <div className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4">
+        <h1 className="p-5 font-black text-7xl text-center md:text-5xl">
+          Quizzes Not Available
+        </h1>
+      </div>
+    );
   }
 
   return (
@@ -35,7 +39,10 @@ const DashBoard = ({quizzes}) => {
                 ) : (
                   <p className="text-[#a72727]  text-base">Quiz Closed</p>
                 )}
-                <Link href={`/admin/editquiz/${quiz._id}`} className="absolute right-6 cursor-pointer">
+                <Link
+                  href={`/admin/editquiz/${quiz._id}`}
+                  className="absolute right-6 cursor-pointer"
+                >
                   Edit
                 </Link>
               </footer>
