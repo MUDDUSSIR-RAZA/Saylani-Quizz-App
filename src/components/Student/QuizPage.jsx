@@ -29,6 +29,7 @@ import "react-circular-progressbar/dist/styles.css";
 import { FaMedal } from "react-icons/fa";
 import { easeQuadInOut } from "d3-ease";
 import AnimatedProgressProvider from "../AnimatedProgressProvider";
+import axios from "axios";
 
 const quizDetails = {
   id: "dsfdsf",
@@ -82,7 +83,7 @@ const quizDetails = {
   ],
 };
 
-const QuizPage = () => {
+const QuizPage = ({quizId}) => {
   const [quizStarted, setQuizStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
@@ -91,6 +92,22 @@ const QuizPage = () => {
   const [timeLeft, setTimeLeft] = useState(quizDetails.quiz[0].time_limit);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get("/api/student/quiz/getQuizById" , {
+          params: { quizId }
+      });
+        
+        console.log(data)
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (!quizStarted) return;
