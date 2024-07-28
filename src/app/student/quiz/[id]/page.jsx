@@ -11,32 +11,11 @@
 import QuizPage from "@/components/Student/QuizPage";
 import React from "react";
 
-async function getAllQuizzes(params, searchParams) {
-  console.log(params, searchParams)
-  // console.log(searchParams)
+const quiz = ({ params }) => {
 
-  // try {
-  //   const { data } = await axios.get(
-  //     `${process.env.BACKEND_URL}/admin/getAllQuizzes`
-  //   );
-   
-  //   return {
-  //     props: data,
-  //   };
-  // } catch (error) {
-  //   return {
-  //     props: error.message,
-  //   };
-  // }
-}
-
-
-const quiz = ({ params, searchParams }) => {
-  getAllQuizzes(params.id,searchParams.key)
-  
   return (
     <>
-       <QuizPage />
+      <QuizPage quizId={params.id} />
     </>
   );
 };
@@ -68,9 +47,6 @@ const quiz = ({ params, searchParams }) => {
 //   }
 
 export default quiz;
-
-
-
 
 // // pages/error.js
 
