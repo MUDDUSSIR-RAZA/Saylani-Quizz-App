@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -22,19 +20,7 @@ const SignupPage = ({Courses}) => {
   });
   const [filteredCourses, setFilteredCourses] = useState([]);
 
-  useEffect(() => {
-    // Fetch courses from backend
-    const fetchCourses = async () => {
-      try {
-        const response = await fetch("/api/admin-courses");
-        const data = await response.json();
-        setCourses(data);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      }
-    };
-    fetchCourses();
-  }, []);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
