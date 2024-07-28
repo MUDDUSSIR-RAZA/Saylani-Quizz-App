@@ -31,76 +31,230 @@ import { easeQuadInOut } from "d3-ease";
 import AnimatedProgressProvider from "../AnimatedProgressProvider";
 import axios from "axios";
 
-const quizDetails = {
-  id: "dsfdsf",
-  quiz_name: "HTML",
-  course: "Web and App Development",
-  key: "dsasadassad545",
-  quiz: [
-    {
-      correct_answer: "3",
-      options: ["1", "2", "3", "4"],
-      question_text: "What is the length of the array [1, 2, 3, 4]?",
-      time_limit: 30,
-      author_id: "fsd2f454f5sfddsf",
-      id: "dsfdsfsf534dsfds",
-    },
-    {
-      correct_answer: "splice",
-      options: ["slice", "splice", "split", "join"],
-      question_text:
-        "Which method can be used to remove elements from an array?",
-      time_limit: 30,
-      author_id: "fsd2f454f5sfddsf",
-      id: "dsfdsfsf534dsfdg",
-    },
-    {
-      correct_answer: "map",
-      options: ["filter", "reduce", "map", "forEach"],
-      question_text:
-        "Which array method creates a new array populated with the results of calling a provided function on every element in the calling array?",
-      time_limit: 30,
-      author_id: "fsd2f454f5sfddsf",
-      id: "dsfdsfsf534dsfdh",
-    },
-    {
-      correct_answer: "0",
-      options: ["0", "1", "undefined", "null"],
-      question_text: "What is the index of the first element in an array?",
-      time_limit: 30,
-      author_id: "fsd2f454f5sfddsf",
-      id: "dsfdsfsf534dsfdi",
-    },
-    {
-      correct_answer: "filter",
-      options: ["find", "filter", "reduce", "some"],
-      question_text:
-        "Which method creates a new array with all elements that pass the test implemented by the provided function?",
-      time_limit: 30,
-      author_id: "fsd2f454f5sfddsf",
-      id: "dsfdsfsf534dsfdj",
-    },
-  ],
-};
 
-const QuizPage = ({quizId}) => {
+//   id: "dsfdsf",
+//   quiz_name: "HTML",
+//   course: "Web and App Development",
+//   key: "dsasadassad545",
+//   quiz: [
+//     {
+//       correct_answer: "3",
+//       options: ["1", "2", "3", "4"],
+//       question_text: "What is the length of the array [1, 2, 3, 4]?",
+//       time_limit: 30,
+//       author_id: "fsd2f454f5sfddsf",
+//       id: "dsfdsfsf534dsfds",
+//     },
+//     {
+//       correct_answer: "splice",
+//       options: ["slice", "splice", "split", "join"],
+//       question_text:
+//         "Which method can be used to remove elements from an array?",
+//       time_limit: 30,
+//       author_id: "fsd2f454f5sfddsf",
+//       id: "dsfdsfsf534dsfdg",
+//     },
+//     {
+//       correct_answer: "map",
+//       options: ["filter", "reduce", "map", "forEach"],
+//       question_text:
+//         "Which array method creates a new array populated with the results of calling a provided function on every element in the calling array?",
+//       time_limit: 30,
+//       author_id: "fsd2f454f5sfddsf",
+//       id: "dsfdsfsf534dsfdh",
+//     },
+//     {
+//       correct_answer: "0",
+//       options: ["0", "1", "undefined", "null"],
+//       question_text: "What is the index of the first element in an array?",
+//       time_limit: 30,
+//       author_id: "fsd2f454f5sfddsf",
+//       id: "dsfdsfsf534dsfdi",
+//     },
+//     {
+//       correct_answer: "filter",
+//       options: ["find", "filter", "reduce", "some"],
+//       question_text:
+//         "Which method creates a new array with all elements that pass the test implemented by the provided function?",
+//       time_limit: 30,
+//       author_id: "fsd2f454f5sfddsf",
+//       id: "dsfdsfsf534dsfdj",
+//     },
+//   ],
+// };
+// const quizDetails = {
+//   "_id": "66a549757a81111e8fb85796",
+//   "course": "66a549577a81111e8fb8578f",
+//   "questions": [
+//       {
+//           "_id": "66a60a7971a18ce726fc255e",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "Who wrote 'Romeo and Juliet'?",
+//           "options": [
+//               "Charles Dickens",
+//               "William Shakespeare",
+//               "Mark Twain",
+//               "Jane Austen"
+//           ],
+//           "correct_answer": "William Shakespeare",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc2576",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "Which element has the atomic number 1?",
+//           "options": [
+//               "Helium",
+//               "Oxygen",
+//               "Hydrogen",
+//               "Carbon"
+//           ],
+//           "correct_answer": "Hydrogen",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc255a",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "Which planet is known as the Red Planet?",
+//           "options": [
+//               "Earth",
+//               "Mars",
+//               "Jupiter",
+//               "Saturn"
+//           ],
+//           "correct_answer": "Mars",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc256a",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "What is the chemical symbol for gold?",
+//           "options": [
+//               "Ag",
+//               "Au",
+//               "Gd",
+//               "Ga"
+//           ],
+//           "correct_answer": "Au",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc2572",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "Who painted the Mona Lisa?",
+//           "options": [
+//               "Vincent van Gogh",
+//               "Leonardo da Vinci",
+//               "Pablo Picasso",
+//               "Claude Monet"
+//           ],
+//           "correct_answer": "Leonardo da Vinci",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc2556",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "What is 2 + 2?",
+//           "options": [
+//               "3",
+//               "4",
+//               "5",
+//               "6"
+//           ],
+//           "correct_answer": "4",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc2562",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "What is the largest ocean on Earth?",
+//           "options": [
+//               "Atlantic Ocean",
+//               "Indian Ocean",
+//               "Arctic Ocean",
+//               "Pacific Ocean"
+//           ],
+//           "correct_answer": "Pacific Ocean",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc256e",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "How many continents are there on Earth?",
+//           "options": [
+//               "5",
+//               "6",
+//               "7",
+//               "8"
+//           ],
+//           "correct_answer": "7",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc2566",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "What is the square root of 64?",
+//           "options": [
+//               "6",
+//               "7",
+//               "8",
+//               "9"
+//           ],
+//           "correct_answer": "8",
+//           "time_limit": 30,
+//           "__v": 0
+//       },
+//       {
+//           "_id": "66a60a7971a18ce726fc2552",
+//           "quiz": "66a549757a81111e8fb85796",
+//           "question_text": "What is the capital of France?",
+//           "options": [
+//               "Berlin",
+//               "Madrid",
+//               "Paris",
+//               "Lisbon"
+//           ],
+//           "correct_answer": "Paris",
+//           "time_limit": 30,
+//           "__v": 0
+//       }
+//   ],
+//   "course_name": "Web And App",
+//   "quiz_name": "CSS",
+//   "displayQuestions": "10",
+//   "quizOpen": true,
+//   "key": "123456891",
+//   "__v": 0
+// }
+const QuizPage = ({ quizId }) => {
+  const [quizDetails, setQuiz] = useState({});
   const [quizStarted, setQuizStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [score, setScore] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(quizDetails.quiz[0].time_limit);
+  const [timeLeft, setTimeLeft] = useState();
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get("/api/student/quiz/getQuizById" , {
-          params: { quizId }
-      });
-        
+        const { data } = await axios.get("/api/student/quiz/getQuizById", {
+          params: { quizId },
+        });
+        setQuiz(data);
         console.log(data)
+        setTimeLeft(quizDetails.questions[0].time_limit);
+        console.log(quizDetails.questions)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -205,15 +359,18 @@ const QuizPage = ({quizId}) => {
       setTimeLeft(0); // Set time left to 0 when quiz is completed
       return;
     }
-
-    // Ensure currentQuestionIndex is within bounds
+  
+    // Ensure quizDetails and quizDetails.questions are defined and currentQuestionIndex is within bounds
     if (
+      quizDetails &&
+      quizDetails.questions &&
       currentQuestionIndex >= 0 &&
-      currentQuestionIndex < quizDetails.quiz.length
+      currentQuestionIndex < quizDetails.questions.length
     ) {
-      setTimeLeft(quizDetails.quiz[currentQuestionIndex].time_limit);
+      setTimeLeft(quizDetails.questions[currentQuestionIndex].time_limit);
     }
-  }, [currentQuestionIndex, isQuizCompleted, quizDetails.quiz]);
+  }, [currentQuestionIndex, isQuizCompleted, quizDetails]);
+  
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
@@ -226,7 +383,7 @@ const QuizPage = ({quizId}) => {
   };
 
   const handleNextQuestion = () => {
-    const currentQuestion = quizDetails.quiz[currentQuestionIndex];
+    const currentQuestion = quizDetails.questions[currentQuestionIndex];
 
     // Check if the current answer is correct and update score
     if (userAnswers[currentQuestion.id] === currentQuestion.correct_answer) {
@@ -234,7 +391,7 @@ const QuizPage = ({quizId}) => {
     }
 
     // Move to the next question if available, otherwise set quiz as completed
-    if (currentQuestionIndex < quizDetails.quiz.length - 1) {
+    if (currentQuestionIndex < quizDetails.questions.length - 1) {
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     } else {
       setIsQuizCompleted(true);
@@ -245,8 +402,8 @@ const QuizPage = ({quizId}) => {
   useEffect(() => {
     if (isQuizCompleted) {
       submitResult();
-      setScore(score); 
-      setUserAnswers({}); 
+      setScore(score);
+      setUserAnswers({});
     }
   }, [isQuizCompleted]);
 
@@ -275,7 +432,7 @@ const QuizPage = ({quizId}) => {
   const submitResultWithZeroScore = async () => {
     // Prepare userAnswers with empty strings for all questions
     const updatedUserAnswers = {};
-    quizDetails.quiz.forEach((question) => {
+    quizDetails.questions.forEach((question) => {
       updatedUserAnswers[question.id] = ""; // Set all answers to empty string
     });
 
@@ -341,7 +498,7 @@ const QuizPage = ({quizId}) => {
   }
 
   if (isQuizCompleted) {
-    const percentageScore = (score / quizDetails.quiz.length) * 100;
+    const percentageScore = (score / quizDetails.questions.length) * 100;
     let badgeColor = "red";
     if (percentageScore >= 75) badgeColor = "green";
     else if (percentageScore >= 50) badgeColor = "yellow";
@@ -374,13 +531,13 @@ const QuizPage = ({quizId}) => {
         <br />
         <FaMedal size={50} color={badgeColor} />
         <p className="mt-5">
-          Your Score: {score} / {quizDetails.quiz.length}
+          Your Score: {score} / {quizDetails.questions.length}
         </p>
       </div>
     );
   }
 
-  const currentQuestion = quizDetails.quiz[currentQuestionIndex];
+  const currentQuestion = quizDetails.questions[currentQuestionIndex];
 
   const calculatePathColor = (timeLeft) => {
     const percentage = (timeLeft / 30) * 100; // Calculate percentage of time left
@@ -448,7 +605,9 @@ const QuizPage = ({quizId}) => {
               <AnimatedProgressProvider
                 valueStart={timeLeft}
                 valueEnd={0}
-                duration={quizDetails.quiz[currentQuestionIndex].time_limit}
+                duration={
+                  quizDetails.questions[currentQuestionIndex].time_limit
+                }
                 easingFunction={easeQuadInOut}
               >
                 {(value) => (
