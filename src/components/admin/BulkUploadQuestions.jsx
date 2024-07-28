@@ -6,6 +6,7 @@ import UploadingBulkFile from "../InPageLoader/UploadingBulkFile";
 import toast, { Toaster } from "react-hot-toast";
 
 const BulkUploadQuestions = ({ quizzes }) => {
+  console.log(quizzes);
   const [loading, setLoading] = useState(false);
 
   const [selectedCourse, setSelectedCourse] = useState("");
@@ -71,18 +72,18 @@ const BulkUploadQuestions = ({ quizzes }) => {
               className="space-y-4 md:space-y-6"
               onSubmit={handleFormSubmit}
             >
-              <label htmlFor="courseSelect">Select Course: </label>
+              <label htmlFor="courseSelect">Select Quiz: </label>
               <select
                 id="courseSelect"
-                className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm"
+                className="bg-bgColor font-bold text-slate-800 border border-gray-300 rounded-sm p-2"
                 value={selectedCourse}
                 onChange={(e) => setSelectedCourse(e.target.value)}
                 required
               >
-                <option value="">Select a course</option>
+                <option value="">Select a quiz</option>
                 {quizzes.map((quiz) => (
                   <option key={quiz._id} value={quiz._id}>
-                    {quiz.course_name}
+                    {quiz.quiz_name}
                   </option>
                 ))}
               </select>
