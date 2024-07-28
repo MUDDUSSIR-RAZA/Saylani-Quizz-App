@@ -8,7 +8,6 @@ import axios from "axios";
 const DashBoard = () => {
   const router = useRouter();
 
-  const [userId, setUserId] = useState("");
   const [courses, setCourses] = useState([]);
   
   useEffect(() => {
@@ -16,8 +15,7 @@ const DashBoard = () => {
       try {
         const { data } = await axios.get("/api/student/quiz/getStudentQuiz");
 
-        setUserId(data.userId);
-        setCourses(data.quiz);
+        setCourses(data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -26,28 +24,28 @@ const DashBoard = () => {
     fetchData();
   }, []);
 
-  const [showKeyEntry, setShowKeyEntry] = useState(false);
-  const [selectedQuizId, setSelectedQuizId] = useState(null);
-  const [enteredKey, setEnteredKey] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [showKeyEntry, setShowKeyEntry] = useState(false);
+  // const [selectedQuizId, setSelectedQuizId] = useState(null);
+  // const [enteredKey, setEnteredKey] = useState("");
+  // const [errorMessage, setErrorMessage] = useState("");
 
-  const handleQuizClick = (quizId) => {
-    setSelectedQuizId(quizId);
-    setShowKeyEntry(true);
-  };
+  // const handleQuizClick = (quizId) => {
+  //   setSelectedQuizId(quizId);
+  //   setShowKeyEntry(true);
+  // };
 
-  const handleKeySubmit = async () => {
-    try {
-      // const { data } = await axios.post("student/quiz/checkKey", {
-      //   key: enteredKey,
-      //   quizId: selectedQuizId,
-      // });
+  // const handleKeySubmit = async () => {
+  //   try {
+  //     // const { data } = await axios.post("student/quiz/checkKey", {
+  //     //   key: enteredKey,
+  //     //   quizId: selectedQuizId,
+  //     // });
 
-      router.push(`/student/quiz/${selectedQuizId}?key=${enteredKey}`);
-    } catch (error) {
-      setErrorMessage(error.response.data);
-    }
-  };
+  //     router.push(`/student/quiz/${selectedQuizId}?key=${enteredKey}`);
+  //   } catch (error) {
+  //     setErrorMessage(error.response.data);
+  //   }
+  // };
 
   if (!Array.isArray(courses) || courses.length === 0) {
     return <p>No courses available</p>;
@@ -60,7 +58,7 @@ const DashBoard = () => {
           <div
             key={course._id}
             className="m-2 backdrop-blur-lg bg-[#ffffff00] cursor-pointer"
-            onClick={() => handleQuizClick(course._id)}
+            onClick={() => router.push(`/student/quiz/${course._id}`)}
           >
             <section className={` ${card}`}>
               <header className="flex flex-col">
@@ -82,7 +80,7 @@ const DashBoard = () => {
           </div>
         ))}
       </div>
-      {showKeyEntry && (
+      {/* {showKeyEntry && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-5 rounded shadow-lg">
             <h2 className="text-lg font-bold mb-3">Enter Quiz Key</h2>
@@ -104,7 +102,7 @@ const DashBoard = () => {
             )}
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };
