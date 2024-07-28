@@ -1,6 +1,6 @@
 "use client";
 // pages/admin/bulk-upload-questions.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import UploadingBulkFile from "../InPageLoader/UploadingBulkFile";
 import toast, { Toaster } from "react-hot-toast";
