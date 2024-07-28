@@ -77,10 +77,10 @@ const DashBoard = () => {
 
   const handleKeySubmit = async () => {
     try {
-      const { data } = await axios.post("student/quiz/checkKey", {
-        key: enteredKey,
-        quizId: selectedQuizId,
-      });
+      // const { data } = await axios.post("student/quiz/checkKey", {
+      //   key: enteredKey,
+      //   quizId: selectedQuizId,
+      // });
 
       router.push(`/student/quiz/${selectedQuizId}?key=${enteredKey}`);
 
