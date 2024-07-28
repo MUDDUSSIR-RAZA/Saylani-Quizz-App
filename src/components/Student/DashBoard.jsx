@@ -7,11 +7,17 @@ import axios from "axios";
 
 const DashBoard = () => {
   const router = useRouter();
+
+  const [userId, setUserId] = useState("");
+  const [courses, setCourses] = useState([]);
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get("/api/student/quiz/getStudentQuiz");
-       console.log(data)
+        const { data } = await axios.get("/api/student/quiz/getStudentQuiz");
+
+        setUserId(data.userId);
+        setCourses(data.quiz);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -19,51 +25,6 @@ const DashBoard = () => {
 
     fetchData();
   }, []);
-  const [courses, setCourses] = useState([
-    {
-      _id: "60d21b4667d0d8992e610c85",
-      course_name: "Web And App Development",
-      quiz_name: "HTML",
-      questions: [
-        {
-          _id: "60d21b4667d0d8992e610c90",
-          question_text: "What is 2 + 2?",
-          options: ["3", "4", "5", "6"],
-          correct_option_index: 1,
-          time_limit: 30,
-        },
-        {
-          _id: "60d21b4667d0d8992e610c91",
-          question_text: "What is 3 * 3?",
-          options: ["6", "7", "8", "9"],
-          correct_option_index: 3,
-          time_limit: 30,
-        },
-        {
-          _id: "60d21b4667d0d8992e610c91",
-          question_text: "What is 3 * 3?",
-          options: ["6", "7", "8", "9"],
-          correct_option_index: 3,
-          time_limit: 30,
-        },
-        {
-          _id: "60d21b4667d0d8992e610c91",
-          question_text: "What is 3 * 3?",
-          options: ["6", "7", "8", "9"],
-          correct_option_index: 3,
-          time_limit: 30,
-        },
-        {
-          _id: "60d21b4667d0d8992e610c91",
-          question_text: "What is 3 * 3?",
-          options: ["6", "7", "8", "9"],
-          correct_option_index: 3,
-          time_limit: 30,
-        },
-      ],
-      quizOpen: true,
-    },
-  ]);
 
   const [showKeyEntry, setShowKeyEntry] = useState(false);
   const [selectedQuizId, setSelectedQuizId] = useState(null);
@@ -83,7 +44,6 @@ const DashBoard = () => {
       // });
 
       router.push(`/student/quiz/${selectedQuizId}?key=${enteredKey}`);
-
     } catch (error) {
       setErrorMessage(error.response.data);
     }
