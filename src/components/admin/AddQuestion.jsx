@@ -1,6 +1,6 @@
 "use client"; // pages/admin/add-question.js
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Adding from "../InPageLoader/Adding";
 import toast, { Toaster } from "react-hot-toast";
@@ -39,7 +39,6 @@ const AddQuestion = ({ quizzes }) => {
       toast.success(data);
       setLoading(false);
       router.push('/admin/dashboard')
-      rout
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data);
