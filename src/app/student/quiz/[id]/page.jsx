@@ -11,7 +11,10 @@
 import QuizPage from "@/components/Student/QuizPage";
 import React from "react";
 
-const quiz = () => {
+const quiz = ({ params, searchParams }) => {
+  console.log(params)
+  console.log(searchParams)
+  
   return (
     <>
        <QuizPage />
