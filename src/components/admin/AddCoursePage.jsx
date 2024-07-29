@@ -43,6 +43,11 @@ const AddCoursePage = ({ Courses }) => {
         ...newCourse,
       });
       getUpdateData();
+      setNewCourse({
+        course_name: "",
+        batch: "",
+        cities: [""],
+      })
       toast.success(data);
     } catch (error) {
       toast.error(error.response.data);
