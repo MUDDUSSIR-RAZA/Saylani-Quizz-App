@@ -171,7 +171,7 @@ const AddCoursePage = ({ Courses }) => {
                 className="mt-2 bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
                 onClick={() => handleDeleteCourse(course._id)}
               >
-                Delete
+                Edit
               </button>
             </div>
           ))}
