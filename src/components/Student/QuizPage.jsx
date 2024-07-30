@@ -31,7 +31,7 @@ const QuizPage = ({ quizId }) => {
         setTimeLeft(quizDetails.questions[0].time_limit);
         console.log(quizDetails.questions);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error(error.response.data);
       }
     };
 
