@@ -17,14 +17,19 @@ const StudentNavbar = () => {
 
   const links = [
     {
-      id: 1,
-      link: "/student/OverallPerformance",
-      name: "Overall Performance",
+      id: 3,
+      link: "/student/dashboard",
+      name: "Dashboard",
     },
     {
       id: 2,
       link: "/student/profile",
       name: "Profile",
+    },
+    {
+      id: 1,
+      link: "/student/OverallPerformance",
+      name: "Overall Performance",
     },
   ];
 
