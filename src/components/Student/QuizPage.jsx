@@ -8,6 +8,7 @@ import { easeQuadInOut } from "d3-ease";
 import AnimatedProgressProvider from "../AnimatedProgressProvider";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const QuizPage = ({ quizId }) => {
   const [quizDetails, setQuizDetails] = useState({});
@@ -19,6 +20,7 @@ const QuizPage = ({ quizId }) => {
   const [timeLeft, setTimeLeft] = useState();
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +33,7 @@ const QuizPage = ({ quizId }) => {
         setTimeLeft(quizDetails.questions[0].time_limit);
         console.log(quizDetails.questions);
       } catch (error) {
-        console.error(error.response.data);
+       router.push("/student/dashboard")
       }
     };
 
