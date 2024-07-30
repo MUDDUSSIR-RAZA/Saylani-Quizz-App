@@ -31,7 +31,6 @@ import { easeQuadInOut } from "d3-ease";
 import AnimatedProgressProvider from "../AnimatedProgressProvider";
 import axios from "axios";
 
-
 //   id: "dsfdsf",
 //   quiz_name: "HTML",
 //   course: "Web and App Development",
@@ -235,7 +234,7 @@ import axios from "axios";
 //   "__v": 0
 // }
 const QuizPage = ({ quizId }) => {
-  const [quizDetails, setQuiz] = useState({});
+  const [quizDetails, setQuizDetails] = useState({});
   const [quizStarted, setQuizStarted] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState({});
@@ -251,10 +250,10 @@ const QuizPage = ({ quizId }) => {
         const { data } = await axios.get("/api/student/quiz/getQuizById", {
           params: { quizId },
         });
-        setQuiz(data);
-        console.log(data)
+        setQuizDetails(data);
+        console.log(data);
         setTimeLeft(quizDetails.questions[0].time_limit);
-        console.log(quizDetails.questions)
+        console.log(quizDetails.questions);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -359,7 +358,7 @@ const QuizPage = ({ quizId }) => {
       setTimeLeft(0); // Set time left to 0 when quiz is completed
       return;
     }
-  
+
     // Ensure quizDetails and quizDetails.questions are defined and currentQuestionIndex is within bounds
     if (
       quizDetails &&
@@ -370,7 +369,6 @@ const QuizPage = ({ quizId }) => {
       setTimeLeft(quizDetails.questions[currentQuestionIndex].time_limit);
     }
   }, [currentQuestionIndex, isQuizCompleted, quizDetails]);
-  
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
@@ -415,8 +413,9 @@ const QuizPage = ({ quizId }) => {
       //       "Content-Type": "application/json",
       //     },
       //     body: JSON.stringify({
-      //       userAnswers,
-      //       score,
+      //       userId,
+      //       course_name,
+      //       quiz_name,
       //       quizId: quizDetails.id,
       //     }),
       //   });
@@ -424,6 +423,14 @@ const QuizPage = ({ quizId }) => {
       //   } else {
       //     console.error("Error submitting result");
       //   }
+      console.log(
+        quizDetails.userId,
+        quizDetails.course_name,
+        quizDetails.course.batch,
+        quizDetails.quiz_name,
+        quizDetails.questions.length,
+        score,
+      );
     } catch (error) {
       // console.error("Error submitting result:", error);
     }
