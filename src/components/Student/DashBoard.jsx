@@ -73,7 +73,7 @@ const DashBoard = () => {
               </header>
               <main>
                 <p>
-                  {course.questions.length} <a href="#">Questions</a>
+                  {course.displayQuestions} <a href="#">Questions</a>
                 </p>
               </main>
             </section>
