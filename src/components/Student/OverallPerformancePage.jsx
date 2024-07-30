@@ -29,7 +29,8 @@ const fakeResults = [
     ],
     date_taken: "2024-06-01T10:00:00Z",
     batch: 1,
-  },{
+  },
+  {
     student: "60f7b2f8b1c2c2a1b1a1b1b1",
     quiz: {
       _id: "60f7b2f8b1c2c2a1b1a1b1b2",
@@ -54,7 +55,8 @@ const fakeResults = [
     ],
     date_taken: "2024-06-01T10:00:00Z",
     batch: 1,
-  },{
+  },
+  {
     student: "60f7b2f8b1c2c2a1b1a1b1b1",
     quiz: {
       _id: "60f7b2f8b1c2c2a1b1a1b1b2",
@@ -324,55 +326,102 @@ const OverallPerformancePage = ({ studentId }) => {
   };
 
   if (!groupedResults.length) {
-    return <> <Loading /> </>;
+    return (
+      <>
+        {" "}
+        <Loading />{" "}
+      </>
+    );
   }
 
   return (
-    <div className="flex flex-col items-center h-dvh w-dvw overflow-y-scroll">
-      <h1 className="text-2xl font-extrabold my-6 tracking-widest">Overall Performance</h1>
+    <div className="flex flex-col items-center h-dvh w-dvw overflow-y-scroll overflow-x-auto">
+      <h1 className="text-2xl font-extrabold my-6 tracking-widest">
+        Overall Performance
+      </h1>
       {groupedResults.map((group, index) => {
+        console.log(group);
         const aggregatedResult = calculateAggregatedResult(group.quizzes);
         return (
           <div
             key={index}
-            className="w-full max-w-2xl backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6 md:w-11/12"
+            className="w-full max-w-[80%] backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6 md:w-11/12"
           >
-            <h2 className="text-xl font-bold mb-4">
+            <h2 className="text-3xl font-bold mb-4">
               {group.course} - Batch {group.batch}
             </h2>
-            <div className="mb-4">
-              <p>Total Quizzes Attempted: {aggregatedResult.totalQuizzes}</p>
-              <p>Total Questions: {aggregatedResult.totalQuestions}</p>
-              <p>
-                Total Correct Answers: {aggregatedResult.totalCorrectAnswers}
+            <hr />
+            <div className="my-4 text-xl">
+              <p className="my-2">
+                {" "}
+                <span className="font-semibold">
+                  Total Quizzes Attempted:
+                </span>{" "}
+                <span className="text-2xl">
+                  {aggregatedResult.totalQuizzes}
+                </span>
               </p>
-              <p>Percentage: {aggregatedResult.percentage}%</p>
+              <p className="my-2">
+                {" "}
+                <span className="font-semibold">Total Questions:</span>{" "}
+                <span className="text-2xl">
+                  {aggregatedResult.totalQuestions}
+                </span>
+              </p>
+              <p className="my-2">
+                {" "}
+                <span className="font-semibold">
+                  {" "}
+                  Total Correct Answers:
+                </span>{" "}
+                <span className="text-2xl">
+                  {aggregatedResult.totalCorrectAnswers}
+                </span>
+              </p>
+              <p className="my-2">
+                {" "}
+                <span className="font-semibold"> Percentage:</span>{" "}
+                <span className="text-2xl">{aggregatedResult.percentage}%</span>
+              </p>
             </div>
-            <div className="overflow-y-auto max-h-[150px]">
-              <table className="min-w-full backdrop-blur-2xl bg-[#ffffff00] shadow-inner">
+            <div className="overflow-y-auto">
+              <table className="min-w-full backdrop-blur-2xl bg-[#ffffff00] shadow-inner lg950px:min-w-[1000px] lg950px:overflow-x-auto ">
                 <thead>
-                  <tr className="shadow-inner">
-                    <th className="px-4 py-2 shadow-inner">Quiz Name</th>
-                    <th className="px-4 py-2 shadow-inner">Score</th>
-                    <th className="px-4 py-2 shadow-inner">Total Questions</th>
-                    <th className="px-4 py-2 shadow-inner">Date Taken</th>
+                  <tr className="shadow-inner text-xl">
+                    <th className="p-4 shadow-inner">Quiz Name</th>
+                    <th className="p-4 shadow-inner">Score</th>
+                    <th className="p-4 shadow-inner">Total Questions</th>
+                    <th className="p-4 shadow-inner">Percentage</th>
+                    <th className="p-4 shadow-inner">Date Taken</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {group.quizzes.map((quiz, idx) => (
-                    <tr key={idx}>
-                      <td className="border px-4 py-2">
-                        {quiz.quiz.quiz_name}
-                      </td>
-                      <td className="border px-4 py-2">{quiz.score}</td>
-                      <td className="border px-4 py-2">
-                        {quiz.totalQuestions}
-                      </td>
-                      <td className="border px-4 py-2">
-                        {new Date(quiz.date_taken).toLocaleDateString()}
-                      </td>
-                    </tr>
-                  ))}
+                  {group.quizzes.map((quiz, idx) => {
+                    const percentage = (
+                      (quiz.score / quiz.totalQuestions) *
+                      100
+                    ).toFixed(2); 
+
+                    return (
+                      <tr key={idx} className="text-lg">
+                        <td className="border px-4 py-2">
+                          {quiz.quiz.quiz_name}
+                        </td>
+                        <td className="border px-4 py-2 text-center">
+                          {quiz.score}
+                        </td>
+                        <td className="border px-4 py-2 text-center">
+                          {quiz.totalQuestions}
+                        </td>
+                        <td className="border px-4 py-2 text-center">
+                          {percentage}%
+                        </td>
+                        <td className="border px-4 py-2 text-center">
+                          {new Date(quiz.date_taken).toLocaleDateString()}
+                        </td>
+                      </tr>
+                    );
+                  })}
                 </tbody>
               </table>
             </div>
