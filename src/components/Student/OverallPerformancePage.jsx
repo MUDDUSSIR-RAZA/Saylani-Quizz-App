@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Loading from "@/components/Loading";
+import { Toaster } from "react-hot-toast";
 
 const fakeResults = [
   {
@@ -336,6 +337,7 @@ const OverallPerformancePage = ({ studentId }) => {
 
   return (
     <div className="flex flex-col items-center h-dvh w-dvw overflow-y-scroll overflow-x-auto">
+      <Toaster position="top-right" reverseOrder={true} />
       <h1 className="text-2xl font-extrabold my-6 tracking-widest">
         Overall Performance
       </h1>
@@ -400,7 +402,7 @@ const OverallPerformancePage = ({ studentId }) => {
                     const percentage = (
                       (quiz.score / quiz.totalQuestions) *
                       100
-                    ).toFixed(2); 
+                    ).toFixed(2);
 
                     return (
                       <tr key={idx} className="text-lg">
