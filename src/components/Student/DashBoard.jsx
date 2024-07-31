@@ -4,19 +4,22 @@ import React, { useEffect, useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import Loading from "../Loading";
 
 const DashBoard = () => {
   const router = useRouter();
-
+  const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([]);
   
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true)
       try {
         const { data } = await axios.get("/api/student/quiz/getStudentQuiz");
-
         setCourses(data);
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         console.error("Error fetching data:", error);
       }
     };
@@ -24,31 +27,15 @@ const DashBoard = () => {
     fetchData();
   }, []);
 
-  // const [showKeyEntry, setShowKeyEntry] = useState(false);
-  // const [selectedQuizId, setSelectedQuizId] = useState(null);
-  // const [enteredKey, setEnteredKey] = useState("");
-  // const [errorMessage, setErrorMessage] = useState("");
-
-  // const handleQuizClick = (quizId) => {
-  //   setSelectedQuizId(quizId);
-  //   setShowKeyEntry(true);
-  // };
-
-  // const handleKeySubmit = async () => {
-  //   try {
-  //     // const { data } = await axios.post("student/quiz/checkKey", {
-  //     //   key: enteredKey,
-  //     //   quizId: selectedQuizId,
-  //     // });
-
-  //     router.push(`/student/quiz/${selectedQuizId}?key=${enteredKey}`);
-  //   } catch (error) {
-  //     setErrorMessage(error.response.data);
-  //   }
-  // };
-
-  if (!Array.isArray(courses) || courses.length === 0) {
-    return <p>No courses available</p>;
+  if (!courses.length) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && <div className=" text-[60px] font-extrabold tracking-widest text-button">No Quizzes Available</div>}
+        </div>
+      </>
+    );
   }
 
   return (
