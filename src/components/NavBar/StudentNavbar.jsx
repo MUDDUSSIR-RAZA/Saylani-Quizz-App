@@ -36,7 +36,7 @@ const StudentNavbar = () => {
   const handleLogout = async () => {
     try {
       await axios.post("/api/user/logout");
-      router.push("/auth/signup")
+      router.push("/auth/login")
       return;
     } catch (error) {
       console.error(error.response.data);
@@ -82,20 +82,20 @@ const StudentNavbar = () => {
               <div className="md:hidden block mr-2 text-xl font-semibold text-center ">
                 <div className="flex justify-around capitalize">
                   {links.map(({ link, id ,name }) => (
-                    <Link
-                      key={id}
-                      href={link}
-                      className="openNavbarLinks text-[#2c4a4f] hover:text-gray-700 ml-3 minLg:ml-11 bg-[#ffffff72] p-2 rounded-full px-4"
-                      id="openNavbarLinksRef"
-                    >
-                      {name}
-                    </Link>
+                   <Link
+                   key={id}
+                   href={link}
+                   className="openNavbarLinks text-[#2c4a4f] hover:text-[#4998a7] ease-in duration-150 ml-3 minLg:ml-11 bg-[#ffffff72] p-2 rounded-full px-4"
+                   id="openNavbarLinksRef"
+                 >
+                   {name}
+                 </Link>
                   ))}
                 </div>
               </div>
               <button
-                // onClick={handleLogout}
-                className="openNavbarLinks bg-[#ffffff72] p-2 rounded-full text-lg text-center minLg:mx-5 mr-16 minMd:mr-0 md:hidden px-4"
+                onClick={handleLogout}
+                className="openNavbarLinks bg-[#ffffff72] p-2 rounded-full text-center capitalize px-4 minLg:mx-5 mr-16 minMd:mr-0 md:hidden text-xl font-semibold text-[#752e2e] hover:text-[#ff4a4a]"
               >
                 Logout
               </button>
@@ -132,7 +132,7 @@ const StudentNavbar = () => {
             ))}
             <button
               onClick={handleLogout}
-              className="closeNavbarLinks bg-[#ffffff72] p-2 rounded-full text-lg text-center my-7 mx-14  minLg:mx-5 mr-16 minMd:mr-0  border-2 border-red-700"
+              className="closeNavbarLinks bg-[#ffffff72] p-2 rounded-full text-center my-11 mx-14 capitalize px-4 text-2xl font-semibold text-[#752e2e] hover:text-[#ff4a4a]"
             >
               Logout
             </button>
