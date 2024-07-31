@@ -30,7 +30,6 @@ const QuizPage = ({ quizId }) => {
           params: { quizId },
         });
         setQuizDetails(data);
-        console.log(data);
         setTimeLeft(quizDetails.questions[0].time_limit);
         console.log(quizDetails.questions);
       } catch (error) {
@@ -362,7 +361,7 @@ const QuizPage = ({ quizId }) => {
               >
                 {(value) => (
                   <CircularProgressbar
-                    value={(timeLeft / 30) * 100} // Calculate the percentage of time left
+                    value={(timeLeft / quizDetails.questions[currentQuestionIndex].time_limit) * 100} // Calculate the percentage of time left
                     text={`${timeLeft}`} // Display the current time left
                     styles={buildStyles({
                       pathColor: calculatePathColor(timeLeft), // Dynamically calculate path color
