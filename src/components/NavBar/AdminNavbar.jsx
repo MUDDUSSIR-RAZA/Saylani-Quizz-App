@@ -46,7 +46,7 @@ const AdminNavbar = () => {
   const handleLogout = async () => {
     try {
       await axios.post("/api/user/logout");
-      router.push("/auth/signup");
+      router.push("/auth/login");
       return;
     } catch (error) {
       console.error(error.response.data);
@@ -102,7 +102,7 @@ const AdminNavbar = () => {
                 </div>
               </div>
               <button
-                // onClick={handleLogout}
+                onClick={handleLogout}
                 className="openNavbarLinks bg-[#ffffff72] p-2 rounded-full text-center capitalize px-4 minLg:mx-5 mr-16 minMd:mr-0 xl:hidden text-xl font-semibold text-[#752e2e] hover:text-[#ff4a4a]"
               >
                 Logout
