@@ -73,7 +73,7 @@ const StudentNavbar = () => {
 
           <div className="flex items-center justify-between w-full">
             <div className="openNavbarLogo flex-shrink-0 flex items-center md:ml-7 ml-3">
-              <a href="/" className="text-gray-900 text-lg font-bold ">
+              <a href="/student/dashboard" className="text-gray-900 text-lg font-bold ">
                 Logo
               </a>
             </div>
