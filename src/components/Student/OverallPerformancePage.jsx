@@ -271,15 +271,19 @@ const fakeResults = [
 const OverallPerformancePage = () => {
   const [results, setResults] = useState([]);
   const [groupedResults, setGroupedResults] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true);
         const { data } = await axios.get("/api/student/getOverallPerformance");
         console.log(data);
-        setResults(fakeResults);
-        groupResultsByCourseAndBatch(fakeResults);
+        setResults(data);
+        groupResultsByCourseAndBatch(data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.error("Error fetching data:", error);
       }
     };
@@ -288,10 +292,10 @@ const OverallPerformancePage = () => {
 
   const groupResultsByCourseAndBatch = (results) => {
     const grouped = results.reduce((acc, result) => {
-      const key = `${result.quiz.course_name} - Batch ${result.batch}`;
+      const key = `${result.course_name} - Batch ${result.batch}`;
       if (!acc[key]) {
         acc[key] = {
-          course: result.quiz.course_name,
+          course: result.course_name,
           batch: result.batch,
           quizzes: [],
         };
@@ -329,8 +333,10 @@ const OverallPerformancePage = () => {
   if (!groupedResults.length) {
     return (
       <>
-        {" "}
-        <Loading />{" "}
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && <div className=" text-[60px] font-extrabold tracking-widest text-button">No Quizzes Attempted Yet</div>}
+        </div>
       </>
     );
   }
@@ -342,7 +348,6 @@ const OverallPerformancePage = () => {
         Overall Performance
       </h1>
       {groupedResults.map((group, index) => {
-        console.log(group);
         const aggregatedResult = calculateAggregatedResult(group.quizzes);
         return (
           <div
@@ -406,9 +411,7 @@ const OverallPerformancePage = () => {
 
                     return (
                       <tr key={idx} className="text-lg">
-                        <td className="border px-4 py-2">
-                          {quiz.quiz.quiz_name}
-                        </td>
+                        <td className="border px-4 py-2">{quiz.quiz_name}</td>
                         <td className="border px-4 py-2 text-center">
                           {quiz.score}
                         </td>
