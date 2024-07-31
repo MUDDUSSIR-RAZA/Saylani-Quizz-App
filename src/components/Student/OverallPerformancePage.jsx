@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Loading from "@/components/Loading";
 import { Toaster } from "react-hot-toast";
+import axios from "axios";
 
 const fakeResults = [
   {
@@ -267,24 +268,23 @@ const fakeResults = [
   },
 ];
 
-const OverallPerformancePage = ({ studentId }) => {
+const OverallPerformancePage = () => {
   const [results, setResults] = useState([]);
   const [groupedResults, setGroupedResults] = useState([]);
 
   useEffect(() => {
-    // Replace with actual fetch call
-    // const fetchResults = async () => {
-    //   const response = await fetch(`/api/get-results?studentId=${studentId}`);
-    //   const data = await response.json();
-    //   setResults(data);
-    //   groupResultsByCourseAndBatch(data);
-    // };
-    // fetchResults();
-
-    // Using fakeResults for demonstration
-    setResults(fakeResults);
-    groupResultsByCourseAndBatch(fakeResults);
-  }, [studentId]);
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get("/api/student/getOverallPerformance");
+        console.log(data);
+        setResults(fakeResults);
+        groupResultsByCourseAndBatch(fakeResults);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const groupResultsByCourseAndBatch = (results) => {
     const grouped = results.reduce((acc, result) => {
@@ -347,19 +347,19 @@ const OverallPerformancePage = ({ studentId }) => {
         return (
           <div
             key={index}
-            className="w-full max-w-[80%] backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6 md:w-11/12"
+            className="w-full max-w-[90%] backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6"
           >
-            <h2 className="text-3xl font-bold mb-4">
+            <h2 className="text-3xl font-bold mb-4 md:text-2xl">
               {group.course} - Batch {group.batch}
             </h2>
             <hr />
-            <div className="my-4 text-xl">
+            <div className="my-4 text-xl md:text-lg">
               <p className="my-2">
                 {" "}
                 <span className="font-semibold">
                   Total Quizzes Attempted:
                 </span>{" "}
-                <span className="text-2xl">
+                <span className="text-2xl md:text-xl">
                   {aggregatedResult.totalQuizzes}
                 </span>
               </p>
