@@ -33,7 +33,8 @@ const QuizPage = ({ quizId }) => {
         setTimeLeft(quizDetails.questions[0].time_limit);
         console.log(quizDetails.questions);
       } catch (error) {
-       router.push("/student/dashboard")
+      //  router.push("/student/dashboard")
+      console.log(error)
       }
     };
 
