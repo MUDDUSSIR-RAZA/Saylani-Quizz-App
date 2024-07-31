@@ -5,9 +5,9 @@ const profile = () => {
   return (
     <>
    <StudentNavbar />
+      <main className="pt-20 px-5">
         <ProfilePage />
-      {/* <main className="flex min-h-screen flex-col items-center justify-between py-24 px-5">
-      </main> */}
+      </main>
     </>
   )
 }
