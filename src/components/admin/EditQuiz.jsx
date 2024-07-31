@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../Loading";
 // import Adding from "../InPageLoader/Adding";
 
 const EditQuiz = ({ id }) => {
@@ -13,13 +14,16 @@ const EditQuiz = ({ id }) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
-        const response = await axios.get("/api/admin/quiz/getQuizById", {
+        const {data} = await axios.get("/api/admin/quiz/getQuizById", {
           params: { id },
         });
-        setInitialData(response.data);
-        setEditedData(response.data);
+        setInitialData(data);
+        setEditedData(data);
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         console.error("Error fetching data:", error);
       }
     };
@@ -47,10 +51,10 @@ const EditQuiz = ({ id }) => {
 
     if (editedData.displayQuestions < 10) {
       toast.error("Question count must be at least 10!");
-    } else if (editedData.displayQuestions > initialData.displayQuestions) {
+    } else if (editedData.displayQuestions > initialData.questions.length) {
       toast.error(
         `First add ${
-          editedData.displayQuestions - initialData.displayQuestions
+          editedData.displayQuestions - initialData.questions.length
         } more questions!`
       );
     } else {
@@ -72,6 +76,16 @@ const EditQuiz = ({ id }) => {
       }
     }
   };
+
+  if (loading) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
+           <Loading />
+        </div>
+      </>
+    );
+  }
 
   return (
     <section className="w-vwh h-dvh flex -z-99">
