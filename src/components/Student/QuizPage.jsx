@@ -20,7 +20,8 @@ const QuizPage = ({ quizId }) => {
   const [timeLeft, setTimeLeft] = useState();
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
-  const router = useRouter()
+  const router = useRouter();
+  const [isResultSubmitted, setIsResultSubmitted] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,8 +34,8 @@ const QuizPage = ({ quizId }) => {
         setTimeLeft(quizDetails.questions[0].time_limit);
         console.log(quizDetails.questions);
       } catch (error) {
-      //  router.push("/student/dashboard")
-      console.log(error)
+        //  router.push("/student/dashboard")
+        console.log(error);
       }
     };
 
@@ -118,9 +119,15 @@ const QuizPage = ({ quizId }) => {
 
   useEffect(() => {
     const handleVisibilityChange = () => {
-      if (document.hidden && quizStarted && !isQuizCompleted) {
+      if (
+        document.hidden &&
+        quizStarted &&
+        !isQuizCompleted &&
+        !isResultSubmitted
+      ) {
         setScore(0);
         submitResult();
+        setIsResultSubmitted(true);
         setIsQuizCompleted(true);
       }
     };
@@ -130,7 +137,7 @@ const QuizPage = ({ quizId }) => {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, [quizStarted, isQuizCompleted]);
+  }, [quizStarted, isQuizCompleted, isResultSubmitted]);
 
   useEffect(() => {
     if (isQuizCompleted) {
@@ -177,12 +184,12 @@ const QuizPage = ({ quizId }) => {
 
   // Effect to submit result once quiz is completed
   useEffect(() => {
-    if (isQuizCompleted) {
+    if (isQuizCompleted && !isResultSubmitted) {
       submitResult();
       setScore(score);
-      setUserAnswers({});
+      setIsResultSubmitted(true);
     }
-  }, [isQuizCompleted]);
+  }, [isQuizCompleted, isResultSubmitted]);
 
   const submitResult = async () => {
     try {
