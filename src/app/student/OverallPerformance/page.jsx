@@ -1,12 +1,16 @@
-import OverallPerformancePage from '@/components/Student/OverallPerformancePage'
-import React from 'react'
+import StudentNavbar from "@/components/NavBar/StudentNavbar";
+import OverallPerformancePage from "@/components/Student/OverallPerformancePage";
+import React from "react";
 
 const OverallPerformance = () => {
   return (
     <>
-    <OverallPerformancePage />
+      <StudentNavbar />
+      <main className="pt-20 px-5">
+        <OverallPerformancePage />
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default OverallPerformance
+export default OverallPerformance;
