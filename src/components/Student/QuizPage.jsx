@@ -30,6 +30,7 @@ const QuizPage = ({ quizId }) => {
           params: { quizId },
         });
         setQuizDetails(data);
+        console.log(data)
         setTimeLeft(quizDetails.questions[0].time_limit);
         console.log(quizDetails.questions);
       } catch (error) {
@@ -195,7 +196,7 @@ const QuizPage = ({ quizId }) => {
       const { data } = await axios.post("/api/student/quiz/submitResult", {
         userId: quizDetails.userId,
         course_name: quizDetails.course_name,
-        batch: quizDetails.course.batch,
+        batch: quizDetails.batch,
         quiz_name: quizDetails.quiz_name,
         totalQuestions: quizDetails.questions.length,
         score,
