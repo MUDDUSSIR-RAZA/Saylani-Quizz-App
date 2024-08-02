@@ -63,7 +63,6 @@ const EditQuiz = ({ id }) => {
         const { data } = await axios.patch("/api/admin/quiz/editQuiz", {
           _id: editedData._id,
           quiz_name: editedData.quiz_name,
-          key: editedData.key,
           displayQuestions: editedData.displayQuestions,
         });
         setLoading(false);
@@ -138,22 +137,7 @@ const EditQuiz = ({ id }) => {
               />
 
               <br />
-
-              <label htmlFor="key">
-                <b>Key:</b>
-              </label>
-              <input
-                type="text"
-                id="key"
-                value={editedData.key}
-                placeholder="**********"
-                autoComplete="off"
-                onChange={(e) => handleInputChange("key", e.target.value)}
-                className="bg-bgColor text-gray-900 text-sm rounded-lg block w-full p-2.5"
-                required
-              />
-
-              <br />
+              
 
               <label htmlFor="displayQuestions">
                 <b>Display Questions:</b>
