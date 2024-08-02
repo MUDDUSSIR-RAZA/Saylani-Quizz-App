@@ -11,7 +11,6 @@ import Creating from "../InPageLoader/Creating";
 
 const initialValues = {
   quiz_name: " ",
-  key: "",
   course_name: "",
   course_id: "",
 };
@@ -134,27 +133,7 @@ const CreateQuizz = ({ Courses }) => {
                     ""
                   )}
                 </div>
-
-                <div>
-                  <label
-                    htmlFor="key"
-                    className="block mb-2 text-sm font-medium text-gray-900"
-                  >
-                    Add Key
-                  </label>
-                  <input
-                    type="password"
-                    name="key"
-                    id="key"
-                    className="bg-bgColor border border-green-950 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
-                    placeholder="Quiz Key *****"
-                    required
-                    autoComplete="off"
-                    value={values.key}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </div>
+                
                 <button
                   disabled={loading}
                   type="submit"
