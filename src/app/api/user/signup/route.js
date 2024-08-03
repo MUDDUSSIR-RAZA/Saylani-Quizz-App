@@ -7,6 +7,7 @@ export async function POST(req) {
 
         try {
             const { data } = await axios.post(`${process.env.BACKEND_URL}/auth/signUp`, {...studentData});
+            console.log(studentData)
             return NextResponse.json(data)
         } catch (axiosError) {
             console.log(axiosError.response.data)
