@@ -143,7 +143,7 @@ const EditQuiz = ({ id }) => {
                 <b>Display Questions:</b>
               </label>
               <input
-                type="number"
+                type="Number"
                 id="displayQuestions"
                 value={editedData.displayQuestions}
                 placeholder="Minimum 10"
