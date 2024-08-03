@@ -13,7 +13,7 @@ const SignupPage = ({ Courses }) => {
     nic: "",
     password: "",
     email: "",
-    phone: "",
+    phone: "03",
     city: "",
     course_name: "",
     batch: "",
