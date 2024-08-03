@@ -39,7 +39,19 @@ const SignupPage = ({ Courses }) => {
           return prevStudentData;
         }
       }
+      
       const updatedStudentData = { ...prevStudentData, [name]: value };
+
+
+    if (name === "password") {
+      // Ensure the password field has a maximum length of 8 characters
+      if (value.length >= 8) {
+        return updatedStudentData;
+      } else {
+        // If password is invalid, return previous state without updating
+        return prevStudentData;
+      }
+    }
 
       if (name === "city") {
         const filteredCourses = courses.filter((course) =>
@@ -203,7 +215,7 @@ const SignupPage = ({ Courses }) => {
                     maxLength="11"
                     pattern="\d{11}" // Enforces only 11 digits
                     className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-                    />
+                  />
                 </div>
 
                 <div>
@@ -215,7 +227,6 @@ const SignupPage = ({ Courses }) => {
                     name="email"
                     value={studentData.email}
                     onChange={handleChange}
-                    maxLength="11"
                     required
                     className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                   />
@@ -227,6 +238,7 @@ const SignupPage = ({ Courses }) => {
                   <input
                     type="password"
                     name="password"
+                    minLength="8"
                     value={studentData.password}
                     onChange={handleChange}
                     required
