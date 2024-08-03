@@ -103,7 +103,7 @@ const AddCoursePage = ({ Courses }) => {
                   Batch:
                 </label>
                 <input
-                  type="number"
+                  type="Number"
                   value={newCourse.batch}
                   onChange={(e) =>
                     setNewCourse({
