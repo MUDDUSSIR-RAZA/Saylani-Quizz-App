@@ -282,7 +282,7 @@ const SignupPage = ({ Courses }) => {
                     Batch:
                   </label>
                   <input
-                    type="number"
+                    type="Number"
                     name="batch"
                     value={studentData.batch}
                     readOnly
