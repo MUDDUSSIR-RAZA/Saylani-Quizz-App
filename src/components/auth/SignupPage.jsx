@@ -42,17 +42,6 @@ const SignupPage = ({ Courses }) => {
       
       const updatedStudentData = { ...prevStudentData, [name]: value };
 
-
-    if (name === "password") {
-      // Ensure the password field has a maximum length of 8 characters
-      if (value.length >= 8) {
-        return updatedStudentData;
-      } else {
-        // If password is invalid, return previous state without updating
-        return prevStudentData;
-      }
-    }
-
       if (name === "city") {
         const filteredCourses = courses.filter((course) =>
           course.cities.includes(value)
