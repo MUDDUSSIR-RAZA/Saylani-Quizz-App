@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const SignupPage = ({Courses}) => {
+const SignupPage = ({ Courses }) => {
   const [courses, setCourses] = useState(Courses);
   const [isSend, setIsSend] = useState(false);
   const [studentData, setStudentData] = useState({
@@ -20,32 +20,46 @@ const SignupPage = ({Courses}) => {
   });
   const [filteredCourses, setFilteredCourses] = useState([]);
 
-
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-
+  
     setStudentData((prevStudentData) => {
       const updatedStudentData = { ...prevStudentData, [name]: value };
-
+  
+      if (name === "nic") {
+        if (/^\d{0,13}$/.test(value)) {
+          return updatedStudentData;
+        } else {
+          return prevStudentData;
+        }
+      }
+  
+      if (name === "phone") {
+        if (/^\d{0,11}$/.test(value)) {
+          return updatedStudentData;
+        } else {
+          return prevStudentData;
+        }
+      }
+  
       if (name === "city") {
         const filteredCourses = courses.filter((course) =>
           course.cities.includes(value)
         );
         setFilteredCourses(filteredCourses);
-
+  
         return {
           ...updatedStudentData,
           course_name: "",
           batch: "",
         };
       }
-
+  
       if (name === "course_name") {
         const selectedCourse = filteredCourses.find(
           (course) => course.course_name === value
         );
-
+  
         if (selectedCourse) {
           return {
             ...updatedStudentData,
@@ -53,10 +67,11 @@ const SignupPage = ({Courses}) => {
           };
         }
       }
-
+  
       return updatedStudentData;
     });
   };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,13 +93,17 @@ const SignupPage = ({Courses}) => {
       });
       toast.success(data);
       setIsSend(true);
-    } catch (error)  {
+    } catch (error) {
       toast.error(error.response.data);
     }
   };
 
   return (
-    <div className={`container mx-auto ${isSend && "h-dvh flex justify-center items-center"}`}>
+    <div
+      className={`container mx-auto ${
+        isSend && "h-dvh flex justify-center items-center"
+      }`}
+    >
       {isSend && (
         <div>
           <div className="backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl p-16 smm:px-2 smm:py-6">
@@ -165,6 +184,9 @@ const SignupPage = ({Courses}) => {
                     value={studentData.nic}
                     onChange={handleChange}
                     required
+                    minLength="13"
+                    maxLength="13"
+                    pattern="\d{13}" // Enforces only 13 digits
                     className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                   />
                 </div>
@@ -173,14 +195,18 @@ const SignupPage = ({Courses}) => {
                     Phone:
                   </label>
                   <input
-                    type="text"
+                    type="text" 
                     name="phone"
                     value={studentData.phone}
                     onChange={handleChange}
                     required
+                    minLength="11" 
+                    maxLength="11" 
+                    pattern="\d{11}" // Enforces only 11 digits
                     className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                   />
                 </div>
+
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Email:
@@ -258,7 +284,7 @@ const SignupPage = ({Courses}) => {
                     Batch:
                   </label>
                   <input
-                    type="text"
+                    type="number"
                     name="batch"
                     value={studentData.batch}
                     readOnly
