@@ -31,16 +31,28 @@ const SignupPage = ({ Courses }) => {
           return prevStudentData;
         }
       }
+     
+      const updatedStudentData = { ...prevStudentData, [name]: value };
 
       if (name === "phone") {
-        if (/^\d{0,11}$/.test(value)) {
-          return { ...prevStudentData, [name]: Number(value) };
+        // Ensure the phone field contains exactly 11 digits and starts with "03"
+        if (value.length < 3) {
+          // Prevent user from removing "03"
+          updatedStudentData.phone = "03";
+        } else if (!value.startsWith("03")) {
+          // Add "03" at the beginning if it doesn't start with "03"
+          updatedStudentData.phone = "03" + value.replace(/^0+/, "");
+        } else if (/^\d{0,11}$/.test(value)) {
+          // Allow only digits up to 11 characters
+          updatedStudentData.phone = value;
         } else {
+          // If phone number is invalid, return previous state without updating
           return prevStudentData;
         }
+  
+        return updatedStudentData;
       }
       
-      const updatedStudentData = { ...prevStudentData, [name]: value };
 
       if (name === "city") {
         const filteredCourses = courses.filter((course) =>
