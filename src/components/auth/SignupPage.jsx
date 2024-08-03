@@ -22,44 +22,43 @@ const SignupPage = ({ Courses }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     setStudentData((prevStudentData) => {
-      const updatedStudentData = { ...prevStudentData, [name]: value };
-  
       if (name === "nic") {
         if (/^\d{0,13}$/.test(value)) {
-          return updatedStudentData;
+          return { ...prevStudentData, [name]: Number(value) };
         } else {
           return prevStudentData;
         }
       }
-  
+
       if (name === "phone") {
         if (/^\d{0,11}$/.test(value)) {
-          return updatedStudentData;
+          return { ...prevStudentData, [name]: Number(value) };
         } else {
           return prevStudentData;
         }
       }
-  
+      const updatedStudentData = { ...prevStudentData, [name]: value };
+
       if (name === "city") {
         const filteredCourses = courses.filter((course) =>
           course.cities.includes(value)
         );
         setFilteredCourses(filteredCourses);
-  
+
         return {
           ...updatedStudentData,
           course_name: "",
           batch: "",
         };
       }
-  
+
       if (name === "course_name") {
         const selectedCourse = filteredCourses.find(
           (course) => course.course_name === value
         );
-  
+
         if (selectedCourse) {
           return {
             ...updatedStudentData,
@@ -67,11 +66,10 @@ const SignupPage = ({ Courses }) => {
           };
         }
       }
-  
+
       return updatedStudentData;
     });
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -195,13 +193,13 @@ const SignupPage = ({ Courses }) => {
                     Phone:
                   </label>
                   <input
-                    type="text" 
+                    type="text"
                     name="phone"
                     value={studentData.phone}
                     onChange={handleChange}
                     required
-                    minLength="11" 
-                    maxLength="11" 
+                    minLength="11"
+                    maxLength="11"
                     pattern="\d{11}" // Enforces only 11 digits
                     className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                   />
