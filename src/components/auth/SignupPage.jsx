@@ -202,7 +202,7 @@ const SignupPage = ({ Courses }) => {
                     required
                     minLength="11"
                     maxLength="11"
-                    pattern="\d{11}" // Enforces only 11 digits
+                    pattern="03\d{9}" // Enforces starting with "03" and having exactly 11 digits
                     className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                   />
                 </div>
