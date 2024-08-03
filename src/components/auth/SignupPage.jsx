@@ -73,6 +73,7 @@ const SignupPage = ({ Courses }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // console.log(studentData)
     try {
       const { data } = await axios.post("/api/user/signup", {
         studentData,
@@ -202,7 +203,7 @@ const SignupPage = ({ Courses }) => {
                     maxLength="11"
                     pattern="\d{11}" // Enforces only 11 digits
                     className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
-                  />
+                    />
                 </div>
 
                 <div>
@@ -214,6 +215,7 @@ const SignupPage = ({ Courses }) => {
                     name="email"
                     value={studentData.email}
                     onChange={handleChange}
+                    maxLength="11"
                     required
                     className="form-input mt-1 block w-full backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-inner p-2"
                   />
