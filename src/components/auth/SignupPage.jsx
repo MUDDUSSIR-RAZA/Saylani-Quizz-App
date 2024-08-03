@@ -92,17 +92,17 @@ const SignupPage = ({ Courses }) => {
         studentData,
       });
 
-      setStudentData({
-        name: "",
-        fathername: "",
-        nic: "",
-        password: "",
-        email: "",
-        phone: "",
-        city: "",
-        course_name: "",
-        batch: "",
-      });
+      // setStudentData({
+      //   name: "",
+      //   fathername: "",
+      //   nic: "",
+      //   password: "",
+      //   email: "",
+      //   phone: "",
+      //   city: "",
+      //   course_name: "",
+      //   batch: "",
+      // });
       toast.success(data);
       setIsSend(true);
     } catch (error) {
