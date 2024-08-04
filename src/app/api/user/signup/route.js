@@ -5,7 +5,7 @@ export async function POST(req) {
     try {
         const {studentData} = await req.json()
         try {
-            const { data } = await axios.post(`${process.env.BACKEND_URL}/auth/admin/signUp`, {...studentData});
+            const { data } = await axios.post(`${process.env.BACKEND_URL}/auth/signUp`, {...studentData});
             return NextResponse.json(data)
         } catch (axiosError) {
             return NextResponse.json(axiosError.response.data, { status: 400 })
