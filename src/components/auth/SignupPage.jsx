@@ -86,7 +86,6 @@ const SignupPage = ({ Courses }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(studentData)
     try {
       const { data } = await axios.post("/api/user/signup", {
         studentData,
