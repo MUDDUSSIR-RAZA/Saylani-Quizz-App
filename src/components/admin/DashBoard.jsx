@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
+import Toggle from "../Toggle";
 
 const DashBoard = ({ quizzes }) => {
   // Check if courses is defined and is an array
@@ -49,45 +50,10 @@ const DashBoard = ({ quizzes }) => {
             </section>
           </div>
         ))}
+        <Toggle />
       </div>
     </>
   );
 };
 
 export default DashBoard;
-
-// import { card } from "@/css/quizList.module.css";
-
-// const quizList = ({ course }) => {
-//   return (
-//     <>
-//       {course.map((course) => {
-//         <section className={`backdrop-blur-sm ${card}`}>
-//           <header>
-//             <p>{course.course_name}</p>
-//             <a href="#" className=" text-[#18af94]">
-//               Details
-//             </a>
-//           </header>
-//           <main>
-//             <p>
-//               {course.questions.length} <a href="#">Questions</a>
-//             </p>
-//           </main>
-//           <footer className="relative">
-//             {course.quizOpen ? (
-//               <p className="text-green-800"> Quiz Open </p>
-//             ) : (
-//               <p className="text-[#ff0000]"> Quiz Closed </p>
-//             )}
-//             <a href="#" className="absolute right-6">
-//               Edit
-//             </a>
-//           </footer>
-//         </section>;
-//       })}
-//     </>
-//   );
-// };
-
-// export default QuizList;
