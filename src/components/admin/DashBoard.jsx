@@ -46,11 +46,11 @@ const DashBoard = ({ quizzes }) => {
                 >
                   Edit
                 </Link>
+                <Toggle />
               </footer>
             </section>
           </div>
         ))}
-        <Toggle />
       </div>
     </>
   );
