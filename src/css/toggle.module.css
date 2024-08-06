@@ -4,8 +4,8 @@
   --dark: #121212;
   --red: #ff0000;
   --gray: #444141;
-  --width: 30px; /* Adjusted width */
-  --height: 30px; /* Adjusted height */
+  --width: 20px; /* Adjusted width */
+  --height: 20px; /* Adjusted height */
 
   position: relative;
   z-index: 10;
@@ -50,8 +50,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-  width: calc(100% + 1rem);
-  height: calc(100% + 1rem);
+  width: calc(100% + .7rem);
+  height: calc(100% + .7rem);
   background-color: var(--gray);
 
   border: 1px solid #777777;
@@ -137,7 +137,7 @@
 }
 
 .cont-icon .icon {
-  width: 0.8rem; /* Adjusted icon size */
+  width: 0.7rem; /* Adjusted icon size */
   fill: var(--light);
 }
 
