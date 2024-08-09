@@ -27,7 +27,7 @@ export async function middleware(request) {
         try {
             const secretKey = new TextEncoder().encode(process.env.SECRET_KEY);
 
-            // const { payload } = await jose.jwtVerify(token, secretKey)
+            const { payload } = await jose.jwtVerify(token, secretKey)
             
             // console.log(payload.role)
 
