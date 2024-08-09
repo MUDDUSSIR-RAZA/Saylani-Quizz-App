@@ -1,20 +1,22 @@
+import axios from 'axios';
 import { NextResponse } from 'next/server'
 const jwt = require("jsonwebtoken");
+const jose = require('jose')
 
 
 
 export async function middleware(request) {
     const path = request.nextUrl.pathname
 
-    const isPublicPath = path === "/auth/signup" || path === "/auth/login"
+    // const isPublicPath = path === "/auth/signup" || path === "/auth/login"
 
-    const isAdminPath = path === '/admin/dashboard' || path === '/admin/addBulkQuestion' || path === '/admin/createquiz' || path === '/admin/addQuestion' || path === '/admin/requests' || path === '/admin/editquiz'
+    // const isAdminPath = path === '/admin/dashboard' || path === '/admin/addBulkQuestion' || path === '/admin/createquiz' || path === '/admin/addQuestion' || path === '/admin/requests' || path === '/admin/editquiz'
 
-    const isStudentPath = path === '/admin/dashboard' || path === '/student/OverallPerformance' || path === '/student/profile'
+    // const isStudentPath = path === '/admin/dashboard' || path === '/student/OverallPerformance' || path === '/student/profile'
 
     const token = request.cookies.get("token")?.value || ''
 
-    const verify = await jwt.verify(token, process.env.SECRET_KEY);
+    // const verify = await jwt.verify(token, process.env.SECRET_KEY);
 
     // if (isPublicPath && token) {
     //     return NextResponse.redirect(new URL("/", request.url))
@@ -25,9 +27,25 @@ export async function middleware(request) {
     // }
 
 
-    console.log("first token", token)
-    console.log("first path", path)
-    console.log("first verify", verify)
+    if (token) {
+        try {
+            // const secretKey = new TextEncoder().encode(process.env.SECRET_KEY);
+
+            // const { payload } = await jose.jwtVerify(token, secretKey)
+            
+            // console.log(payload.role)
+
+            // Redirect users with valid tokens away from public paths
+            // if (isPublicPath) {
+            //     return NextResponse.redirect(new URL('/', request.url));
+            // }
+        } catch (error) {
+            console.error('JWT verification failed:', error.message);
+            // return NextResponse.redirect(new URL('/auth/login', request.url));
+        }
+    } else {
+        console.log('No token provided');
+    }
 
     return;
 }
