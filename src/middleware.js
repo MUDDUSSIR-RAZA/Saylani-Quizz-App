@@ -29,7 +29,7 @@ export async function middleware(request) {
 
             const { payload } = await jose.jwtVerify(token, secretKey)
             
-            // console.log(payload.role)
+            console.log(payload.role)
 
             // Redirect users with valid tokens away from public paths
             // if (isPublicPath) {
