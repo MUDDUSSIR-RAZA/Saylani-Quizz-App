@@ -13,7 +13,6 @@ export async function middleware(request) {
 
     const token = request.cookies.get("token")?.value || ''
 
-    const verify = await jwt.verify(token, process.env.SECRET_KEY);
 
     // if (isPublicPath && token) {
     //     return NextResponse.redirect(new URL("/", request.url))
