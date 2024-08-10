@@ -27,9 +27,9 @@ export async function middleware(request) {
              else if (!isStudentPath && role == "student") {
                 return NextResponse.redirect(new URL('/student/dashboard', request.url));
             }
-            //  else if (role != "student" && role != "admin") {
-            //     return NextResponse.redirect(new URL('/auth/login', request.url));
-            // } 
+             else if (role != "student" && role != "admin") {
+                return NextResponse.redirect(new URL('/auth/login', request.url));
+            } 
         } catch (error) {
             console.error('JWT verification failed:', error.message);
             return NextResponse.redirect(new URL('/auth/login', request.url));
