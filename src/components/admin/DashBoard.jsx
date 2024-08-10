@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
-import Toggle from "../Toggle";
 
 const DashBoard = ({ quizzes }) => {
   // Check if courses is defined and is an array
