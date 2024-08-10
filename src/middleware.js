@@ -46,7 +46,7 @@ export async function middleware(request) {
         }
     } else {
         console.log('No token provided');
-        // return NextResponse.redirect(new URL('/auth/login', request.url));
+        return NextResponse.redirect(new URL('/auth/login', request.url));
     }
 
     return;
