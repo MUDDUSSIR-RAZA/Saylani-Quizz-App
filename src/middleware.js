@@ -24,9 +24,10 @@ export async function middleware(request) {
             if (!isAdminPath && role == "admin") {
                 return NextResponse.redirect(new URL('/admin/dashboard', request.url));
             }
-            //  else if (!isStudentPath && role == "student") {
-            //     return NextResponse.redirect(new URL('/student/dashboard', request.url));
-            // } else if (role != "student" && role != "admin") {
+             else if (!isStudentPath && role == "student") {
+                return NextResponse.redirect(new URL('/student/dashboard', request.url));
+            }
+            //  else if (role != "student" && role != "admin") {
             //     return NextResponse.redirect(new URL('/auth/login', request.url));
             // } 
         } catch (error) {
