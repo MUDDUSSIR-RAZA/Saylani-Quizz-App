@@ -29,7 +29,6 @@ export async function middleware(request) {
                 return NextResponse.redirect(new URL('/auth/login', request.url));
             }
         } catch (error) {
-            console.error('JWT verification failed:', error.message);
             if (!isPublicPath) {
                 return NextResponse.redirect(new URL('/auth/login', request.url));
             }
