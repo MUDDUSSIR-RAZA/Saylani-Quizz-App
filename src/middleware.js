@@ -16,8 +16,6 @@ export async function middleware(request) {
     const token = request.cookies.get("token")?.value || ''
 
 
-
-
     if (token) {
         try {
             const secretKey = new TextEncoder().encode(process.env.SECRET_KEY);
