@@ -31,7 +31,7 @@ export async function middleware(request) {
             const { payload } = await jose.jwtVerify(token, secretKey)
             const role = payload.role
 
-            // console.log(role)
+            console.log(role)
 
             // if (!isAdminPath && role == "admin") {
             //     return NextResponse.redirect(new URL('/admin/dashboard', request.url));
