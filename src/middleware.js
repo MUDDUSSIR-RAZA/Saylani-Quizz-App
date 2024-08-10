@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server'
 const jose = require('jose')
 
-
-
 export async function middleware(request) {
     const path = request.nextUrl.pathname
 
