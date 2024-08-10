@@ -35,7 +35,6 @@ export async function middleware(request) {
             }
         }
     } else {
-        console.log('No token provided');
         if (!isPublicPath) {
             return NextResponse.redirect(new URL('/auth/login', request.url));
         }
