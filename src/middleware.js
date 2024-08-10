@@ -30,7 +30,9 @@ export async function middleware(request) {
             }
         } catch (error) {
             console.error('JWT verification failed:', error.message);
-            return NextResponse.redirect(new URL('/auth/login', request.url));
+            if (!isPublicPath) {
+                return NextResponse.redirect(new URL('/auth/login', request.url));
+            }
         }
     } else {
         console.log('No token provided');
