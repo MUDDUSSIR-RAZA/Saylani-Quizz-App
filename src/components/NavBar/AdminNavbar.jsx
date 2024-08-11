@@ -12,7 +12,6 @@ const AdminNavbar = () => {
   const [nav, setNav] = useState(false);
   const handleToggle = () => {
     setNav(!nav);
-    // }
   };
 
   const links = [
