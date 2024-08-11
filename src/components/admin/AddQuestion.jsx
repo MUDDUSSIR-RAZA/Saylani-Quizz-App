@@ -13,6 +13,7 @@ const AddQuestion = ({ quizzes }) => {
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [time_limit, setTimeLimit] = useState(30);
+  const [quizzes, setQuizzes] = useState([]);
   const router =useRouter()
 
   useEffect(() => {
