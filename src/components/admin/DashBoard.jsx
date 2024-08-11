@@ -17,6 +17,19 @@ const DashBoard = ({ quizzes }) => {
     );
   }
 
+  const handleDelete = async (_id) => {
+    try {
+      console.log(_id)
+      // const { data } = await axios.patch("/api/admin/quiz/deleteQuiz", {
+        
+      // });
+      // toast.success(data);
+      // router.push("/admin/dashboard");
+    } catch (error) {
+      toast.error(error.response.data || "Error updating data.");
+    }
+  };
+
   if (!quizzes) {
     return (
       <>
@@ -35,7 +48,7 @@ const DashBoard = ({ quizzes }) => {
             <section className={` ${card}`}>
               <header>
                 <p>{quiz.quiz_name}</p>
-                <a href="#" className="text-[#893232]">
+                <a onClick={() => {handleDelete(quiz._id)}} className="text-[#893232]">
                   Delete
                 </a>
               </header>
