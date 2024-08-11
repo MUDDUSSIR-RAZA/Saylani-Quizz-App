@@ -2,7 +2,6 @@
 
 import RequestPage from "@/components/admin/RequestPage";
 import AdminNavbar from "@/components/NavBar/AdminNavbar";
-import axios from "axios";
 import React from "react";
 
 const requests = async () => {
