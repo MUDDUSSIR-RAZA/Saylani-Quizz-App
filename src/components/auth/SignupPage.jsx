@@ -5,7 +5,7 @@ import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 const SignupPage = () => {
-  const [courses, setCourses] = useState();
+  const [courses, setCourses] = useState([]);
   const [isSend, setIsSend] = useState(false);
   const [studentData, setStudentData] = useState({
     name: "",
@@ -24,6 +24,7 @@ const SignupPage = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`/api/admin/courses/getCourses`);
+        console.log("first " , data)
         setCourses(data);
       } catch (error) {
         toast.error(error.response.data);
