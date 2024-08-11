@@ -21,6 +21,7 @@ const AddCoursePage = ({ Courses }) => {
       toast.error(error.response.data);
     }
   };
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
