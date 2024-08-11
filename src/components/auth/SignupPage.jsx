@@ -24,7 +24,6 @@ const SignupPage = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`/api/admin/courses/getCourses`);
-        console.log("first " , data)
         setCourses(data);
       } catch (error) {
         toast.error(error.response.data);
