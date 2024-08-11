@@ -11,7 +11,6 @@ const ProfilePage = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get("/api/student/profile/getProfile");
-        console.log(data)
         setStudent(data);
       } catch (error) {
         console.error("Error fetching data:", error);
