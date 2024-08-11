@@ -16,14 +16,15 @@ const EditQuiz = ({ id }) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const {data} = await axios.get("/api/admin/quiz/getQuizById", {
+        const { data } = await axios.get("/api/admin/quiz/getQuizById", {
           params: { id },
         });
         setInitialData(data);
+        console.log(data);
         setEditedData(data);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
         console.error("Error fetching data:", error);
       }
     };
@@ -38,7 +39,7 @@ const EditQuiz = ({ id }) => {
     };
 
     setEditedData(newEditedData);
-
+    console.log(newEditedData);
     const hasChanges = Object.keys(newEditedData).some(
       (key) => newEditedData[key] !== initialData[key]
     );
@@ -80,7 +81,7 @@ const EditQuiz = ({ id }) => {
     return (
       <>
         <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
-           <Loading />
+          <Loading />
         </div>
       </>
     );
@@ -99,7 +100,30 @@ const EditQuiz = ({ id }) => {
               >
                 X
               </a>
-              <center>Quiz Name</center>
+              <center>
+              <div className="flex justify-center">
+                <label htmlFor="isPublished" className="font-bold mx-2">
+                  Publish Quiz:
+                </label>
+                <div className="toggle-cont">
+                  <input
+                    type="checkbox"
+                    id="isPublished"
+                    className="toggle-input"
+                    checked={editedData.quizOpen}
+                    onChange={(e) =>
+                      handleInputChange("quizOpen", e.target.checked)
+                    }
+                  />
+                  <label htmlFor="isPublished" className="toggle-label">
+                    <span className="cont-icon">
+                      <div className="sparkle" />
+                      <div className="icon"></div>
+                    </span>
+                  </label>
+                </div>
+              </div>
+              </center>
             </h1>
 
             <br />
@@ -137,7 +161,6 @@ const EditQuiz = ({ id }) => {
               />
 
               <br />
-              
 
               <label htmlFor="displayQuestions">
                 <b>Display Questions:</b>
@@ -154,6 +177,11 @@ const EditQuiz = ({ id }) => {
                 className="bg-bgColor text-gray-900 text-sm rounded-lg block w-full p-2.5 "
                 required
               />
+
+              <br />
+              <br />
+
+              
 
               <br />
               <br />
