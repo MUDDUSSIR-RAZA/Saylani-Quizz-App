@@ -16,7 +16,6 @@ const DashBoard = () => {
         const { data } = await axios.get(
           `/api/admin/quiz/getAllQuiz`
         );
-        console.log("first " , data)
         setQuizzes(data);
       } catch (error) {
         toast.error(error.response.data);
