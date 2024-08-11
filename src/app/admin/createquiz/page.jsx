@@ -7,7 +7,7 @@ const createquiz = async () => {
     <>
       <div className="overflow-hidden w-dvw h-dvh" >
         <AdminNavbar />
-          <CreateQuizz Courses={props} />
+          <CreateQuizz />
       </div>
     </>
   );
