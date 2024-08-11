@@ -19,26 +19,6 @@ async function getRequests() {
     };
   }
 }
-// async function getRequests() {
-//   try {
-//     const { data } = await axios.get(
-//       `${process.env.BACKEND_URL}/admin/getStudentRequests`
-//     );
-//     return {
-//       props: {
-//         data,
-//         error: null,
-//       },
-//     };
-//   } catch (axiosError) {
-//     return {
-//       props: {
-//         data: null,
-//         error: axiosError.message,
-//       },
-//     };
-//   }
-// }
 
 const requests = async () => {
   const { props } = await getRequests();
