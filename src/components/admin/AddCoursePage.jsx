@@ -1,25 +1,11 @@
 "use client";
+
 import axios from "axios";
-// const mongoose = require('mongoose');
-// const Schema = mongoose.Schema;
-
-// const adminCourseSchema = new Schema({
-//   course_name: { type: String, required: true },
-//   batches: { type: [String], required: true },
-//   cities: { type: [String], required: true }
-// });
-
-// const AdminCourse = mongoose.model('AdminCourse', adminCourseSchema);
-
-// module.exports = AdminCourse;
-
-// admin-page.js
-// admin-page.js
-
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const AddCoursePage = ({ Courses }) => {
+  console.log(Courses)
   const [courses, setCourses] = useState(Courses);
   const [newCourse, setNewCourse] = useState({
     course_name: "",
