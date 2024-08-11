@@ -6,7 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const AddCoursePage = ({ Courses }) => {
   console.log(Courses)
-  const [courses, setCourses] = useState(Courses);
+  const [courses, setCourses] = useState([]);
   const [newCourse, setNewCourse] = useState({
     course_name: "",
     batch: "",
@@ -21,6 +21,18 @@ const AddCoursePage = ({ Courses }) => {
       toast.error(error.response.data);
     }
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`/api/admin/courses/getCourses`);
+        setCourses(data);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleCourseSubmit = async (e) => {
     e.preventDefault();
