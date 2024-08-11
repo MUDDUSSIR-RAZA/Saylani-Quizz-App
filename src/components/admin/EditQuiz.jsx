@@ -1,4 +1,4 @@
-"use client"; // pages/admin/edit-detail.js
+"use client"; 
 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
