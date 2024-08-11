@@ -1,6 +1,5 @@
 import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import BulkUploadQuestions from "@/components/admin/BulkUploadQuestions";
-import axios from "axios";
 import React from "react";
 
 const page = async () => {
