@@ -11,9 +11,10 @@ export async function POST(req) {
             );
         return NextResponse.json(data);
         } catch (axiosError) {
+            console.log(axiosError.response.data)
             return NextResponse.json(axiosError.response.data, { status: 400 });
         }
     } catch (axiosError) {
-        return NextResponse.json("axiosError.response.data", { status: 400 });
+        return NextResponse.json(axiosError.response.data, { status: 400 });
     }
 }
