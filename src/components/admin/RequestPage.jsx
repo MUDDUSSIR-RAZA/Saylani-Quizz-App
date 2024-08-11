@@ -4,15 +4,15 @@ import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiFillEye } from "react-icons/ai";
 
-const RequestPage = ({ initialData }) => {
+const RequestPage = () => {
   const [selectedStudentId, setSelectedStudentId] = useState(null);
-  const [data, setUpdateData] = useState(initialData);
+  const [data, setUpdateData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/admin/getStudentRequests`
+          `/api/admin/studentRequest/getStudentRequests`
         );
         setUpdateData(data);
       } catch (error) {
