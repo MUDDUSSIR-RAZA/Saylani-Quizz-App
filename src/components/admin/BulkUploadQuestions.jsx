@@ -15,7 +15,7 @@ const BulkUploadQuestions = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+          `/api/student/quiz/getAllQuiz`
         );
         setQuizzes(data);
       } catch (error) {
