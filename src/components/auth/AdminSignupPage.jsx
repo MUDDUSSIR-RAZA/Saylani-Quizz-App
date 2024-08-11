@@ -27,7 +27,6 @@ const AdminSignupPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
     try {
       setLoading(true);
       const { data } = await axios.post("/api/user/adminSignup", values, {
