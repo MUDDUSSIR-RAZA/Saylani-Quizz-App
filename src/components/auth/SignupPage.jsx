@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const SignupPage = ({ Courses }) => {
-  const [courses, setCourses] = useState(Courses);
+const SignupPage = () => {
+  const [courses, setCourses] = useState();
   const [isSend, setIsSend] = useState(false);
   const [studentData, setStudentData] = useState({
     name: "",
@@ -19,6 +19,19 @@ const SignupPage = ({ Courses }) => {
     batch: "",
   });
   const [filteredCourses, setFilteredCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`/api/admin/courses/getCourses`);
+        setCourses(data);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
