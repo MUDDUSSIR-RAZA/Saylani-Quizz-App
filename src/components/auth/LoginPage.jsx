@@ -119,12 +119,12 @@ const LoginPage = () => {
                   {loading ? <LogingIn /> : "Login"}
                 </button>
               </div>
-              <div className="text-sm text-center">
+              <div className="text-sm text-center">Don't have an account?
                 <a
                   href="/auth/signup"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  Don't have an account? Signup here
+                  {" "} Signup here
                 </a>
               </div>
             </form>
