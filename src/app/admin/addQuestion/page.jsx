@@ -7,7 +7,7 @@ const page = async () => {
     <>
       <AdminNavbar />
       <main className="items-center justify-between py-24 -z-30">
-        <AddQuestion quizzes={props}  />
+        <AddQuestion />
       </main>
     </>
   );
