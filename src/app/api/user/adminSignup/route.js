@@ -5,7 +5,6 @@ export async function POST(req) {
 
     try {
         const admin = await req.json()
-        console.log(admin)
         try {
             const { data } = await axios.post(`${process.env.BACKEND_URL}/auth/admin/signUp`, {
                 ...admin
