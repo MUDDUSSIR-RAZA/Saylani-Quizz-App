@@ -8,15 +8,12 @@ export async function POST(req) {
         console.log(admin)
         try {
             const { data } = await axios.post(`${process.env.BACKEND_URL}/auth/admin/signUp`, {
-              ...admin
+                ...admin
             });
-            // const response = NextResponse.json({ message: "Login Succesfuly", success: true })
-            // response.cookies.set("token", data, { httpOnly: true })
-            // return response
+            return NextResponse.json(data)
         } catch (axiosError) {
             return NextResponse.json(axiosError.response.data, { status: 400 })
         }
-        return NextResponse.json("data")
     } catch (axiosError) {
         return NextResponse.json(error)
     }
