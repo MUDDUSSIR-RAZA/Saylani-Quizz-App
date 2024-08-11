@@ -5,6 +5,7 @@ import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
 import Loading from "../Loading";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const DashBoard = ({ quizzes }) => {
   // Check if courses is defined and is an array
@@ -20,13 +21,13 @@ const DashBoard = ({ quizzes }) => {
 
   const handleDelete = async (_id) => {
     try {
-      const { data } = await axios.delete("/api/admin/quiz/deleteQuiz", {
+      const { data } = await axios.post("/api/admin/quiz/deleteQuiz", {
         _id,
       });
       // toast.success(data);
       // router.push("/admin/dashboard");
     } catch (error) {
-      toast.error(error.response.data || "Error updating data.");
+      // toast.error(error.response.data || "Error updating data.");
     }
   };
 
