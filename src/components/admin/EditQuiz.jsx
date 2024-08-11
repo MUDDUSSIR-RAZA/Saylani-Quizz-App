@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "../Loading";
+import { useRouter } from "next/navigation";
 
 const EditQuiz = ({ id }) => {
   const [loading, setLoading] = useState(false);
   const [initialData, setInitialData] = useState({});
   const [editedData, setEditedData] = useState({});
   const [isEdited, setIsEdited] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -70,6 +72,7 @@ const EditQuiz = ({ id }) => {
         toast.success(data);
         setInitialData(editedData);
         setIsEdited(false);
+        router.push("/")
       } catch (error) {
         toast.error(error.response.data || "Error updating data.");
         setLoading(false);
