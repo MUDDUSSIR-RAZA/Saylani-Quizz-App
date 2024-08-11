@@ -1,12 +1,27 @@
 "use client";
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiFillEye } from "react-icons/ai";
 
 const RequestPage = ({ initialData }) => {
   const [selectedStudentId, setSelectedStudentId] = useState(null);
   const [data, setUpdateData] = useState(initialData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+        );
+        setQuizzes(data);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const getUpdateData = async () => {
     try {
