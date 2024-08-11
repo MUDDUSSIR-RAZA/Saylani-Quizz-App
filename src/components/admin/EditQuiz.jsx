@@ -72,7 +72,7 @@ const EditQuiz = ({ id }) => {
         toast.success(data);
         setInitialData(editedData);
         setIsEdited(false);
-        router.push("/")
+        router.push("/admin/dashboard")
       } catch (error) {
         toast.error(error.response.data || "Error updating data.");
         setLoading(false);
