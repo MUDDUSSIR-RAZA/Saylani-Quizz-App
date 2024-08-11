@@ -4,7 +4,7 @@ const jose = require('jose')
 export async function middleware(request) {
     const path = request.nextUrl.pathname
 
-    const isPublicPath = path === "/auth/signup" || path === "/auth/login"
+    const isPublicPath = path === "/auth/signup" || path === "/auth/login" || path === "/auth/admin/signup"
 
     const isAdminPath = path === '/admin/dashboard' || path === '/admin/addBulkQuestion' || path === '/admin/createquiz' || path === '/admin/addQuestion' || path === '/admin/requests' || path === '/admin/editquiz'
 
