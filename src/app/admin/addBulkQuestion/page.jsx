@@ -3,7 +3,6 @@ import BulkUploadQuestions from "@/components/admin/BulkUploadQuestions";
 import React from "react";
 
 const page = async () => {
-  const { props } = await getAllQuizzes();
   return (
     <>
       <div className="overflow-hidden w-dvw h-dvh">
