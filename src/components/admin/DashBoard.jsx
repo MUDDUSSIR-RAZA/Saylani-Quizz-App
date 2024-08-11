@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
 import Loading from "../Loading";
