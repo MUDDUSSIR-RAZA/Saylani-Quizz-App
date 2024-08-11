@@ -12,7 +12,7 @@ const RequestPage = ({ initialData }) => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.BACKEND_URL}/admin/getStudentRequests`
+          `/api/admin/getStudentRequests`
         );
         setUpdateData(data);
       } catch (error) {
