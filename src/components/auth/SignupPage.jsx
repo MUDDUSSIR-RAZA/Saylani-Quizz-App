@@ -311,6 +311,14 @@ const SignupPage = ({ Courses }) => {
               >
                 Sign Up
               </button>
+            <div className="text-lg text-center">Already Signup?
+                <a
+                  href="/auth/login"
+                  className="font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                   {" "}Sign in
+                </a>
+              </div>
             </div>
           </form>
         </div>
