@@ -5,21 +5,6 @@ import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import axios from "axios";
 import React from "react";
 
-async function getRequests() {
-  try {
-    const { data } = await axios.get(
-      `${process.env.BACKEND_URL}/admin/getStudentRequests`
-    );
-    return {
-      props: data,
-    };
-  } catch (axiosError) {
-    return {
-      props: axiosError.message,
-    };
-  }
-}
-
 const requests = async () => {
   const { props } = await getRequests();
   return (
