@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import EditQuiz from '@/components/admin/EditQuiz'
-import React from 'react'
+import EditQuiz from "@/components/admin/EditQuiz";
+import React from "react";
 
-const editQuiz = ({params}) => {
+const editQuiz = ({ params }) => {
   return (
     <>
-    <EditQuiz id={params.id} />
+      <EditQuiz id={params.id} />
     </>
-  )
-}
+  );
+};
 
-export default editQuiz
+export default editQuiz;
