@@ -27,6 +27,9 @@ const AddQuestion = ({ quizzes }) => {
       }
     };
 
+    fetchData();
+  }, []);
+
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
     newOptions[index] = value;
