@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
+import Loading from "../Loading";
 
 const DashBoard = ({ quizzes }) => {
   // Check if courses is defined and is an array
@@ -13,6 +14,16 @@ const DashBoard = ({ quizzes }) => {
           Quizzes Not Available
         </h1>
       </div>
+    );
+  }
+
+  if (!quizzes) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
+          <Loading />
+        </div>
+      </>
     );
   }
 
