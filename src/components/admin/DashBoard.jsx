@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
 import Loading from "../Loading";
+import toast from "react-hot-toast";
 
 const DashBoard = ({ quizzes }) => {
   // Check if courses is defined and is an array
