@@ -10,7 +10,6 @@ const AdminNavbar = () => {
   const router = useRouter();
 
   const [nav, setNav] = useState(false);
-  const [loading, setLoading] = useState(false);
   
   const handleToggle = () => {
     setNav(!nav);
