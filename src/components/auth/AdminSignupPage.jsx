@@ -166,14 +166,15 @@ const AdminSignupPage = () => {
                 //  {loading ? <LogingIn /> : "Login"}
                 </button>
               </div>
-              <div className="text-sm text-center">Signup as a Student!?
+              <div className="text-lg text-center">Already Signup?
                 <a
-                  href="/auth/signup"
+                  href="/auth/login"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                  {" "} Signup here
+                   {" "}Sign in
                 </a>
               </div>
+            </div>
             </form>
           </div>
         </div>
