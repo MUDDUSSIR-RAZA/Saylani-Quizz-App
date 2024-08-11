@@ -1,7 +1,7 @@
 "use client";
 
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
 const AddCoursePage = ({ Courses }) => {
