@@ -7,6 +7,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import LogingIn from "@/components/InPageLoader/LogingIn";
+import SigningUp from "../InPageLoader/SigningUp";
 
 const initialValues = {
   name: "",
@@ -163,7 +164,7 @@ const AdminSignupPage = () => {
                   }`}
                 >
 "Login"
-                //  {loading ? <LogingIn /> : "Login"}
+                  {loading ? <SigningUp /> : "Login"}
                 </button>
               </div>
               <div className="text-lg text-center">Already Signup?
