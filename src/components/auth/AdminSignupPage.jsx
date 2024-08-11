@@ -57,7 +57,7 @@ const AdminSignupPage = () => {
         <div className="bg-black bg-opacity-50 h-full flex items-center justify-center">
           <div className="w-full max-w-md bg-[#ffffff8b] backdrop-blur-lg rounded-lg shadow-lg p-8">
             <h1 className="text-2xl font-bold text-center text-gray-900">
-              Login to your account
+              Admin Sinup
             </h1>
             <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <div>
@@ -162,10 +162,11 @@ const AdminSignupPage = () => {
                       : "bg-button hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   }`}
                 >
-                  {loading ? <LogingIn /> : "Login"}
+"Login"
+                //  {loading ? <LogingIn /> : "Login"}
                 </button>
               </div>
-              <div className="text-sm text-center">Don't have an account?
+              <div className="text-sm text-center">Signup as a Student!?
                 <a
                   href="/auth/signup"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
