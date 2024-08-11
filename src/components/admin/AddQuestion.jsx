@@ -1,6 +1,6 @@
 "use client"; // pages/admin/add-question.js
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Adding from "../InPageLoader/Adding";
 import toast, { Toaster } from "react-hot-toast";
