@@ -4,12 +4,21 @@ import React, { useState } from "react";
 import { card } from "@/css/quizList.module.css";
 import Link from "next/link";
 import Loading from "../Loading";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
-const DashBoard = ({ quizzes }) => {
-  // Check if courses is defined and is an array
-  if (!Array.isArray(quizzes) || quizzes.length === 0) {
+const DashBoard = ({ allQuizzes }) => {
+  const [quizzes , setQuizzes] = useState(allQuizzes);
+
+  const getUpdateData = async () => {
+    try {
+      const { data } = await axios.get(`/api/admin/courses/getCourses`);
+      setCourses(data);
+    } catch (error) {
+      toast.error(error.response.data);
+    }
+  };
+    if (!Array.isArray(quizzes) || quizzes.length === 0) {
     return (
       <div className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4">
         <h1 className="p-5 font-black text-7xl text-center md:text-5xl">
@@ -24,10 +33,10 @@ const DashBoard = ({ quizzes }) => {
       const { data } = await axios.post("/api/admin/quiz/deleteQuiz", {
         _id,
       });
-      // toast.success(data);
-      // router.push("/admin/dashboard");
+      toast.success(data);
+      router.push("/admin/dashboard");
     } catch (error) {
-      // toast.error(error.response.data || "Error updating data.");
+      toast.error(error.response.data || "Error updating data.");
     }
   };
 
@@ -43,6 +52,7 @@ const DashBoard = ({ quizzes }) => {
 
   return (
     <>
+      <Toaster position="top-right" reverseOrder={true} />
       <div className="flex flex-wrap justify-center z-30 ">
         {quizzes.map((quiz) => (
           <div key={quiz._id} className="m-2 backdrop-blur-lg bg-[#ffffff00]">
