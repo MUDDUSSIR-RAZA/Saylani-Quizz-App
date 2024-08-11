@@ -12,8 +12,10 @@ const DashBoard = ({ allQuizzes }) => {
 
   const getUpdateData = async () => {
     try {
-      const { data } = await axios.get(`/api/admin/courses/getCourses`);
-      setCourses(data);
+      const { data } = await axios.get(
+        `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+      );
+      setQuizzes(data);
     } catch (error) {
       toast.error(error.response.data);
     }
@@ -35,7 +37,7 @@ const DashBoard = ({ allQuizzes }) => {
         _id,
       });
       toast.success(data);
-      router.push("/admin/dashboard");
+      // getUpdateData();
     } catch (error) {
       toast.error(error.response.data || "Error updating data.");
     }
