@@ -2,7 +2,6 @@ import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import CreateQuizz from "@/components/admin/CreateQuizz";
 
 const createquiz = async () => {
-  const { props } = await getCourses();
 
   return (
     <>
