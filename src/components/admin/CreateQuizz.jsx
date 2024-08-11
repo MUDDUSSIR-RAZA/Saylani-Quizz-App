@@ -14,7 +14,7 @@ const initialValues = {
 };
 
 const CreateQuizz = () => {
-  const [courses, setCourses] = useState(Courses);
+  const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
