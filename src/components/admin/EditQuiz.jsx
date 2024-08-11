@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "../Loading";
-// import Adding from "../InPageLoader/Adding";
 
 const EditQuiz = ({ id }) => {
   const [loading, setLoading] = useState(false);
