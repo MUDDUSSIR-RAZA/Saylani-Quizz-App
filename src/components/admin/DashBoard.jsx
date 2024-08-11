@@ -8,7 +8,7 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
 const DashBoard = ({ allQuizzes }) => {
-  const [quizzes , setQuizzes] = useState(allQuizzes);
+  const [quizzes, setQuizzes] = useState(allQuizzes);
 
   const getUpdateData = async () => {
     try {
@@ -18,7 +18,8 @@ const DashBoard = ({ allQuizzes }) => {
       toast.error(error.response.data);
     }
   };
-    if (!Array.isArray(quizzes) || quizzes.length === 0) {
+
+  if (!Array.isArray(quizzes) || quizzes.length === 0) {
     return (
       <div className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4">
         <h1 className="p-5 font-black text-7xl text-center md:text-5xl">
