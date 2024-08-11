@@ -20,7 +20,6 @@ const EditQuiz = ({ id }) => {
           params: { id },
         });
         setInitialData(data);
-        console.log(data);
         setEditedData(data);
         setLoading(false);
       } catch (error) {
