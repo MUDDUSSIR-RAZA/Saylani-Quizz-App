@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     try {
-      console.log("first dsfsd")
       const { data } = await axios.get(
         `${process.env.BACKEND_URL}/admin/getStudentRequests`
       );
