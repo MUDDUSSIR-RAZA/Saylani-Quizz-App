@@ -12,8 +12,6 @@ export async function GET(req) {
                 params: { token }
             }
             );
-
-            console.log(data)
             return NextResponse.json(data)
         } catch (error) {
             return NextResponse.json(error.response.data, { status: 400 });
