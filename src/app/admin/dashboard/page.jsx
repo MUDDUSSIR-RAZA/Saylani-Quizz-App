@@ -29,7 +29,7 @@ const dashboard = async () => {
     <>
       <AdminNavbar />
       <main className="flex min-h-screen flex-col items-center justify-between py-24 px-5">
-        <DashBoard quizzes={props} />
+        <DashBoard allQuizzes={props} />
       </main>
     </>
   );
