@@ -6,7 +6,6 @@ import React from "react";
 
 
 const dashboard = async () => {
-  const { props } = await getAllQuizzes();
   return (
     <>
       <AdminNavbar />
