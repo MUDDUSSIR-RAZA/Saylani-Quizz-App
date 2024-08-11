@@ -7,7 +7,7 @@ import Loading from "../Loading";
 import { useRouter } from "next/navigation";
 
 const EditQuiz = ({ id }) => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [initialData, setInitialData] = useState({});
   const [editedData, setEditedData] = useState({});
   const [isEdited, setIsEdited] = useState(false);
@@ -15,7 +15,6 @@ const EditQuiz = ({ id }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
         const { data } = await axios.get("/api/admin/quiz/getQuizById", {
           params: { id },
