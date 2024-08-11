@@ -37,7 +37,7 @@ const DashBoard = ({ allQuizzes }) => {
         _id,
       });
       toast.success(data);
-      // getUpdateData();
+      getUpdateData();
     } catch (error) {
       toast.error(error.response.data || "Error updating data.");
     }
