@@ -8,14 +8,15 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
 const DashBoard = () => {
-  const [quizzes, setQuizzes] = useState(allQuizzes);
+  const [quizzes, setQuizzes] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/student/quiz/getAllQuiz`
+          `/api/admin/quiz/getAllQuiz`
         );
+        console.log("first " , data)
         setQuizzes(data);
       } catch (error) {
         toast.error(error.response.data);
