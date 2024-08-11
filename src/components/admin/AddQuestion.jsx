@@ -6,7 +6,7 @@ import Adding from "../InPageLoader/Adding";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
-const AddQuestion = ({ quizzes }) => {
+const AddQuestion = () => {
   const [loading, setLoading] = useState(false);
   const [quizId, setQuizId] = useState("");
   const [question_text, setQuestionText] = useState("");
