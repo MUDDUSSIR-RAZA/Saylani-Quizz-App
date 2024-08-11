@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useFormik } from "formik";
-import { loginSchema } from "@/yupSchemas/page";
+import { adminSignupSchema } from "@/yupSchemas/page";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
@@ -22,27 +22,24 @@ const AdminSignupPage = () => {
 
   const { values, errors, touched, handleChange, handleBlur } = useFormik({
     initialValues,
-    validationSchema: loginSchema
+    validationSchema: adminSignupSchema
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(values)
-    // try {
+    try {
     //   setLoading(true);
-    //   const { data } = await axios.post(
-    //     "/api/user/login",
-    //     {
-    //       email: values.email,
-    //       password: values.password,
-    //     },
-    //     {
-    //       withCredentials: true,
-    //     }
-    //   );
+      const { data } = await axios.post(
+        "/api/user/adminSignup",
+        values,
+        {
+          withCredentials: true,
+        }
+      );
     //   setLoading(false);
     //   router.push("/student/dashboard");
-    // } catch (error) {
+    } catch (error) {
     //   const err = error.response.data;
     //   setLoading(false);
     //   if (err == "pending" || err ==  "Unverified") {
@@ -50,7 +47,7 @@ const AdminSignupPage = () => {
     //   } else {
     //     toast.error(err);
     //   }
-    // }
+    }
   };
 
   return (
