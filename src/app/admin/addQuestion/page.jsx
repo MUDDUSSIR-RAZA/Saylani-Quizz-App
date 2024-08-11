@@ -1,6 +1,5 @@
 import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import AddQuestion from "@/components/admin/AddQuestion";
-import axios from "axios";
 import React from "react";
 }
 
