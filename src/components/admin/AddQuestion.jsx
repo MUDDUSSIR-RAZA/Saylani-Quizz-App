@@ -20,7 +20,8 @@ const AddQuestion = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/student/quiz/getAllQuiz`
+          `/api/admin/quiz/getAllQuiz`
+
         );
         setQuizzes(data);
       } catch (error) {
