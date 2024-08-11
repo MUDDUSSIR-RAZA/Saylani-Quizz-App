@@ -19,6 +19,19 @@ const CreateQuizz = () => {
   const [courses, setCourses] = useState(Courses);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(`/api/admin/courses/getCourses`);
+        setCourses(data);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   const {
     values,
     errors,
