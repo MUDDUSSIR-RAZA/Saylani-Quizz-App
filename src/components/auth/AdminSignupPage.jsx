@@ -29,7 +29,7 @@ const AdminSignupPage = () => {
     e.preventDefault();
     console.log(values)
     try {
-    //   setLoading(true);
+      setLoading(true);
       const { data } = await axios.post(
         "/api/user/adminSignup",
         values,
@@ -37,16 +37,16 @@ const AdminSignupPage = () => {
           withCredentials: true,
         }
       );
-    //   setLoading(false);
-    //   router.push("/student/dashboard");
+      setLoading(false);
+      router.push("/student/dashboard");
     } catch (error) {
-    //   const err = error.response.data;
-    //   setLoading(false);
-    //   if (err == "pending" || err ==  "Unverified") {
-    //     toast.error(`${err} Request!`);
-    //   } else {
-    //     toast.error(err);
-    //   }
+      const err = error.response.data;
+      setLoading(false);
+      if (err == "pending" || err ==  "Unverified") {
+        toast.error(`${err} Request!`);
+      } else {
+        toast.error(err);
+      }
     }
   };
 
