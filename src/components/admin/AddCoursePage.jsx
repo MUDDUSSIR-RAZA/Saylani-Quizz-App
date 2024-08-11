@@ -4,8 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
-const AddCoursePage = ({ Courses }) => {
-  console.log(Courses)
+const AddCoursePage = () => {
   const [courses, setCourses] = useState([]);
   const [newCourse, setNewCourse] = useState({
     course_name: "",
