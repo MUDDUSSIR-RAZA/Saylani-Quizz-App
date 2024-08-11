@@ -39,7 +39,6 @@ const EditQuiz = ({ id }) => {
     };
 
     setEditedData(newEditedData);
-    console.log(newEditedData);
     const hasChanges = Object.keys(newEditedData).some(
       (key) => newEditedData[key] !== initialData[key]
     );
@@ -105,7 +104,7 @@ const EditQuiz = ({ id }) => {
               <center>
               <div className="flex justify-center">
                 <label htmlFor="isPublished" className="font-bold mx-2">
-                  Publish Quiz:
+                  Publish Quiz :
                 </label>
                 <div className="toggle-cont">
                   <input
