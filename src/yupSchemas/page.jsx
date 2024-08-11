@@ -4,6 +4,15 @@ export const loginSchema = Yup.object({
   email: Yup.string().email().required("Please Enter Your Email"),
   password: Yup.string().required("Please Enter Your Password"),
 });
+export const adminSignupSchema = Yup.object({
+  name:Yup.string().min(2).max(25).required("Please Enter Your Name"),
+  phone:Yup.number().min(2).max(25).required("Please Enter Your Phone Number"),
+  email: Yup.string().email().required("Please Enter Your Email"),
+  password: Yup.string().required("Please Enter Your Password"),
+});
+
+
+
 // export const loginSchema = Yup.object({
 //     email:Yup.string().email().required("Please Enter Your Email"),
 //     password:Yup.string().min(13).max(13).required("Please Enter Your Password"),
