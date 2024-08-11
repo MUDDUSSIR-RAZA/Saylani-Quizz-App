@@ -2,7 +2,6 @@
 
 import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import DashBoard from "@/components/admin/DashBoard";
-import axios from "axios";
 import React from "react";
 
 
