@@ -8,7 +8,7 @@ export async function middleware(request) {
 
     const isAdminPath = path === '/admin/dashboard' || path === '/admin/addBulkQuestion' || path === '/admin/createquiz' || path === '/admin/addQuestion' || path === '/admin/requests' || path === '/admin/editquiz'
 
-    const isStudentPath = path === '/admin/dashboard' || path === '/student/OverallPerformance' || path === '/student/profile'
+    const isStudentPath = path === '/student/dashboard' || path === '/student/OverallPerformance' || path === '/student/profile'
 
     const token = request.cookies.get("token")?.value || ''
 
@@ -19,13 +19,13 @@ export async function middleware(request) {
             const { payload } = await jose.jwtVerify(token, secretKey)
             const role = payload.role
 
-            console.log(role)
-
             if (!isAdminPath && role == "admin") {
                 return NextResponse.redirect(new URL('/admin/dashboard', request.url));
-            } else if (!isStudentPath && role == "student") {
+            } 
+            else if (!isStudentPath && role == "student") {
                 return NextResponse.redirect(new URL('/student/dashboard', request.url));
-            } else if (role != "student" && role != "admin" && !isPublicPath) {
+            } 
+            else if (role != "student" && role != "admin" && !isPublicPath) {
                 return NextResponse.redirect(new URL('/auth/login', request.url));
             }
         } catch (error) {
