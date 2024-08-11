@@ -15,6 +15,18 @@ const AddQuestion = ({ quizzes }) => {
   const [time_limit, setTimeLimit] = useState(30);
   const router =useRouter()
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+        );
+        setQuizzes(data);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    };
+
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
     newOptions[index] = value;
