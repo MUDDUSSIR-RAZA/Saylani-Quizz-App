@@ -5,7 +5,6 @@ import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import React from "react";
 
 const requests = async () => {
-  const { props } = await getRequests();
   return (
     <>
       <AdminNavbar />
