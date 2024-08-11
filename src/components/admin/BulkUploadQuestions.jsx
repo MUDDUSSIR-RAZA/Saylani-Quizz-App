@@ -5,12 +5,26 @@ import axios from "axios";
 import UploadingBulkFile from "../InPageLoader/UploadingBulkFile";
 import toast, { Toaster } from "react-hot-toast";
 
-const BulkUploadQuestions = ({ quizzes }) => {
-  console.log(quizzes);
+const BulkUploadQuestions = () => {
   const [loading, setLoading] = useState(false);
-
+  const [quizzes, setQuizzes] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [file, setFile] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+        );
+        setQuizzes(data);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
