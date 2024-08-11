@@ -21,7 +21,7 @@ const DashBoard = ({ quizzes }) => {
     try {
       console.log(_id);
       const { data } = await axios.patch("/api/admin/quiz/deleteQuiz", {
-        _id
+        _id,
       });
       // toast.success(data);
       // router.push("/admin/dashboard");
