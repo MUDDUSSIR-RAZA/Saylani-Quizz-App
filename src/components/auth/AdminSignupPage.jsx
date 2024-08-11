@@ -163,7 +163,6 @@ const AdminSignupPage = () => {
                       : "bg-button hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                   }`}
                 >
-"Login"
                   {loading ? <SigningUp /> : "Login"}
                 </button>
               </div>
