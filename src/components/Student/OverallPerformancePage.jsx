@@ -15,7 +15,6 @@ const OverallPerformancePage = () => {
       try {
         setLoading(true);
         const { data } = await axios.get("/api/student/getOverallPerformance");
-        console.log(data);
         setResults(data);
         groupResultsByCourseAndBatch(data);
         setLoading(false);
