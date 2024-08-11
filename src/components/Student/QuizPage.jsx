@@ -30,12 +30,9 @@ const QuizPage = ({ quizId }) => {
           params: { quizId },
         });
         setQuizDetails(data);
-        console.log(data)
         setTimeLeft(quizDetails.questions[0].time_limit);
-        console.log(quizDetails.questions);
       } catch (error) {
-        //  router.push("/student/dashboard")
-        console.log(error);
+         router.push("/student/dashboard")
       }
     };
 
@@ -203,7 +200,6 @@ const QuizPage = ({ quizId }) => {
       });
       toast.success(data);
     } catch (error) {
-      console.log(error.response.data);
       toast.error(error.response.data);
     }
   };
