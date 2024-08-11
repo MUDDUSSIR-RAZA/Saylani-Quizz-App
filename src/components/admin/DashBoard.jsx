@@ -19,7 +19,7 @@ const DashBoard = ({ quizzes }) => {
 
   const handleDelete = async (_id) => {
     try {
-      const { data } = await axios.patch("/api/admin/quiz/deleteQuiz", {
+      const { data } = await axios.delete("/api/admin/quiz/deleteQuiz", {
         _id,
       });
       // toast.success(data);
