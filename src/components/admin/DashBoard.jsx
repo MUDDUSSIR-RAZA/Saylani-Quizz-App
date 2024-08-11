@@ -7,8 +7,23 @@ import Loading from "../Loading";
 import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 
-const DashBoard = ({ allQuizzes }) => {
+const DashBoard = () => {
   const [quizzes, setQuizzes] = useState(allQuizzes);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = await axios.get(
+          `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+        );
+        setQuizzes(data);
+      } catch (error) {
+        toast.error(error.response.data);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const getUpdateData = async () => {
     try {
