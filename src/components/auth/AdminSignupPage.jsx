@@ -174,7 +174,6 @@ const AdminSignupPage = () => {
                    {" "}Sign in
                 </a>
               </div>
-            </div>
             </form>
           </div>
         </div>
