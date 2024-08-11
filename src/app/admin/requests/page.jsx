@@ -9,7 +9,7 @@ const requests = async () => {
     <>
       <AdminNavbar />
       <main className="items-center justify-between py-24 -z-30">
-        <RequestPage initialData={props} />;
+        <RequestPage />;
       </main>
     </>
   );
