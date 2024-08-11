@@ -15,7 +15,7 @@ const initialValues = {
   course_id: "",
 };
 
-const CreateQuizz = ({ Courses }) => {
+const CreateQuizz = () => {
   const [courses, setCourses] = useState(Courses);
   const [loading, setLoading] = useState(false);
 
