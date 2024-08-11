@@ -1,12 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { quizTitleSchema } from "@/yupSchemas/page";
 import axios from "axios";
-import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
-import LogingIn from "@/components/InPageLoader/LogingIn";
 import Creating from "../InPageLoader/Creating";
 
 const initialValues = {
