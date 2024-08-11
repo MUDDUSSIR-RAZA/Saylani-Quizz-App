@@ -23,27 +23,23 @@ const AdminSignupPage = () => {
 
   const { values, errors, touched, handleChange, handleBlur } = useFormik({
     initialValues,
-    validationSchema: adminSignupSchema
+    validationSchema: adminSignupSchema,
   });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values)
+    console.log(values);
     try {
       setLoading(true);
-      const { data } = await axios.post(
-        "/api/user/adminSignup",
-        values,
-        {
-          withCredentials: true,
-        }
-      );
+      const { data } = await axios.post("/api/user/adminSignup", values, {
+        withCredentials: true,
+      });
       setLoading(false);
       router.push("/student/dashboard");
     } catch (error) {
       const err = error.response.data;
       setLoading(false);
-      if (err == "pending" || err ==  "Unverified") {
+      if (err == "pending" || err == "Unverified") {
         toast.error(`${err} Request!`);
       } else {
         toast.error(err);
@@ -166,12 +162,14 @@ const AdminSignupPage = () => {
                   {loading ? <SigningUp /> : "Login"}
                 </button>
               </div>
-              <div className="text-lg text-center">Already Signup?
+              <div className="text-lg text-center">
+                Already Signup?
                 <a
                   href="/auth/login"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                   {" "}Sign in
+                  {" "}
+                  Sign in
                 </a>
               </div>
             </form>
