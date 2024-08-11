@@ -1,8 +1,6 @@
 import AdminNavbar from "@/components/NavBar/AdminNavbar";
 import AddQuestion from "@/components/admin/AddQuestion";
 import React from "react";
-}
-
 
 const page = async () => {
   const { props } = await getAllQuizzes();
