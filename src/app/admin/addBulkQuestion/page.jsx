@@ -8,7 +8,7 @@ const page = async () => {
       <div className="overflow-hidden w-dvw h-dvh">
         <AdminNavbar />
         <main className="items-center justify-between py-24 -z-30">
-          <BulkUploadQuestions quizzes={props} />
+          <BulkUploadQuestions />
         </main>
       </div>
     </>
