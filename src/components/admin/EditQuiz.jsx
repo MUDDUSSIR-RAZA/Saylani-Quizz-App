@@ -65,6 +65,7 @@ const EditQuiz = ({ id }) => {
           _id: editedData._id,
           quiz_name: editedData.quiz_name,
           displayQuestions: editedData.displayQuestions,
+          quizOpen: editedData.quizOpen,
         });
         setLoading(false);
         toast.success(data);
