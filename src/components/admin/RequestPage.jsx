@@ -12,9 +12,9 @@ const RequestPage = ({ initialData }) => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+          `${process.env.BACKEND_URL}/admin/getStudentRequests`
         );
-        setQuizzes(data);
+        setUpdateData(data);
       } catch (error) {
         toast.error(error.response.data);
       }
