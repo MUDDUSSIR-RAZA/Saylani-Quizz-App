@@ -14,7 +14,7 @@ const AddCoursePage = () => {
 
   const getUpdateData = async () => {
     try {
-      const { data } = await axios.get(`${process.env.BACKEND_URL}/admin/getCourses`);
+      const { data } = await axios.get(`/api/admin/courses/getCourses`);
       console.log(data)
       setCourses(data);
     } catch (error) {
@@ -25,9 +25,9 @@ const AddCoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${process.env.BACKEND_URL}/admin/getCourses`);
-        console.log(data)
-        setCourses(data);
+        const { data } = await axios.get(`/api/admin/courses/getCourses`);
+      console.log(data)
+      setCourses(data);
       } catch (error) {
         toast.error(error.response.data);
       }
