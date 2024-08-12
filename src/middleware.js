@@ -6,7 +6,7 @@ export async function middleware(request) {
 
     const isPublicPath = path === "/auth/signup" || path === "/auth/login" || path === "/auth/admin/signup"
 
-    const isAdminPath = path === '/admin/dashboard' || path === '/admin/addBulkQuestion' || path === '/admin/createquiz' || path === '/admin/addQuestion' || path === '/admin/requests' || path === '/admin/editquiz'
+    const isAdminPath = path === '/admin/dashboard' || path === '/admin/addBulkQuestion' || path === '/admin/createquiz' || path === '/admin/addQuestion' || path === '/admin/requests' || path === '/admin/editquiz' || path === '/admin/addCourse'
 
     const isStudentPath = path === '/student/dashboard' || path === '/student/OverallPerformance' || path === '/student/profile'
 
