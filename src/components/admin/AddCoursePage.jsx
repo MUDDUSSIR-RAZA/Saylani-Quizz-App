@@ -15,6 +15,7 @@ const AddCoursePage = () => {
   const getUpdateData = async () => {
     try {
       const { data } = await axios.get(`${process.env.BACKEND_URL}/admin/getCourses`);
+      console.log(data)
       setCourses(data);
     } catch (error) {
       toast.error(error.response.data);
@@ -25,6 +26,7 @@ const AddCoursePage = () => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`${process.env.BACKEND_URL}/admin/getCourses`);
+        console.log(data)
         setCourses(data);
       } catch (error) {
         toast.error(error.response.data);
