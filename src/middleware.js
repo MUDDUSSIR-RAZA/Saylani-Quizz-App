@@ -53,6 +53,7 @@ export const config = {
         '/admin/addQuestion',
         '/admin/requests',
         '/admin/editquiz',
+        '/admin/addCourse',
         '/student/dashboard',
         '/student/profile',
         '/student/OverallPerformance',
