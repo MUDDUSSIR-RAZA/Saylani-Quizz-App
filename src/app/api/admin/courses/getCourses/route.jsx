@@ -7,6 +7,7 @@ export async function GET() {
       const { data } = await axios.get(
         `${process.env.BACKEND_URL}/admin/getCourses`
       );
+      console.log(data)
       return NextResponse.json(data)
     } catch (error) {
       return NextResponse.json(error.response.data, { status: 400 });
