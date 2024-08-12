@@ -5,7 +5,7 @@ export async function GET() {
   try {
     try {
       const { data } = await axios.get(
-        `https://saylani-quizz-app-backend.onrender.com/admin/getCourses`
+        `${process.env.BACKEND_URL}/admin/getCourses`
       );
       console.log("data " , data)
       return NextResponse.json(data)
