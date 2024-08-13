@@ -12,7 +12,7 @@ const AddCoursePage = () => {
     cities: [""],
   });
 
-  const getUpdateData = async () => { //////////GET Request\\\\\
+  const getUpdateData = async () => {
     try {
       const { data } = await axios.get(`/api/admin/courses/getCourses`);
       // console.log(data)
@@ -23,7 +23,7 @@ const AddCoursePage = () => {
   };
   
   useEffect(() => {
-    const fetchData = async () => //////////GET Request\\\\\
+    const fetchData = async () => 
       try {
         const { data } = await axios.get(`/api/admin/courses/getCourses`);
       // console.log(data)
@@ -36,7 +36,7 @@ const AddCoursePage = () => {
     fetchData();
   }, []);
 
-  const handleCourseSubmit = async (e) => //////////POST Request\\\\\
+  const handleCourseSubmit = async (e) =>
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/admin/courses/addCourse", {
