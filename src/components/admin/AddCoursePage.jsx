@@ -41,7 +41,7 @@ const AddCoursePage = () => {
     try {
       const { data } = await axios.post("/api/admin/courses/addCourse", {
         ...newCourse,
-      });
+      }); //////////POST Request\\\\\
       getUpdateData();
       setNewCourse({
         course_name: "",
