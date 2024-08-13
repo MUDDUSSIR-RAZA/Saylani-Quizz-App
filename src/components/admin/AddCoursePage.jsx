@@ -36,12 +36,12 @@ const AddCoursePage = () => {
     fetchData();
   }, []);
 
-  const handleCourseSubmit = async (e) => 
+  const handleCourseSubmit = async (e) => //////////POST Request\\\\\
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/admin/courses/addCourse", {
         ...newCourse,
-      }); //////////POST Request\\\\\
+      }); 
       getUpdateData();
       setNewCourse({
         course_name: "",
