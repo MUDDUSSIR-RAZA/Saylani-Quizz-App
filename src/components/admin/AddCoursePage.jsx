@@ -23,7 +23,7 @@ const AddCoursePage = () => {
   };
   
   useEffect(() => {
-    const fetchData = async () => 
+    const fetchData = async () => //////////GET Request\\\\\
       try {
         const { data } = await axios.get(`/api/admin/courses/getCourses`);
       // console.log(data)
