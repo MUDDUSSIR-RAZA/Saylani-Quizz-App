@@ -27,7 +27,7 @@ const AddCoursePage = () => {
     const fetchData = async () => {
       try {
         console.log("UseEffect Request");
-        const { data } = await axios.get(`https://saylani-quizz-app.vercel.app/api/admin/courses/getCourses`);
+        const { data } = await axios.get(`/api/admin/courses/getCourses`);
         console.log("UseEffect Request Request Response", data);
         setCourses(data);
       } catch (error) {
