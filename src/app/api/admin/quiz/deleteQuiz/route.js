@@ -6,7 +6,7 @@ export async function POST(req) {
         const { _id } = await req.json();
         try {
             const { data } = await axios.post(
-                `${process.env.BACKEND_URL}/admin/deleteQuiz`,
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/deleteQuiz`,
                 { _id }
             );
         return NextResponse.json(data);

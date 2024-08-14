@@ -28,7 +28,7 @@ const DashBoard = () => {
   const getUpdateData = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getAllQuizzes`
       );
       setQuizzes(data);
     } catch (error) {

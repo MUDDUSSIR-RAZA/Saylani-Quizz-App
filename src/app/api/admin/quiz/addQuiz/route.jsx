@@ -6,7 +6,7 @@ export async function POST(req) {
     const { course_name, course_id, quiz_name, key } = await req.json();
     try {
       const { data } = await axios.post(
-        `${process.env.BACKEND_URL}/admin/addQuiz`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/addQuiz`,
         { course_name, course_id, quiz_name, key }
       );
       return NextResponse.json(data);

@@ -5,7 +5,7 @@ export async function GET() {
   try {
     try {
       const { data } = await axios.get(
-        `${process.env.BACKEND_URL}/admin/getAllQuizzes`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getAllQuizzes`
       );
       return NextResponse.json(data)
     } catch (error) {

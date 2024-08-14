@@ -6,7 +6,7 @@ export async function POST(req) {
     try {
         const { email, password } = await req.json()
         try {
-            const { data } = await axios.post(`${process.env.BACKEND_URL}/auth/login`, {
+            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/login`, {
                 email,
                 password,
             });

@@ -8,7 +8,7 @@ export async function GET(req) {
     try {
         try {
             const { data } = await axios.get(
-                `${process.env.BACKEND_URL}/student/getStudentQuiz`, {
+                `${process.env.NEXT_PUBLIC_BACKEND_URL}/student/getStudentQuiz`, {
                 params: { token }
             }
             );
