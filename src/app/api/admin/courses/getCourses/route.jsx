@@ -4,10 +4,11 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
     try {
+      console.log("Server Get Request")
       const { data } = await axios.get(
-        `${process.env.BACKEND_URL}/admin/getCourses`
+        `https://saylani-quizz-app-backend.onrender.com/admin/getCourses`
       );
-      console.log("data " , data)
+      console.log("Server Get Request Response" , data)
       return NextResponse.json(data)
     } catch (error) {
       return NextResponse.json(error.response.data, { status: 400 });
