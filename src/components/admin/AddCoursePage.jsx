@@ -16,7 +16,7 @@ const AddCoursePage = () => {
     try {
       console.log("Get Update Data Request");
       // const { data } = await axios.get(`/api/admin/courses/getCourses`);
-      const res = await fetch("https://saylani-quizz-app.vercel.app/api/admin/courses/getCourses", {
+      const res = await fetch("https://saylani-quizz-app.vercel.app/api/getCourses", {
         method: "GET",
       });
       const data = await res.json();
@@ -31,7 +31,7 @@ const AddCoursePage = () => {
     const fetchData = async () => {
       try {
         console.log("UseEffect Request");
-        const res = await fetch("https://saylani-quizz-app.vercel.app//api/admin/courses/getCourses", {
+        const res = await fetch("https://saylani-quizz-app.vercel.app/api/getCourses", {
           method: "GET",
         });
         const data = await res.json();
