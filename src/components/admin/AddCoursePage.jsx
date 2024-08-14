@@ -3,8 +3,10 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../Loading";
 
 const AddCoursePage = () => {
+  const [loading, setLoading] = useState(true);
   const [courses, setCourses] = useState([]);
   const [newCourse, setNewCourse] = useState({
     course_name: "",
@@ -26,10 +28,12 @@ const AddCoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true)
         console.log("UseEffect Request");
         const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`);
         console.log("UseEffect Request Request Response", data);
         setCourses(data);
+        setLoading(false)
       } catch (error) {
         toast.error(error);
       }
@@ -147,7 +151,7 @@ const AddCoursePage = () => {
         <h2 className="text-3xl tracking-widest font-extrabold mb-4 text-center backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4 p-3 text-gray-900">
           Current Courses
         </h2>
-        <div>
+       { loading ? <Loading /> :  <div>
           {courses.length == 0 && (
             <div className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4">
               <h1 className="p-5 font-black text-7xl text-center md:text-5xl">
@@ -177,7 +181,7 @@ const AddCoursePage = () => {
               </button>
             </div>
           ))}
-        </div>
+        </div>}
       </div>
     </div>
   );
