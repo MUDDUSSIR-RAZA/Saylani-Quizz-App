@@ -6,7 +6,7 @@ export async function POST(req) {
     const { userId, course_name , batch , quiz_name , totalQuestions , score } = await req.json();
     try {
       const {data} = await axios.post(
-        `${process.env.BACKEND_URL}/student/submitResult`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/student/submitResult`,
         {  userId, course_name , batch , quiz_name , totalQuestions , score  }
       );return NextResponse.json(data);
     } catch (axiosError) {
