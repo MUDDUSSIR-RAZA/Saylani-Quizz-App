@@ -15,11 +15,13 @@ const AddCoursePage = () => {
   const getUpdateData = async () => {
     try {
       console.log("Get Update Data Request");
-      const { data } = await axios.get(`/api/admin/courses/getCourses`);
+      // const { data } = await axios.get(`/api/admin/courses/getCourses`);
+      const res = await fetch("https://saylani-quizz-app.vercel.app/api/admin/courses/getCourses")
+      const data = res.json()
       console.log("Get Update Data Request Response", data);
       setCourses(data);
     } catch (error) {
-      toast.error(error.response.data);
+      toast.error(error);
     }
   };
 
@@ -27,11 +29,13 @@ const AddCoursePage = () => {
     const fetchData = async () => {
       try {
         console.log("UseEffect Request");
-        const { data } = await axios.get(`/api/admin/courses/getCourses`);
+      const res = await fetch("https://saylani-quizz-app.vercel.app/api/admin/courses/getCourses")
+      const data = res.json()
+        // const { data } = await axios.get(`/api/admin/courses/getCourses`);
         console.log("UseEffect Request Request Response", data);
         setCourses(data);
       } catch (error) {
-        toast.error(error.response.data);
+        toast.error(error);
       }
     };
 
