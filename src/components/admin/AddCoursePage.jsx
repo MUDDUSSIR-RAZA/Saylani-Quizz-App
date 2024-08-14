@@ -15,7 +15,7 @@ const AddCoursePage = () => {
   const getUpdateData = async () => {
     try {
       console.log("Get Update Data Request");
-      const { data } = await axios.get(`/api/admin/courses/getCourses`);
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`);
       console.log("Get Update Data Request Response", data);
       setCourses(data);
     } catch (error) {
@@ -27,7 +27,7 @@ const AddCoursePage = () => {
     const fetchData = async () => {
       try {
         console.log("UseEffect Request");
-        const { data } = await axios.get(`/api/admin/courses/getCourses`);
+        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`);
         console.log("UseEffect Request Request Response", data);
         setCourses(data);
       } catch (error) {
