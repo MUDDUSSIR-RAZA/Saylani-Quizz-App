@@ -14,6 +14,7 @@ const AddCoursePage = () => {
 
   const getUpdateData = async () => {
     try {
+      console.log("Get Update Data Request")
       const { data } = await axios.get(`/api/admin/courses/getCourses`);
       // console.log(data)
       setCourses(data);
@@ -25,6 +26,7 @@ const AddCoursePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log("Get Update Data Request")
         const { data } = await axios.get(`/api/admin/courses/getCourses`);
       // console.log(data)
       setCourses(data);
