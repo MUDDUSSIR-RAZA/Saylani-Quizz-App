@@ -17,7 +17,6 @@ const AddCoursePage = () => {
       console.log("Get Update Data Request")
       const { data } = await axios.get(`/api/admin/courses/getCourses`);
       console.log("Get Update Data Request Response" , data)
-      // console.log(data)
       setCourses(data);
     } catch (error) {
       toast.error(error.response.data);
@@ -30,7 +29,6 @@ const AddCoursePage = () => {
         console.log("UseEffect Request")
         const { data } = await axios.get(`/api/admin/courses/getCourses`);
         console.log("UseEffect Request Request Response" , data)
-      // console.log(data)
       setCourses(data);
       } catch (error) {
         toast.error(error.response.data);
