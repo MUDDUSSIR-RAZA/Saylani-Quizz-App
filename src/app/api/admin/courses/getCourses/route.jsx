@@ -1,7 +1,7 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
 
-export async function GET() {
+export default async function GET() {
   console.log("Server Get Request");
   try {
     console.log("Server Get Request");
