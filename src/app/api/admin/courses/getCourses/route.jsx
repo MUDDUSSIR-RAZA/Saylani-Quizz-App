@@ -2,14 +2,16 @@ import axios from "axios";
 import { NextResponse } from "next/server";
 
 export async function GET() {
+  console.log("Server Get Request");
   try {
+    console.log("Server Get Request");
     try {
-      console.log("Server Get Request")
+      console.log("Server Get Request");
       const { data } = await axios.get(
         `https://saylani-quizz-app-backend.onrender.com/admin/getCourses`
       );
-      console.log("Server Get Request Response" , data)
-      return NextResponse.json(data)
+      console.log("Server Get Request Response", data);
+      return NextResponse.json(data);
     } catch (error) {
       return NextResponse.json(error.response.data, { status: 400 });
     }
