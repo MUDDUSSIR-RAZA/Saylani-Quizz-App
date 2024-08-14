@@ -6,7 +6,7 @@ export async function POST(req) {
     const { course_name, batch, cities } = await req.json();
     try {
       const {data} = await axios.post(
-        `${process.env.BACKEND_URL}/admin/addCourse`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/addCourse`,
         { course_name, batch, cities }
       );
       console.log("Add Course API data " , data)
