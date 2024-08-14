@@ -14,22 +14,22 @@ const AddCoursePage = () => {
 
   const getUpdateData = async () => {
     try {
-      console.log("Get Update Data Request")
+      console.log("Get Update Data Request");
       const { data } = await axios.get(`/api/admin/courses/getCourses`);
-      console.log("Get Update Data Request Response" , data)
+      console.log("Get Update Data Request Response", data);
       setCourses(data);
     } catch (error) {
       toast.error(error.response.data);
     }
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("UseEffect Request")
-        const { data } = await axios.get(`/api/admin/courses/getCourses`);
-        console.log("UseEffect Request Request Response" , data)
-      setCourses(data);
+        console.log("UseEffect Request");
+        const { data } = await axios.get(`https://saylani-quizz-app.vercel.app/api/admin/courses/getCourses`);
+        console.log("UseEffect Request Request Response", data);
+        setCourses(data);
       } catch (error) {
         toast.error(error.response.data);
       }
@@ -49,7 +49,7 @@ const AddCoursePage = () => {
         course_name: "",
         batch: "",
         cities: [""],
-      })
+      });
       toast.success(data);
     } catch (error) {
       toast.error(error.response.data);
