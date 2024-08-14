@@ -9,7 +9,7 @@ export async function POST(req) {
         `${process.env.BACKEND_URL}/admin/addCourse`,
         { course_name, batch, cities }
       );
-      
+      console.log("Add Course API data " , data)
       return NextResponse.json(data);
     } catch (axiosError) {
       return NextResponse.json(axiosError.response.data, { status: 400 });
