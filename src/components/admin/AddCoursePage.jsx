@@ -15,7 +15,7 @@ const AddCoursePage = () => {
   const getUpdateData = async () => {
     try {
       console.log("Get Update Data Request")
-      const { data } = await axios.get(`https://saylani-quizz-app-backend.onrender.com/admin/getCourses`);
+      const { data } = await axios.get(`/api/admin/courses/getCourses`);
       console.log("Get Update Data Request Response" , data)
       // console.log(data)
       setCourses(data);
@@ -28,7 +28,7 @@ const AddCoursePage = () => {
     const fetchData = async () => {
       try {
         console.log("UseEffect Request")
-        const { data } = await axios.get(`https://saylani-quizz-app-backend.onrender.com/admin/getCourses`);
+        const { data } = await axios.get(`/api/admin/courses/getCourses`);
         console.log("UseEffect Request Request Response" , data)
       // console.log(data)
       setCourses(data);
@@ -40,12 +40,12 @@ const AddCoursePage = () => {
     fetchData();
   }, []);
 
-  const handleCourseSubmit = async (e) =>{
+  const handleCourseSubmit = async (e) => {
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/admin/courses/addCourse", {
         ...newCourse,
-      }); 
+      });
       getUpdateData();
       setNewCourse({
         course_name: "",
