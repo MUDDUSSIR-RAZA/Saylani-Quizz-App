@@ -4,6 +4,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "../Loading";
+import { revalidateTag } from "next/cache";
 
 const AddCoursePage = () => {
   const [loading, setLoading] = useState(true);
@@ -17,10 +18,7 @@ const AddCoursePage = () => {
   const getUpdateData = async () => {
     try {
       console.log("Get Update Data Request");
-      const res = await fetch("/api/admin/courses/getCourses", {
-        method: "GET",
-        cache: "no-store",
-      });
+      const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
       const data = await res.json();
       //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
       console.log("Get Update Data Request Response", data);
@@ -35,10 +33,7 @@ const AddCoursePage = () => {
       try {
         setLoading(true);
         console.log("UseEffect Request");
-        const res = await fetch("/api/admin/courses/getCourses", {
-          method: "GET",
-          cache: "no-store",
-        });
+        const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
         const data = await res.json();
         //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
         console.log("UseEffect Request Request Response", data);
@@ -58,6 +53,7 @@ const AddCoursePage = () => {
       const { data } = await axios.post("/api/admin/courses/addCourse", {
         ...newCourse,
       });
+      revalidateTag("courses")
       getUpdateData();
       setNewCourse({
         course_name: "",
