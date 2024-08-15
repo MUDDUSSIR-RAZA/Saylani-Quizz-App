@@ -18,8 +18,9 @@ const AddCoursePage = () => {
     try {
 console.log("Get Update Data Request");
       const res = await fetch("/api/admin/courses/getCourses", {
-         method: "GET",
-       }, { cache: 'no-store' });
+      method: "GET",
+      cache: 'no-store' // Ensures fresh data on each request
+    });
       const data = await res.json();
       
    //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
@@ -36,8 +37,9 @@ console.log("Get Update Data Request");
         setLoading(true)
         console.log("UseEffect Request");
         const res = await fetch("/api/admin/courses/getCourses", {
-         method: "GET",
-       }, { cache: 'no-store' });
+      method: "GET",
+      cache: 'no-store' // Ensures fresh data on each request
+    });
       const data = await res.json();
       
    //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
