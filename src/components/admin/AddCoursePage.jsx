@@ -16,14 +16,13 @@ const AddCoursePage = () => {
 
   const getUpdateData = async () => {
     try {
-console.log("Get Update Data Request");
+      console.log("Get Update Data Request");
       const res = await fetch("/api/admin/courses/getCourses", {
-      method: "GET",
-      cache: 'no-store' // Ensures fresh data on each request
-    });
+        method: "GET",
+        cache: "no-store",
+      });
       const data = await res.json();
-      
-   //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
+      //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
       console.log("Get Update Data Request Response", data);
       setCourses(data);
     } catch (error) {
@@ -34,18 +33,17 @@ console.log("Get Update Data Request");
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         console.log("UseEffect Request");
         const res = await fetch("/api/admin/courses/getCourses", {
-      method: "GET",
-      cache: 'no-store' // Ensures fresh data on each request
-    });
-      const data = await res.json();
-      
-   //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
+          method: "GET",
+          cache: "no-store",
+        });
+        const data = await res.json();
+        //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
         console.log("UseEffect Request Request Response", data);
         setCourses(data);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
         toast.error(error);
       }
@@ -163,37 +161,41 @@ console.log("Get Update Data Request");
         <h2 className="text-3xl tracking-widest font-extrabold mb-4 text-center backdrop-blur-3xl bg-[#ffffff00] rounded-lg shadow-2xl mx-4 p-3 text-gray-900">
           Current Courses
         </h2>
-       { loading ? <Loading /> :  <div>
-          {courses.length == 0 && (
-            <div className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4">
-              <h1 className="p-5 font-black text-7xl text-center md:text-5xl">
-                Courses Not Available
-              </h1>
-            </div>
-          )}
+        {loading ? (
+          <Loading />
+        ) : (
+          <div>
+            {courses.length == 0 && (
+              <div className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4">
+                <h1 className="p-5 font-black text-7xl text-center md:text-5xl">
+                  Courses Not Available
+                </h1>
+              </div>
+            )}
 
-          {courses.map((course) => (
-            <div
-              key={course._id}
-              className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4"
-            >
-              <h3 className="text-lg font-bold mb-2">{course.course_name}</h3>
-              <p>
-                <span className="font-medium">Batch:</span> {course.batch}
-              </p>
-              <p>
-                <span className="font-medium">Cities:</span>{" "}
-                {course.cities.join(", ")}
-              </p>
-              <button
-                className="mt-2 bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
-                onClick={() => handleDeleteCourse(course._id)}
+            {courses.map((course) => (
+              <div
+                key={course._id}
+                className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4"
               >
-                Edit
-              </button>
-            </div>
-          ))}
-        </div>}
+                <h3 className="text-lg font-bold mb-2">{course.course_name}</h3>
+                <p>
+                  <span className="font-medium">Batch:</span> {course.batch}
+                </p>
+                <p>
+                  <span className="font-medium">Cities:</span>{" "}
+                  {course.cities.join(", ")}
+                </p>
+                <button
+                  className="mt-2 bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
+                  onClick={() => handleDeleteCourse(course._id)}
+                >
+                  Edit
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
