@@ -54,7 +54,7 @@ const AddCoursePage = () => {
         ...newCourse,
       });
       revalidateTag("courses")
-      getUpdateData();
+      // getUpdateData();
       setNewCourse({
         course_name: "",
         batch: "",
