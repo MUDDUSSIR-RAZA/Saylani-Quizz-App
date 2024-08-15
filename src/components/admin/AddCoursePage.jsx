@@ -34,7 +34,7 @@ const AddCoursePage = () => {
       try {
         setLoading(true)
         console.log("UseEffect Request");
-        const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`);
+        const { data } = await axios.get(`/api/admin/courses/getCourses`);
         console.log("UseEffect Request Request Response", data);
         setCourses(data);
         setLoading(false)
