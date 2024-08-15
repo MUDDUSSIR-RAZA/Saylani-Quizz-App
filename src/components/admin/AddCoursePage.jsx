@@ -21,7 +21,7 @@ const AddCoursePage = () => {
       // });
       // const data = await res.json();
       console.log("Get Update Data Request");
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`);
+      const { data } = await axios.get(`/api/admin/courses/getCourses`);
       console.log("Get Update Data Request Response", data);
       setCourses(data);
     } catch (error) {
