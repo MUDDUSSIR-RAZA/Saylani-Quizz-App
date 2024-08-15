@@ -6,7 +6,7 @@ export async function GET() {
   try {
     console.log("Server Get Request");
     const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`, { cache: 'no-store' }
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`
     );
     console.log("Server Get Request Response", data);
     return NextResponse.json(data);
