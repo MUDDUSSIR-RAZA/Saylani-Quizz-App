@@ -16,6 +16,10 @@ const AddCoursePage = () => {
 
   const getUpdateData = async () => {
     try {
+      // const res = await fetch("/api/admin/courses/getCourses", {
+      //   method: "GET",
+      // });
+      // const data = await res.json();
       console.log("Get Update Data Request");
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`);
       console.log("Get Update Data Request Response", data);
