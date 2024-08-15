@@ -8,11 +8,11 @@ export async function GET() {
   console.log("Server Get Request");
   try {
     console.log("Server Get Request");
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`, {
+    const data = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`, {
       method: "GET",
       cache: "no-store",
     });
-    const data = await res.json(); // Assign response to `data` variable
+    // const data = await res.json(); // Assign response to `data` variable
   
     // Now you can access `data` safely:
     console.log("Server Get Request Response", data);
