@@ -34,7 +34,7 @@ const AddCoursePage = () => {
       try {
         setLoading(true)
         console.log("UseEffect Request");
-        const { data } = await axios.get(`/api/admin/courses/getCourses`);
+        const { data } = await axios.get(`/api/admin/courses/getCourses`, { cache: 'no-store' });
         console.log("UseEffect Request Request Response", data);
         setCourses(data);
         setLoading(false)
