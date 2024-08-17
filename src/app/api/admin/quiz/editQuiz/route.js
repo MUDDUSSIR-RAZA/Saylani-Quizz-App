@@ -1,4 +1,5 @@
     import axios from "axios";
+import { revalidateTag } from "next/cache";
     import { NextResponse } from "next/server";
 
     export async function PATCH(req) {
@@ -9,6 +10,7 @@
                     `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/editQuiz`,
                     { _id, quiz_name, key, displayQuestions, quizOpen }
                 );
+      revalidateTag("quizzes")
                 return NextResponse.json(data);
             } catch (axiosError) {
                 return NextResponse.json(axiosError.response.data, { status: 400 });
