@@ -18,9 +18,9 @@ const AddCoursePage = () => {
   const getUpdateData = async () => {
     try {
       console.log("Get Update Data Request");
-      const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
-      const data = await res.json();
-      //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
+      // const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
+      // const data = await res.json();
+        const { data } = await axios.get(`/api/admin/courses/getCourses` );
       console.log("Get Update Data Request Response", data);
       setCourses(data);
     } catch (error) {
@@ -33,9 +33,9 @@ const AddCoursePage = () => {
       try {
         setLoading(true);
         console.log("UseEffect Request");
-        const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
-        const data = await res.json();
-        //   const { data } = await axios.get(`/api/admin/courses/getCourses` );
+        // const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
+        // const data = await res.json();
+          const { data } = await axios.get(`/api/admin/courses/getCourses` );
         console.log("UseEffect Request Request Response", data);
         setCourses(data);
         setLoading(false);
