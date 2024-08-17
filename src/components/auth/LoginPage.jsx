@@ -38,7 +38,7 @@ const LoginPage = () => {
         }
       );
       setLoading(false);
-      router.push("/student/dashboard");
+      router.push("/auth/signup");
     } catch (error) {
       const err = error.response.data;
       setLoading(false);
