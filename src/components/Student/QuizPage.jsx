@@ -30,7 +30,6 @@ const QuizPage = ({ quizId }) => {
           params: { quizId },
         });
         setQuizDetails(data);
-        setTimeLeft(quizDetails.questions[0].time_limit);
       } catch (error) {
          router.push("/student/dashboard")
       }
@@ -154,6 +153,7 @@ const QuizPage = ({ quizId }) => {
   }, [currentQuestionIndex, isQuizCompleted, quizDetails]);
 
   const handleStartQuiz = () => {
+    setTimeLeft(quizDetails.questions[0].time_limit);
     setQuizStarted(true);
   };
   const handleOptionClick = (questionId, selectedOption) => {
