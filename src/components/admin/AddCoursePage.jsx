@@ -24,7 +24,7 @@ const AddCoursePage = () => {
       console.log("Get Update Data Request Response", data);
       setCourses(data);
     } catch (error) {
-      toast.error(error);
+      toast.error(error); 
     }
   };
 
