@@ -1,4 +1,5 @@
 import axios from "axios";
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -9,6 +10,7 @@ export async function POST(req) {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/addQuiz`,
         { course_name, course_id, quiz_name, key }
       );
+      revalidateTag("quizzes")
       return NextResponse.json(data);
     } catch (axiosError) {
       return NextResponse.json(axiosError.response.data, { status: 400 });
