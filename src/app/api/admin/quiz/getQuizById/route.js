@@ -7,7 +7,7 @@ export async function GET(req) {
     try {
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getQuizById?id=${id}`,
-            { next: { tags: ["quizzes"] }, cache: "no-store" }
+            { next: { tags: ["quizzId"] }, cache: "no-store" }
         );
         const data = await res.json();
         return NextResponse.json(data)
