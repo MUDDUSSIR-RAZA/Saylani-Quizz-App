@@ -19,7 +19,7 @@ export async function GET(req) {
         const data = await res.json();
         return NextResponse.json(data)
     } catch (error) {
-        return NextResponse.json(error.response.data, { status: 400 });
+        return NextResponse.json(error, { status: 400 });
     }
 
 }
