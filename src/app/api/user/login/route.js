@@ -1,4 +1,5 @@
 import axios from "axios";
+import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
@@ -10,6 +11,11 @@ export async function POST(req) {
         });
         const response = NextResponse.json({ message: "Login Succesfuly", success: true })
         response.cookies.set("token", data, { httpOnly: true })
+        revalidateTag("studentQuizzes")
+        revalidateTag("courses")
+        revalidateTag("quizzes")
+        revalidateTag("requests")
+        revalidateTag("performance")
         return response
     } catch (axiosError) {
         return NextResponse.json(axiosError.response.data, { status: 400 })
