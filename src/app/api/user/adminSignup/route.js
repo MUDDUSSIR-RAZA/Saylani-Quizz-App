@@ -5,15 +5,11 @@ export async function POST(req) {
 
     try {
         const admin = await req.json()
-        try {
-            const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/admin/signUp`, {
-                ...admin
-            });
-            return NextResponse.json(data)
-        } catch (axiosError) {
-            return NextResponse.json(axiosError.response.data, { status: 400 })
-        }
+        const { data } = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/admin/signUp`, {
+            ...admin
+        });
+        return NextResponse.json(data)
     } catch (axiosError) {
-        return NextResponse.json(error)
+        return NextResponse.json(axiosError.response.data, { status: 400 })
     }
 }
