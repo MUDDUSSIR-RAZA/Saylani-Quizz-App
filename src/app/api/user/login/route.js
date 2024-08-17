@@ -14,6 +14,7 @@ export async function POST(req) {
         revalidateTag("studentQuizzes")
         revalidateTag("courses")
         revalidateTag("quizzes")
+        revalidateTag("quizzId")
         revalidateTag("requests")
         revalidateTag("performance")
         return response
