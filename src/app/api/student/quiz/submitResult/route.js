@@ -3,7 +3,6 @@ import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  try {
     const { userId, course_name, batch, quiz_name, totalQuestions, score } = await req.json();
     try {
       const { data } = await axios.post(
@@ -15,7 +14,4 @@ export async function POST(req) {
     } catch (axiosError) {
       return NextResponse.json(axiosError.response.data, { status: 400 });
     }
-  } catch (axiosError) {
-    return NextResponse.json(axiosError.response.data, { status: 400 });
-  }
 }
