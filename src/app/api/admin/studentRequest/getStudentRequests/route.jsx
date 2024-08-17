@@ -11,6 +11,7 @@ export async function GET() {
       { next: { tags: ["requests"] }, cache: "no-store" }
     );
     const data = await res.json();
+    console.log("requests" , data)
     return NextResponse.json(data);
   } catch (axiosError) {
     return NextResponse.json(axiosError, { status: 400 });
