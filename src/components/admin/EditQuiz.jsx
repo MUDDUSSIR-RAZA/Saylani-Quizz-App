@@ -24,7 +24,6 @@ const EditQuiz = ({ id }) => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.error("Error fetching data:", error);
       }
     };
 

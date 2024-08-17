@@ -10,7 +10,6 @@ export async function POST(req) {
       { course_name, batch, cities }
     );
     revalidateTag("courses");
-    console.log("Add Course API data ", data);
     return NextResponse.json(data);
   } catch (axiosError) {
     return NextResponse.json(axiosError.response.data, { status: 400 });

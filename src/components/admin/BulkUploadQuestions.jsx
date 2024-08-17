@@ -46,7 +46,6 @@ const BulkUploadQuestions = () => {
       try {
         questions = JSON.parse(fileContent); // Parse JSON file content
       } catch (err) {
-        console.error("Error parsing file content:", err);
         alert("Invalid file format. Please upload a valid JSON file.");
         return;
       }

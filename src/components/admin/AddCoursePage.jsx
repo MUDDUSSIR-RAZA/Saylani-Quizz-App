@@ -17,11 +17,9 @@ const AddCoursePage = () => {
 
   const getUpdateData = async () => {
     try {
-      console.log("Get Update Data Request");
       // const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
       // const data = await res.json();
         const { data } = await axios.get(`/api/admin/courses/getCourses` );
-      console.log("Get Update Data Request Response", data);
       setCourses(data);
     } catch (error) {
       toast.error(error); 
@@ -32,11 +30,9 @@ const AddCoursePage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        console.log("UseEffect Request");
         // const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
         // const data = await res.json();
           const { data } = await axios.get(`/api/admin/courses/getCourses` );
-        console.log("UseEffect Request Request Response", data);
         setCourses(data);
         setLoading(false);
       } catch (error) {
@@ -77,10 +73,8 @@ const AddCoursePage = () => {
         // Update courses state to reflect deletion
         setCourses(courses.filter((course) => course._id !== courseId));
       } else {
-        console.error("Failed to delete course");
       }
     } catch (error) {
-      console.error("Error deleting course:", error);
     }
   };
 

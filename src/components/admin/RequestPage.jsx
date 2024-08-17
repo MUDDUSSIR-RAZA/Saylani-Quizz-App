@@ -14,7 +14,6 @@ const RequestPage = () => {
         const { data } = await axios.get(
           `/api/admin/studentRequest/getStudentRequests`
         );
-        console.log("req" , data)
         setUpdateData(data);
       } catch (error) {
         toast.error(error.response.data);
@@ -31,7 +30,6 @@ const RequestPage = () => {
       );
       setUpdateData(data);
     } catch (error) {
-      console.error("Error fetching update data:", error);
     }
   };
 
@@ -53,7 +51,6 @@ const RequestPage = () => {
       }
       getUpdateData();
     } catch (error) {
-      console.error("Error signing up student:", error);
     }
   };
 

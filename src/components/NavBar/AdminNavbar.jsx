@@ -49,7 +49,6 @@ const AdminNavbar = () => {
       router.push("/auth/login");
       return;
     } catch (error) {
-      console.error(error.response.data);
       return;
     }
   };

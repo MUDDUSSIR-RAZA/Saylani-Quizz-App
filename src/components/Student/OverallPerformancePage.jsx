@@ -20,7 +20,6 @@ const OverallPerformancePage = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        console.error("Error fetching data:", error);
       }
     };
     fetchData();

@@ -16,7 +16,6 @@ export async function GET(req) {
             { next: { tags: ["quizzes ,studentQuizzes"] }, cache: "no-store" }
         );
         const data = await res.json();
-        console.log("quizzes student" , data)
         return NextResponse.json(data)
     } catch (error) {
         return NextResponse.json(error, { status: 400 });

@@ -13,7 +13,6 @@ const ProfilePage = () => {
         const { data } = await axios.get("/api/student/profile/getProfile");
         setStudent(data);
       } catch (error) {
-        console.error("Error fetching data:", error);
       }
     };
 

@@ -17,7 +17,6 @@ const DashBoard = () => {
       try {
         const { data } = await axios.get("/api/student/quiz/getStudentQuiz");
         setCourses(data);
-        console.log("data " , data)
         setLoading(false)
       } catch (error) {
         setLoading(false)

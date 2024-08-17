@@ -8,7 +8,7 @@ export async function middleware(request) {
 
     const isAdminPath = path === '/admin/dashboard' || path === '/admin/addBulkQuestion' || path === '/admin/createquiz' || path === '/admin/addQuestion' || path === '/admin/requests' || path === '/admin/editquiz' || path === '/admin/addCourse'
 
-    const isStudentPath = path === '/student/dashboard' || path === '/student/OverallPerformance' || path === '/student/profile'
+    const isStudentPath = path === '/student/dashboard' || path === '/student/OverallPerformance' || path === '/student/profile' || path === '/student/quiz/:path'
 
     const token = request.cookies.get("token")?.value || ''
 
@@ -57,5 +57,6 @@ export const config = {
         '/student/dashboard',
         '/student/profile',
         '/student/OverallPerformance',
+    
     ]
 }
