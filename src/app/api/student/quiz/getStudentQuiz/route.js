@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
 
     const token = cookies().get("token").value;
-    try {
         try {
             // const { data } = await axios.get(
             //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/student/getStudentQuiz`, {
@@ -21,7 +20,4 @@ export async function GET(req) {
         } catch (error) {
             return NextResponse.json(error.response.data, { status: 400 });
         }
-    } catch (error) {
-        return NextResponse.json(axiosError.response.data, { status: 400 });
-    }
 }
