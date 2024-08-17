@@ -10,6 +10,7 @@ export async function PATCH(req) {
             { _id, quiz_name, key, displayQuestions, quizOpen }
         );
         revalidateTag("quizzes")
+        revalidateTag("quizzId")
         return NextResponse.json(data);
     } catch (axiosError) {
         return NextResponse.json(axiosError.response.data, { status: 400 });
