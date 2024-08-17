@@ -3,15 +3,16 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    try {
-      const { data } = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getAllQuizzes`
-      );
-      return NextResponse.json(data)
-    } catch (error) {
-      return NextResponse.json(error.response.data, { status: 400 });
-    }
+    // const { data } = await axios.get(
+    //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getAllQuizzes`
+    // );
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getAllQuizzes`,
+      { next: { tags: ["quizzes"] }, cache: "no-store" }
+    );
+    const data = await res.json();
+    return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json(axiosError.response.data, { status: 400 });
+    return NextResponse.json(error, { status: 400 });
   }
 }
