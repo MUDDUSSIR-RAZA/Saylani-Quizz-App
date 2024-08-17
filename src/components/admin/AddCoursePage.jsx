@@ -53,8 +53,7 @@ const AddCoursePage = () => {
       const { data } = await axios.post("/api/admin/courses/addCourse", {
         ...newCourse,
       });
-      revalidateTag("courses")
-      // getUpdateData();
+      getUpdateData();
       setNewCourse({
         course_name: "",
         batch: "",
@@ -62,6 +61,7 @@ const AddCoursePage = () => {
       });
       toast.success(data);
     } catch (error) {
+      console.log(error)
       toast.error(error.response.data);
     }
   };
