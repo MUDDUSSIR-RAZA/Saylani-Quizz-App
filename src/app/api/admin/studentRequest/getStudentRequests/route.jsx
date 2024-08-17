@@ -7,7 +7,7 @@ export async function GET() {
     //   `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getStudentRequests`
     // );
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getCourses`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/admin/getStudentRequests`,
       { next: { tags: ["requests"] }, cache: "no-store" }
     );
     const data = await res.json();
