@@ -14,7 +14,7 @@ export async function GET(req) {
         // );
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/student/getQuizById?quizId=${quizId}&token=${token}`,
-            { next: { tags: ["quizzes"] }, cache: "no-store" }
+            { next: { tags: ["quizzId"] }, cache: "no-store" }
         );
         const data = await res.json();
         return NextResponse.json(data)
