@@ -14,6 +14,7 @@ const RequestPage = () => {
         const { data } = await axios.get(
           `/api/admin/studentRequest/getStudentRequests`
         );
+        console.log("req" , data)
         setUpdateData(data);
       } catch (error) {
         toast.error(error.response.data);
