@@ -13,9 +13,10 @@ export async function GET(req) {
         // );
         const res = await fetch(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/student/getStudentQuiz?token=${token}`,
-            { next: { tags: ["quizzes"] }, cache: "no-store" }
+            { next: { tags: ["quizzes ,studentQuizzes"] }, cache: "no-store" }
         );
         const data = await res.json();
+        console.log("quizzes student" , data)
         return NextResponse.json(data)
     } catch (error) {
         return NextResponse.json(error, { status: 400 });
