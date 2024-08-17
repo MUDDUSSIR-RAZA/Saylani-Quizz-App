@@ -3,7 +3,6 @@ import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  try {
     const { course_name, course_id, quiz_name, key } = await req.json();
     try {
       const { data } = await axios.post(
