@@ -6,7 +6,6 @@ import { Toaster } from "react-hot-toast";
 import axios from "axios";
 
 const OverallPerformancePage = () => {
-  const [results, setResults] = useState([]);
   const [groupedResults, setGroupedResults] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -15,7 +14,6 @@ const OverallPerformancePage = () => {
       try {
         setLoading(true);
         const { data } = await axios.get("/api/student/getOverallPerformance");
-        setResults(data);
         groupResultsByCourseAndBatch(data);
         setLoading(false);
       } catch (error) {
@@ -68,13 +66,15 @@ const OverallPerformancePage = () => {
   if (!groupedResults.length) {
     return (
       <>
-       <>
-        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
-          {loading && <Loading />}
-          {!loading && <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">No Quizzes Available</div>}
-        </div>
-      </>
-      </>
+          <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
+            {loading && <Loading />}
+            {!loading && (
+              <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+                No Quizzes Available
+              </div>
+            )}
+          </div>
+        </>
     );
   }
 
@@ -135,7 +135,9 @@ const OverallPerformancePage = () => {
                   <tr className="shadow-inner text-xl md:text-lg">
                     <th className="p-4 shadow-inner md:px-0">Quiz Name</th>
                     <th className="p-4 shadow-inner md:px-0">Score</th>
-                    <th className="p-4 shadow-inner md:px-0">Total Questions</th>
+                    <th className="p-4 shadow-inner md:px-0">
+                      Total Questions
+                    </th>
                     <th className="p-4 shadow-inner md:px-0">Percentage</th>
                     <th className="p-4 shadow-inner md:px-0">Date Taken</th>
                   </tr>
