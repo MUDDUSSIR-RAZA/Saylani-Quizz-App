@@ -7,7 +7,7 @@
 //        <QuizPage quizDetails={quizDetails} error={error} />
 //     </>
 //   );
-// };
+// }; 
 import QuizPage from "@/components/Student/QuizPage";
 import React from "react";
 
