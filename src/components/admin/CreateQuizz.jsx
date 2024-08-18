@@ -33,21 +33,6 @@ const CreateQuizz = () => {
     fetchData();
   }, []);
 
-  if (!courses.length) {
-    return (
-      <>
-        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
-          {loading && <Loading />}
-          {!loading && (
-            <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
-              No Quizzes Available
-            </div>
-          )}
-        </div>
-      </>
-    );
-  }
-
   const {
     values,
     errors,
@@ -91,6 +76,21 @@ const CreateQuizz = () => {
     setFieldValue("course_name", courseName);
     setFieldValue("course_id", courseId);
   };
+
+  if (!courses.length) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && (
+            <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+              No Quizzes Available
+            </div>
+          )}
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
