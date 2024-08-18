@@ -12,8 +12,7 @@ const ProfilePage = () => {
       try {
         const { data } = await axios.get("/api/student/profile/getProfile");
         setStudent(data);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchData();
@@ -22,8 +21,9 @@ const ProfilePage = () => {
   if (!student) {
     return (
       <>
-        {" "}
-        <Loading />{" "}
+        <div className="flex flex-col items-center h-dvh m-auto justify-center">
+          <Loading />
+        </div>
       </>
     );
   }
@@ -37,14 +37,13 @@ const ProfilePage = () => {
       case "failed":
         return "text-red-500";
       case "completed":
-        return "text-blue-500";  // assuming blue for completed
+        return "text-blue-500"; // assuming blue for completed
       case "canceled":
-        return "text-gray-500";  // assuming gray for canceled
+        return "text-gray-500"; // assuming gray for canceled
       default:
         return "";
     }
   };
-  
 
   return (
     <div className="flex flex-col items-center h-dvh m-auto justify-center">
