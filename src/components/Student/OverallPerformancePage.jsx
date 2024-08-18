@@ -68,24 +68,18 @@ const OverallPerformancePage = () => {
   if (!groupedResults.length) {
     return (
       <>
-        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
-          {loading && (
-            <div className="flex flex-col items-center h-dvh m-auto justify-center">
-              <Loading />
-            </div>
-          )}
-          {!loading && (
-            <div className=" text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
-              No Quizzes Attempted Yet
-            </div>
-          )}
+       <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">No Quizzes Available</div>}
         </div>
+      </>
       </>
     );
   }
 
   return (
-    <div className="flex flex-col items-center  h-[90dvh] overflow-y-scroll overflow-x-auto">
+    <div className="flex flex-col items-center  h-[90dvh] overflow-y-scroll overflow-x-auto px-5">
       <Toaster position="top-right" reverseOrder={true} />
       <header className="my-5 text-center backdrop-blur-2xl bg-[#918d8d52] shadow-inner text-button tracking-[5px] py-2 font-black rounded-xl w-full">
         <h1> Overall Performance</h1>
@@ -96,7 +90,7 @@ const OverallPerformancePage = () => {
         return (
           <div
             key={index}
-            className="w-full max-w-[90%] backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6"
+            className="w-full max-w-[90%] md:max-w-full backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6"
           >
             <h2 className="text-3xl font-bold mb-4 md:text-2xl">
               {group.course} - Batch {group.batch}
@@ -136,14 +130,14 @@ const OverallPerformancePage = () => {
               </p>
             </div>
             <div className="overflow-y-auto">
-              <table className="min-w-full backdrop-blur-2xl bg-[#ffffff00] shadow-inner lg950px:min-w-[1000px] lg950px:overflow-x-auto ">
+              <table className="min-w-full backdrop-blur-2xl bg-[#ffffff00] shadow-inner lg950px:min-w-[1000px] md:min-w-[700px] smm:min-w-[600px] lg950px:overflow-x-auto ">
                 <thead>
-                  <tr className="shadow-inner text-xl">
-                    <th className="p-4 shadow-inner">Quiz Name</th>
-                    <th className="p-4 shadow-inner">Score</th>
-                    <th className="p-4 shadow-inner">Total Questions</th>
-                    <th className="p-4 shadow-inner">Percentage</th>
-                    <th className="p-4 shadow-inner">Date Taken</th>
+                  <tr className="shadow-inner text-xl md:text-lg">
+                    <th className="p-4 shadow-inner md:px-0">Quiz Name</th>
+                    <th className="p-4 shadow-inner md:px-0">Score</th>
+                    <th className="p-4 shadow-inner md:px-0">Total Questions</th>
+                    <th className="p-4 shadow-inner md:px-0">Percentage</th>
+                    <th className="p-4 shadow-inner md:px-0">Date Taken</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -154,8 +148,8 @@ const OverallPerformancePage = () => {
                     ).toFixed(2);
 
                     return (
-                      <tr key={idx} className="text-lg">
-                        <td className="border px-4 py-2">{quiz.quiz_name}</td>
+                      <tr key={idx} className="text-lg md:text-base">
+                        <td className="border px-4 py-2 ">{quiz.quiz_name}</td>
                         <td className="border px-4 py-2 text-center">
                           {quiz.score}
                         </td>
