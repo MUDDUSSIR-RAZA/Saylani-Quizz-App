@@ -6,7 +6,7 @@ const OverallPerformance = () => {
   return (
     <>
       <StudentNavbar />
-      <main className="pt-20 px-5">
+      <main className="pt-20">
         <OverallPerformancePage />
       </main>
     </>
