@@ -9,13 +9,16 @@ import axios from "axios";
 
 const DashBoard = () => {
   const [quizzes, setQuizzes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`/api/admin/quiz/getAllQuiz`);
         setQuizzes(data);
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         toast.error(error.response.data);
       }
     };
@@ -33,6 +36,21 @@ const DashBoard = () => {
       toast.error(error.response.data);
     }
   };
+
+  if (!quizzes.length) {
+    return (
+      <>
+          <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
+            {loading && <Loading />}
+            {!loading && (
+              <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+                No Quizzes Available
+              </div>
+            )}
+          </div>
+        </>
+    );
+  }
 
   if (!Array.isArray(quizzes) || quizzes.length === 0) {
     return (
@@ -56,15 +74,6 @@ const DashBoard = () => {
     }
   };
 
-  if (!quizzes) {
-    return (
-      <>
-        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
-          <Loading />
-        </div>
-      </>
-    );
-  }
 
   return (
     <>
