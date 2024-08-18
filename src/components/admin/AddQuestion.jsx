@@ -5,32 +5,47 @@ import axios from "axios";
 import Adding from "../InPageLoader/Adding";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Loading from "../Loading";
 
 const AddQuestion = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [quizId, setQuizId] = useState("");
   const [question_text, setQuestionText] = useState("");
   const [options, setOptions] = useState(["", "", "", ""]);
   const [correctAnswer, setCorrectAnswer] = useState("");
   const [time_limit, setTimeLimit] = useState(30);
   const [quizzes, setQuizzes] = useState([]);
-  const router =useRouter()
+  const router = useRouter();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          `/api/admin/quiz/getAllQuiz`
-
-        );
+        const { data } = await axios.get(`/api/admin/quiz/getAllQuiz`);
         setQuizzes(data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         toast.error(error.response.data);
       }
     };
 
     fetchData();
   }, []);
+
+  if (!quizzes.length) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && (
+            <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+              No Quizzes Available
+            </div>
+          )}
+        </div>
+      </>
+    );
+  }
 
   const handleOptionChange = (index, value) => {
     const newOptions = [...options];
@@ -55,7 +70,7 @@ const AddQuestion = () => {
       });
       toast.success(data);
       setLoading(false);
-      router.push('/admin/dashboard')
+      router.push("/admin/dashboard");
     } catch (error) {
       setLoading(false);
       toast.error(error.response.data);
