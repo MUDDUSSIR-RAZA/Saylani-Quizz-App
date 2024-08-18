@@ -69,7 +69,11 @@ const OverallPerformancePage = () => {
     return (
       <>
         <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
-          {loading && <Loading />}
+          {loading && (
+            <div className="flex flex-col items-center h-dvh m-auto justify-center">
+              <Loading />
+            </div>
+          )}
           {!loading && (
             <div className=" text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
               No Quizzes Attempted Yet
