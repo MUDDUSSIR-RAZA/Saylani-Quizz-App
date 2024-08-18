@@ -55,7 +55,7 @@ const LoginPage = () => {
       <Toaster position="top-right" reverseOrder={true} />
       <section className="relative w-full h-screen">
         <div className="bg-black bg-opacity-50 h-full flex items-center justify-center">
-          <div className="w-full max-w-md bg-[#ffffff8b] backdrop-blur-lg rounded-lg shadow-lg p-8">
+          <div className="w-full max-w-md smm:max-w-[350px] bg-[#ffffff8b] backdrop-blur-lg rounded-lg shadow-lg p-8">
             <h1 className="text-2xl font-bold text-center text-gray-900">
               Login to your account
             </h1>
