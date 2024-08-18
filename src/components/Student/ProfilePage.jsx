@@ -53,10 +53,10 @@ const ProfilePage = () => {
         </header>
 
         <div className="w-full backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6">
-          <h2 className="text-3xl font-extrabold mt-2 mb-5 pb-3">
+          <h2 className="text-3xl font-extrabold mt-2 mb-5 pb-3 smm:text-2xl">
             Profile Details
           </h2>
-          <div className="mb-4 my-3 text-2xl">
+          <div className="mb-4 my-3 text-2xl smm:text-xl">
             <div className="mb-1  my-3">
               <span className="font-semibold">Name: </span>
               <span>{student.name}</span>
@@ -83,7 +83,7 @@ const ProfilePage = () => {
             </div>
           </div>
           <hr className="text-slate-950 bg-button " />
-          <h2 className="text-3xl py-3 font-bold mb-4">Enrolled Courses</h2>
+          <h2 className="text-3xl py-3 font-bold mb-4 smm:text-2xl">Enrolled Courses</h2>
           <div className="overflow-y-auto max-h-[300px]">
             <table className="min-w-full backdrop-blur-2xl bg-[#ffffff00] shadow-inner text-center">
               <thead>
