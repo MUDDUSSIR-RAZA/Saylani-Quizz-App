@@ -6,6 +6,7 @@ import { AiFillEye } from "react-icons/ai";
 
 const RequestPage = () => {
   const [selectedStudentId, setSelectedStudentId] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [data, setUpdateData] = useState([]);
 
   useEffect(() => {
@@ -15,13 +16,30 @@ const RequestPage = () => {
           `/api/admin/studentRequest/getStudentRequests`
         );
         setUpdateData(data);
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         toast.error(error.response.data);
       }
     };
 
     fetchData();
   }, []);
+
+  if (!data.length) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && (
+            <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+              No Quizzes Available
+            </div>
+          )}
+        </div>
+      </>
+    );
+  }
 
   const getUpdateData = async () => {
     try {
