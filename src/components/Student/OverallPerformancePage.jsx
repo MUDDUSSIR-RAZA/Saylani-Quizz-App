@@ -70,18 +70,23 @@ const OverallPerformancePage = () => {
       <>
         <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
           {loading && <Loading />}
-          {!loading && <div className=" text-[60px] font-extrabold tracking-widest text-button">No Quizzes Attempted Yet</div>}
+          {!loading && (
+            <div className=" text-[60px] font-extrabold tracking-widest text-button">
+              No Quizzes Attempted Yet
+            </div>
+          )}
         </div>
       </>
     );
   }
 
   return (
-    <div className="flex flex-col items-center h-dvh w-dvw overflow-y-scroll overflow-x-auto">
+    <div className="flex flex-col items-center  h-[90dvh] overflow-y-scroll overflow-x-auto">
       <Toaster position="top-right" reverseOrder={true} />
-      <h1 className="text-2xl font-extrabold my-6 tracking-widest">
-        Overall Performance
-      </h1>
+      <header className="my-5 text-center backdrop-blur-2xl bg-[#918d8d52] shadow-inner text-button tracking-[5px] py-2 font-black rounded-xl w-full">
+        <h1> Overall Performance</h1>
+      </header>
+
       {groupedResults.map((group, index) => {
         const aggregatedResult = calculateAggregatedResult(group.quizzes);
         return (
