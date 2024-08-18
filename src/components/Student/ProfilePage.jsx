@@ -21,7 +21,7 @@ const ProfilePage = () => {
   if (!student) {
     return (
       <>
-        <div className="flex flex-col items-center h-dvh m-auto justify-center">
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
           <Loading />
         </div>
       </>
@@ -46,7 +46,7 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center h-[90dvh] m-auto scroll-auto">
+    <div className="flex flex-col items-center h-[90dvh] m-auto scroll-auto px-5">
       <div className="my-5 flex flex-col items-center w-full max-w-[80%] md:w-full md:max-w-[98%]">
         <header className="mb-3 text-center backdrop-blur-2xl bg-[#918d8d52] shadow-inner text-button tracking-[5px] py-2 font-black rounded-xl w-full">
           <h1>Profile</h1>
@@ -83,7 +83,9 @@ const ProfilePage = () => {
             </div>
           </div>
           <hr className="text-slate-950 bg-button " />
-          <h2 className="text-3xl py-3 font-bold mb-4 smm:text-2xl">Enrolled Courses</h2>
+          <h2 className="text-3xl py-3 font-bold mb-4 smm:text-2xl">
+            Enrolled Courses
+          </h2>
           <div className="overflow-y-auto max-h-[300px]">
             <table className="min-w-full backdrop-blur-2xl bg-[#ffffff00] shadow-inner text-center">
               <thead>
