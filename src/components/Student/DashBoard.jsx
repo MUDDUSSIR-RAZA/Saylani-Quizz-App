@@ -66,29 +66,6 @@ const DashBoard = () => {
           </div>
         ))}
       </div>
-      {/* {showKeyEntry && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-5 rounded shadow-lg">
-            <h2 className="text-lg font-bold mb-3">Enter Quiz Key</h2>
-            <input
-              type="text"
-              value={enteredKey}
-              onChange={(e) => setEnteredKey(e.target.value)}
-              className="border p-2 mb-3 w-full"
-              placeholder="Enter key"
-            />
-            <button
-              onClick={handleKeySubmit}
-              className="bg-blue-500 text-white px-4 py-2 rounded"
-            >
-              Submit
-            </button>
-            {errorMessage && (
-              <p className="text-red-500 mt-2">{errorMessage}</p>
-            )}
-          </div>
-        </div>
-      )} */}
     </>
   );
 };
