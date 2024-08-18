@@ -3,9 +3,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../Loading";
 
 const SignupPage = () => {
   const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [isSend, setIsSend] = useState(false);
   const [studentData, setStudentData] = useState({
     name: "",
@@ -25,13 +27,44 @@ const SignupPage = () => {
       try {
         const { data } = await axios.get(`/api/admin/courses/getCourses`);
         setCourses(data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         toast.error(error.response.data);
       }
     };
 
     fetchData();
   }, []);
+
+  if (!courses.length) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-dvh w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && (
+            <>
+              <div>
+                <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+                  No Courses Available
+                </div>
+                <div className="text-lg text-center">
+                  Already Signup?
+                  <a
+                    href="/auth/login"
+                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                  >
+                    {" "}
+                    Sign in
+                  </a>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+      </>
+    );
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -44,7 +77,7 @@ const SignupPage = () => {
           return prevStudentData;
         }
       }
-     
+
       const updatedStudentData = { ...prevStudentData, [name]: value };
 
       if (name === "phone") {
@@ -62,10 +95,9 @@ const SignupPage = () => {
           // If phone number is invalid, return previous state without updating
           return prevStudentData;
         }
-  
+
         return updatedStudentData;
       }
-      
 
       if (name === "city") {
         const filteredCourses = courses.filter((course) =>
@@ -324,12 +356,14 @@ const SignupPage = () => {
               >
                 Sign Up
               </button>
-            <div className="text-lg text-center">Already Signup?
+              <div className="text-lg text-center">
+                Already Signup?
                 <a
                   href="/auth/login"
                   className="font-medium text-indigo-600 hover:text-indigo-500"
                 >
-                   {" "}Sign in
+                  {" "}
+                  Sign in
                 </a>
               </div>
             </div>
