@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import UploadingBulkFile from "../InPageLoader/UploadingBulkFile";
 import toast, { Toaster } from "react-hot-toast";
+import Loading from "../Loading";
 
 const BulkUploadQuestions = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [quizzes, setQuizzes] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState("");
   const [file, setFile] = useState(null);
@@ -14,18 +15,32 @@ const BulkUploadQuestions = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          `/api/admin/quiz/getAllQuiz`
-
-        );
+        const { data } = await axios.get(`/api/admin/quiz/getAllQuiz`);
         setQuizzes(data);
+        setLoading(false);
       } catch (error) {
+        setLoading(false);
         toast.error(error.response.data);
       }
     };
 
     fetchData();
   }, []);
+
+  if (!quizzes.length) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && (
+            <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+              No Quizzes Available
+            </div>
+          )}
+        </div>
+      </>
+    );
+  }
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -60,7 +75,7 @@ const BulkUploadQuestions = () => {
         setLoading(false);
       } catch (error) {
         setLoading(false);
-        toast.error(error.response.data)
+        toast.error(error.response.data);
       }
     };
 
