@@ -6,6 +6,7 @@ import { quizTitleSchema } from "@/yupSchemas/page";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 import Creating from "../InPageLoader/Creating";
+import Loading from "../Loading";
 
 const initialValues = {
   quiz_name: " ",
@@ -15,20 +16,37 @@ const initialValues = {
 
 const CreateQuizz = () => {
   const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(`/api/admin/courses/getCourses`);
         setCourses(data);
+        setLoading(false)
       } catch (error) {
+        setLoading(false)
         toast.error(error.response.data);
       }
     };
 
     fetchData();
   }, []);
+
+  if (!courses.length) {
+    return (
+      <>
+        <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
+          {loading && <Loading />}
+          {!loading && (
+            <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+              No Quizzes Available
+            </div>
+          )}
+        </div>
+      </>
+    );
+  }
 
   const {
     values,
