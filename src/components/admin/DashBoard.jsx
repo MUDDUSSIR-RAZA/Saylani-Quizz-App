@@ -13,9 +13,7 @@ const DashBoard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(
-          `/api/admin/quiz/getAllQuiz`
-        );
+        const { data } = await axios.get(`/api/admin/quiz/getAllQuiz`);
         setQuizzes(data);
       } catch (error) {
         toast.error(error.response.data);
@@ -38,10 +36,10 @@ const DashBoard = () => {
 
   if (!Array.isArray(quizzes) || quizzes.length === 0) {
     return (
-      <div className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4">
-        <h1 className="p-5 font-black text-7xl text-center md:text-5xl">
-          Quizzes Not Available
-        </h1>
+      <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
+        <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+          No Quizzes Available
+        </div>
       </div>
     );
   }
