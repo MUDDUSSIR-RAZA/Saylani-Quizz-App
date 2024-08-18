@@ -47,7 +47,7 @@ const ProfilePage = () => {
 
   return (
     <div className="flex flex-col items-center h-[85dvh] m-auto justify-center">
-      <div className="my-4 flex flex-col items-center w-full max-w-[80%] md:max-w-full md:w-full">
+      <div className="my-4 flex flex-col items-center w-full max-w-[80%] md:w-full md:max-w-[98%]">
         <h1 className="text-2xl font-black my-6 tracking-[10px] md:tracking-[5px] ">
           Student Profile
         </h1>
