@@ -29,8 +29,7 @@ const RequestPage = () => {
         `/api/admin/studentRequest/getStudentRequests`
       );
       setUpdateData(data);
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleVerify = async (id, status) => {
@@ -50,8 +49,7 @@ const RequestPage = () => {
         }
       }
       getUpdateData();
-    } catch (error) {
-    }
+    } catch (error) {}
   };
 
   const handleViewDetails = (id) => {
@@ -83,11 +81,15 @@ const RequestPage = () => {
             <div className="backdrop-blur-xl bg-[#ffffff00] shadow-inner border-2 border-[#ccc] p-3 my-3 rounded-xl flex justify-between items-center  xl:max-w-[80%] xl:mx-auto md:max-w-[95%]">
               <div className="flex text-center xl:flex-col xl:my-1 xl:text-left xl:w-[70%]">
                 <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg tracking-widest flex justify-center items-center capitalize xl:w-full xl:my-2 xl:backdrop-blur-0 xl:shadow-none xl:justify-start">
-                  <div className="hidden xl:flex xl:text-wrap font-bold">NAME: </div>
+                  <div className="hidden xl:flex xl:text-wrap font-bold">
+                    NAME:{" "}
+                  </div>
                   <span>{user.name}</span>
                 </p>
                 <p className="w-[23dvw] backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-center flex justify-center items-center xl:w-full xl:my-2  xl:backdrop-blur-0 xl:shadow-none xl:justify-start">
-                  <div className="hidden xl:flex xl:text-wrap font-bold">NIC: </div>
+                  <div className="hidden xl:flex xl:text-wrap font-bold">
+                    NIC:{" "}
+                  </div>
                   <div>{user.nic}</div>
                 </p>
                 <div className="flex backdrop-blur-3xl bg-[#ffffff00] shadow-inner p-1 rounded px-2 mx-2 text-lg text-center xl:backdrop-blur-0 xl:shadow-none">
