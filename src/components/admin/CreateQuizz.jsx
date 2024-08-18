@@ -84,7 +84,7 @@ const CreateQuizz = () => {
           {loading && <Loading />}
           {!loading && (
             <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
-              No Quizzes Available
+              No Courses Available
             </div>
           )}
         </div>
