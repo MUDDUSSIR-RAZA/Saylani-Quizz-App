@@ -48,9 +48,10 @@ const ProfilePage = () => {
   return (
     <div className="flex flex-col items-center h-[90dvh] m-auto justify-center">
       <div className="my-4 flex flex-col items-center w-full max-w-[80%] md:w-full md:max-w-[98%]">
-        <h1 className="text-2xl font-black my-6 tracking-[10px] md:tracking-[5px] ">
-          Student Profile
-        </h1>
+        <header className="mb-3 text-center backdrop-blur-2xl bg-[#918d8d52] shadow-inner text-button tracking-[5px] py-2 font-black rounded-xl w-full">
+          <h1>Profile</h1>
+        </header>
+
         <div className="w-full backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl p-6 mb-6">
           <h2 className="text-3xl font-extrabold mt-2 mb-5 pb-3">
             Profile Details
