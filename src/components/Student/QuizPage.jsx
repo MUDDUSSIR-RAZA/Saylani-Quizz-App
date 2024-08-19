@@ -31,7 +31,7 @@ const QuizPage = ({ quizId }) => {
         });
         setQuizDetails(data);
       } catch (error) {
-         router.push("/student/dashboard")
+        router.push("/student/dashboard");
       }
     };
 
@@ -231,7 +231,7 @@ const QuizPage = ({ quizId }) => {
 
           <button
             onClick={handleStartQuiz}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-11 rounded-2xl text-6xl smm:text-3xl"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-6 px-11 rounded-2xl text-6xl"
           >
             Start Quiz
           </button>
@@ -327,7 +327,7 @@ const QuizPage = ({ quizId }) => {
       )}
 
       {!isPaused && (
-        <div className="w-dvw h-dvh flex justify-center items-center md:mt-10">
+        <div className="w-[95dvw] h-dvh flex justify-center items-center mx-auto md:mt-10">
           <Toaster position="top-right" reverseOrder={true} />
           <div className="flex flex-col items-center backdrop-blur-xl bg-bgColor rounded-lg shadow-2xl p-7">
             <h1 className="text-2xl font-bold tracking-widest mb-5">
@@ -358,7 +358,12 @@ const QuizPage = ({ quizId }) => {
               >
                 {(value) => (
                   <CircularProgressbar
-                    value={(timeLeft / quizDetails.questions[currentQuestionIndex].time_limit) * 100} // Calculate the percentage of time left
+                    value={
+                      (timeLeft /
+                        quizDetails.questions[currentQuestionIndex]
+                          .time_limit) *
+                      100
+                    } // Calculate the percentage of time left
                     text={`${timeLeft}`} // Display the current time left
                     styles={buildStyles({
                       pathColor: calculatePathColor(timeLeft), // Dynamically calculate path color
