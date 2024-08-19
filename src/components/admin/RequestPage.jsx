@@ -34,7 +34,7 @@ const RequestPage = () => {
           {loading && <Loading />}
           {!loading && (
             <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
-              No Quizzes Available
+              No Requests Available
             </div>
           )}
         </div>
