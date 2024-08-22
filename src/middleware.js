@@ -12,8 +12,6 @@ export async function middleware(request) {
 
     const token = request.cookies.get("token")?.value || ''
 
-    // console.log(isStudentPath)
-    console.log("isStudentPath " , isStudentPath) 
 
 
     if (token) {
@@ -26,7 +24,6 @@ export async function middleware(request) {
                 return NextResponse.redirect(new URL('/admin/dashboard', request.url));
             }
             else if (!isStudentPath && role == "student") {
-                console.log("isStudentPath condition = " , isStudentPath) 
                 return NextResponse.redirect(new URL('/student/dashboard', request.url));
             }
             else if (role != "student" && role != "admin" && !isPublicPath) {
