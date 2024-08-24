@@ -5,21 +5,23 @@ import { card } from "@/css/quizList.module.css";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import Loading from "../Loading";
+import { Toaster } from "react-hot-toast";
 
 const DashBoard = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [courses, setCourses] = useState([]);
-  
+
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true)
+      setLoading(true);
       try {
         const { data } = await axios.get("/api/student/quiz/getStudentQuiz");
         setCourses(data);
-        setLoading(false)
+        setLoading(false);
       } catch (error) {
-        setLoading(false)
+        console.log(error)
+        setLoading(false);
       }
     };
 
@@ -31,7 +33,11 @@ const DashBoard = () => {
       <>
         <div className=" backdrop-blur-2xl bg-[#ffffff00] rounded-lg shadow-2xl h-[90dvh] w-dvw flex items-center justify-center">
           {loading && <Loading />}
-          {!loading && <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">No Quizzes Available</div>}
+          {!loading && (
+            <div className="text-[60px] md:text-[28px] font-extrabold tracking-widest text-button">
+              No Quizzes Available
+            </div>
+          )}
         </div>
       </>
     );
@@ -40,6 +46,7 @@ const DashBoard = () => {
   return (
     <>
       <div className="flex flex-wrap justify-center z-30">
+        <Toaster position="top-right" reverseOrder={true} />
         {courses.map((course) => (
           <div
             key={course._id}
