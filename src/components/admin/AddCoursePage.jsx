@@ -4,10 +4,10 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Loading from "../Loading";
-import { revalidateTag } from "next/cache";
 
 const AddCoursePage = () => {
   const [loading, setLoading] = useState(true);
+  const [selectedCourseId, setSelectedCourseId] = useState(null);
   const [courses, setCourses] = useState([]);
   const [newCourse, setNewCourse] = useState({
     course_name: "",
@@ -17,12 +17,14 @@ const AddCoursePage = () => {
 
   const getUpdateData = async () => {
     try {
-      // const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
-      // const data = await res.json();
-        const { data } = await axios.get(`/api/admin/courses/getCourses` );
+      const res = await fetch("/api/admin/courses/getCourses", {
+        next: { tags: ["courses"] },
+      });
+      const data = await res.json();
+      // const { data } = await axios.get(`/api/admin/courses/getCourses` );
       setCourses(data);
     } catch (error) {
-      toast.error(error); 
+      toast.error(error);
     }
   };
 
@@ -30,9 +32,11 @@ const AddCoursePage = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // const res = await fetch("/api/admin/courses/getCourses", { next: { tags: ['courses'] } });
-        // const data = await res.json();
-          const { data } = await axios.get(`/api/admin/courses/getCourses` );
+        const res = await fetch("/api/admin/courses/getCourses", {
+          next: { tags: ["courses"] },
+        });
+        const data = await res.json();
+        // const { data } = await axios.get(`/api/admin/courses/getCourses` );
         setCourses(data);
         setLoading(false);
       } catch (error) {
@@ -61,21 +65,8 @@ const AddCoursePage = () => {
     }
   };
 
-  const handleDeleteCourse = async (courseId) => {
-    try {
-      // Simulating DELETE request to remove course
-      // Replace with actual fetch logic to DELETE course from backend
-      const response = await fetch(`/api/admin-courses/${courseId}`, {
-        method: "DELETE",
-      });
-
-      if (response.ok) {
-        // Update courses state to reflect deletion
-        setCourses(courses.filter((course) => course._id !== courseId));
-      } else {
-      }
-    } catch (error) {
-    }
+  const handleEditCourse = async (id) => {
+    setSelectedCourseId(id === selectedCourseId ? null : id);
   };
 
   return (
@@ -167,20 +158,46 @@ const AddCoursePage = () => {
                 key={course._id}
                 className="backdrop-blur-xl bg-[#ffffff00] rounded-lg shadow-2xl p-4 m-4"
               >
-                <h3 className="text-lg font-bold mb-2">{course.course_name}</h3>
-                <p>
-                  <span className="font-medium">Batch:</span> {course.batch}
-                </p>
-                <p>
-                  <span className="font-medium">Cities:</span>{" "}
-                  {course.cities.join(", ")}
-                </p>
-                <button
-                  className="mt-2 bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
-                  onClick={() => handleDeleteCourse(course._id)}
-                >
-                  Edit
-                </button>
+                {selectedCourseId != course._id && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">
+                      {course.course_name}
+                    </h3>
+                    <p>
+                      <span className="font-medium">Batch:</span> {course.batch}
+                    </p>
+                    <p>
+                      <span className="font-medium">Cities:</span>{" "}
+                      {course.cities.join(", ")}
+                    </p>
+                    <button
+                      className="mt-2 bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
+                      onClick={() => handleEditCourse(course._id)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                )}
+                {selectedCourseId === course._id && (
+                  <div>
+                    <h3 className="text-lg font-bold mb-2">
+                      {course.course_name}
+                    </h3>
+                    <p>
+                      <span className="font-medium">Batch:</span> {course.batch}
+                    </p>
+                    <p>
+                      <span className="font-medium">Cities:</span>{" "}
+                      {course.cities.join(", ")}
+                    </p>
+                    <button
+                      className="mt-2 bg-red-700 hover:bg-red-900 text-white font-bold py-2 px-4 rounded"
+                      onClick={() => handleEditCourse(course._id)}
+                    >
+                      Update
+                    </button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
