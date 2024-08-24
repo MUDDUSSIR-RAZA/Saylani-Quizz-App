@@ -1,8 +1,10 @@
 import axios from "axios";
 import { revalidateTag } from "next/cache";
+import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
+  const token = cookies().get("token").value;
   const { userId, course_name, batch, quiz_name, totalQuestions, score } = await req.json();
   try {
     const { data } = await axios.post(
@@ -12,6 +14,7 @@ export async function POST(req) {
     revalidateTag("performance")
     return NextResponse.json(data);
   } catch (axiosError) {
+    console.log(axiosError)
     return NextResponse.json(axiosError.response.data, { status: 400 });
   }
 }
